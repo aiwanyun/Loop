@@ -59,7 +59,7 @@ struct ManualEntryDoseView: View {
     }
     
     private var title: Text {
-        return Text("Log Dose", comment: "Title for dose logging screen")
+        return Text("原木剂量", comment: "Title for dose logging screen")
     }
 
     private func shouldAutoScroll(basedOn geometry: GeometryProxy) -> Bool {
@@ -80,7 +80,7 @@ struct ManualEntryDoseView: View {
                 // Use a ZStack to allow horizontally clipping the predicted glucose chart,
                 // without clipping the point label on highlight, which draws outside the view's bounds.
                 ZStack(alignment: .topLeading) {
-                    Text("Glucose", comment: "Title for predicted glucose chart on bolus screen")
+                    Text("葡萄糖", comment: "Title for predicted glucose chart on bolus screen")
                         .font(.subheadline)
                         .bold()
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -101,7 +101,7 @@ struct ManualEntryDoseView: View {
     @ViewBuilder
     private var activeCarbsLabel: some View {
         LabeledQuantity(
-            label: Text("Active Carbs", comment: "Title describing quantity of still-absorbing carbohydrates"),
+            label: Text("活性碳水化合物", comment: "Title describing quantity of still-absorbing carbohydrates"),
             quantity: viewModel.activeCarbs,
             unit: .gram()
         )
@@ -110,7 +110,7 @@ struct ManualEntryDoseView: View {
     @ViewBuilder
     private var activeInsulinLabel: some View {
         LabeledQuantity(
-            label: Text("Active Insulin", comment: "Title describing quantity of still-absorbing insulin"),
+            label: Text("活性胰岛素", comment: "Title describing quantity of still-absorbing insulin"),
             quantity: viewModel.activeInsulin,
             unit: .internationalUnit(),
             maxFractionDigits: 2
@@ -149,7 +149,7 @@ struct ManualEntryDoseView: View {
     }
     
     private var titleText: Text {
-        return Text("Dose Summary", comment: "Title for card to log dose")
+        return Text("剂量摘要", comment: "Title for card to log dose")
     }
 
     private var glucoseFormatter: NumberFormatter {
@@ -165,7 +165,7 @@ struct ManualEntryDoseView: View {
         ExpandablePicker(
             with: viewModel.insulinTypePickerOptions,
             selectedValue: $viewModel.selectedInsulinType,
-            label: NSLocalizedString("Insulin Type", comment: "Insulin type label")
+            label: NSLocalizedString("胰岛素类型", comment: "Insulin type label")
         )
     }
     private var datePicker: some View {
@@ -179,14 +179,14 @@ struct ManualEntryDoseView: View {
             )
             .pickerStyle(WheelPickerStyle())
             
-            Text(NSLocalizedString("Date", comment: "Date picker label"))
+            Text(NSLocalizedString("日期", comment: "Date picker label"))
         }
     }
     
 
     private var bolusEntryRow: some View {
         HStack {
-            Text("Bolus", comment: "Label for bolus entry row on bolus screen")
+            Text("推注", comment: "Label for bolus entry row on bolus screen")
             Spacer()
             HStack(alignment: .firstTextBaseline) {
                 DismissibleKeyboardTextField(
@@ -242,7 +242,7 @@ struct ManualEntryDoseView: View {
                 self.viewModel.saveManualDose(onSuccess: self.dismiss)
             },
             label: {
-                return Text("Log Dose", comment: "Button text to log a dose")
+                return Text("原木剂量", comment: "Button text to log a dose")
             }
         )
         .buttonStyle(ActionButtonStyle(.primary))

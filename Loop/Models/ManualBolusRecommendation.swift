@@ -32,7 +32,7 @@ extension BolusRecommendationNotice {
             let minBGStr = glucoseFormatter.string(from: minGlucose.quantity, unit: unit)!
             return String(format: NSLocalizedString("Predicted glucose at %1$@ is %2$@.", comment: "Message when offering bolus recommendation even though bg is below range and minBG is in future. (1: glucose time)(2: glucose number)"), time, minBGStr)
         case .predictedGlucoseInRange:
-            return NSLocalizedString("Predicted glucose is in range.", comment: "Notice when predicted glucose for bolus recommendation is in range")
+            return NSLocalizedString("预测的葡萄糖在范围内。", comment: "Notice when predicted glucose for bolus recommendation is in range")
         }
     }
 }

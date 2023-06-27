@@ -58,18 +58,18 @@ extension DeviceDataManager {
     }
 
     struct ResumeOnboardingStatusHighlight: DeviceStatusHighlight {
-        var localizedMessage: String = NSLocalizedString("Complete Setup", comment: "Title text for button to complete setup")
+        var localizedMessage: String = NSLocalizedString("完整的设置", comment: "Title text for button to complete setup")
         var imageName: String = "exclamationmark.circle.fill"
         var state: DeviceStatusHighlightState = .warning
     }
 
     static var addCGMStatusHighlight: AddDeviceStatusHighlight {
-        return AddDeviceStatusHighlight(localizedMessage: NSLocalizedString("Add CGM", comment: "Title text for button to set up a CGM"),
+        return AddDeviceStatusHighlight(localizedMessage: NSLocalizedString("添加CGM", comment: "Title text for button to set up a CGM"),
                                         state: .critical)
     }
     
     static var addPumpStatusHighlight: AddDeviceStatusHighlight {
-        return AddDeviceStatusHighlight(localizedMessage: NSLocalizedString("Add Pump", comment: "Title text for button to set up a Pump"),
+        return AddDeviceStatusHighlight(localizedMessage: NSLocalizedString("添加泵", comment: "Title text for button to set up a Pump"),
                                         state: .critical)
     }
     

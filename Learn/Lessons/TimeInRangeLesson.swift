@@ -15,9 +15,9 @@ import os.log
 
 
 final class TimeInRangeLesson: Lesson {
-    let title = NSLocalizedString("Time in Range", comment: "Lesson title")
+    let title = NSLocalizedString("时间范围", comment: "Lesson title")
 
-    let subtitle = NSLocalizedString("Computes the percentage of glucose measurements within a specified range", comment: "Lesson subtitle")
+    let subtitle = NSLocalizedString("计算指定范围内葡萄糖测量的百分比", comment: "Lesson subtitle")
 
     let configurationSections: [LessonSectionProviding]
 
@@ -72,7 +72,7 @@ final class TimeInRangeLesson: Lesson {
             case .success(let resultsByDay):
                 guard resultsByDay.count > 0 else {
                     completion([
-                        LessonSection(cells: [TextCell(text: NSLocalizedString("No data available", comment: "Lesson result text for no data"))])
+                        LessonSection(cells: [TextCell(text: NSLocalizedString("无可用数据", comment: "Lesson result text for no data"))])
                         ])
                     return
                 }

@@ -22,8 +22,8 @@ class DateIntervalEntry: LessonSectionProviding {
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
 
-        self.dateEntry = DateEntry(date: start, title: NSLocalizedString("Start Date", comment: "Title of config entry"), mode: .date)
-        self.numberEntry = NumberEntry.integerEntry(value: weeks, unitString: NSLocalizedString("Weeks", comment: "Unit string for a count of calendar weeks"))
+        self.dateEntry = DateEntry(date: start, title: NSLocalizedString("开始日期", comment: "Title of config entry"), mode: .date)
+        self.numberEntry = NumberEntry.integerEntry(value: weeks, unitString: NSLocalizedString("几周", comment: "Unit string for a count of calendar weeks"))
 
         self.cells = [
             self.dateEntry,

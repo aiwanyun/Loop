@@ -68,7 +68,7 @@ public struct NotificationsCriticalAlertPermissionsView: View {
             notificationAndCriticalAlertPermissionSupportSection
         }
         .insetGroupedListStyle()
-        .navigationBarTitle(Text(NSLocalizedString("Alert Permissions", comment: "Notification & Critical Alert Permissions screen title")))
+        .navigationBarTitle(Text(NSLocalizedString("警报许可", comment: "Notification & Critical Alert Permissions screen title")))
     }
 }
 
@@ -77,11 +77,11 @@ extension NotificationsCriticalAlertPermissionsView {
     @ViewBuilder
     private func onOff(_ val: Bool) -> some View {
         if val {
-            Text("On", comment: "Notification Setting Status is On")
+            Text("在", comment: "Notification Setting Status is On")
         } else {
             HStack {
                 Image(systemName: "exclamationmark.triangle.fill").foregroundColor(.critical)
-                Text("Off", comment: "Notification Setting Status is Off")
+                Text("离开", comment: "Notification Setting Status is Off")
             }
         }
     }
@@ -89,7 +89,7 @@ extension NotificationsCriticalAlertPermissionsView {
     private var manageNotifications: some View {
         Button( action: { AlertPermissionsChecker.gotoSettings() } ) {
             HStack {
-                Text(NSLocalizedString("Manage Permissions in Settings", comment: "Manage Permissions in Settings button text"))
+                Text(NSLocalizedString("在设置中管理权限", comment: "Manage Permissions in Settings button text"))
                 Spacer()
                 Image(systemName: "chevron.right").foregroundColor(.gray).font(.footnote)
             }
@@ -99,7 +99,7 @@ extension NotificationsCriticalAlertPermissionsView {
     
     private var notificationsEnabledStatus: some View {
         HStack {
-            Text("Notifications", comment: "Notifications Status text")
+            Text("通知", comment: "Notifications Status text")
             Spacer()
             onOff(!checker.notificationCenterSettings.notificationsDisabled)
         }
@@ -107,7 +107,7 @@ extension NotificationsCriticalAlertPermissionsView {
         
     private var criticalAlertsStatus: some View {
         HStack {
-            Text("Critical Alerts", comment: "Critical Alerts Status text")
+            Text("关键警报", comment: "Critical Alerts Status text")
             Spacer()
             onOff(!checker.notificationCenterSettings.criticalAlertsDisabled)
         }
@@ -116,7 +116,7 @@ extension NotificationsCriticalAlertPermissionsView {
     @available(iOS 15.0, *)
     private var timeSensitiveStatus: some View {
         HStack {
-            Text("Time Sensitive Notifications", comment: "Time Sensitive Status text")
+            Text("时间敏感通知", comment: "Time Sensitive Status text")
             Spacer()
             onOff(!checker.notificationCenterSettings.timeSensitiveNotificationsDisabled)
         }
@@ -125,21 +125,21 @@ extension NotificationsCriticalAlertPermissionsView {
     @available(iOS 15.0, *)
     private var notificationDelivery: some View {
         HStack {
-            Text("Notification Delivery", comment: "Notification Delivery Status text")
+            Text("通知交付", comment: "Notification Delivery Status text")
             Spacer()
             if checker.notificationCenterSettings.scheduledDeliveryEnabled {
                 Image(systemName: "exclamationmark.triangle.fill").foregroundColor(.critical)
-                Text("Scheduled", comment: "Scheduled Delivery status text")
+                Text("计划", comment: "Scheduled Delivery status text")
             } else {
-                Text("Immediate", comment: "Immediate Delivery status text")
+                Text("即时", comment: "Immediate Delivery status text")
             }
         }
     }
 
     private var notificationAndCriticalAlertPermissionSupportSection: some View {
-        Section(header: SectionHeader(label: NSLocalizedString("Support", comment: "Section title for Support"))) {
-            NavigationLink(destination: Text("Get help with Alert Permissions")) {
-                Text(NSLocalizedString("Get help with Alert Permissions", comment: "Get help with Alert Permissions support button text"))
+        Section(header: SectionHeader(label: NSLocalizedString("支持", comment: "Section title for Support"))) {
+            NavigationLink(destination: Text("获得警报权限的帮助")) {
+                Text(NSLocalizedString("获得警报权限的帮助", comment: "Get help with Alert Permissions support button text"))
             }
         }
     }

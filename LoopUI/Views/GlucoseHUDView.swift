@@ -13,7 +13,7 @@ import LoopKitUI
 
 public final class GlucoseHUDView: BaseHUDView {
     
-    static let staleGlucoseRepresentation: String = NSLocalizedString("– – –", comment: "No glucose value representation (3 dashes for mg/dL)")
+    static let staleGlucoseRepresentation: String = NSLocalizedString(" -   -   - ", comment: "No glucose value representation (3 dashes for mg/dL)")
     
     private var stalenessTimer: Timer?
     
@@ -158,7 +158,7 @@ public final class GlucoseHUDView: BaseHUDView {
             sensorAlertState = .missing
         } else if sensor!.isStateValid == false {
             sensorAlertState = .invalid
-            accessibilityStrings.append(LocalizedString("Needs attention", comment: "Accessibility label component for glucose HUD describing an invalid state"))
+            accessibilityStrings.append(LocalizedString("需要注意", comment: "Accessibility label component for glucose HUD describing an invalid state"))
         } else if sensor!.isLocal == false {
             sensorAlertState = .remote
         } else {

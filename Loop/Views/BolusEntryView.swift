@@ -78,9 +78,9 @@ struct BolusEntryView: View {
     
     private var title: Text {
         if viewModel.potentialCarbEntry == nil {
-            return Text("Bolus", comment: "Title for bolus entry screen")
+            return Text("推注", comment: "Title for bolus entry screen")
         }
-        return Text("Meal Bolus", comment: "Title for bolus entry screen when also entering carbs")
+        return Text("进餐推注", comment: "Title for bolus entry screen when also entering carbs")
     }
 
     private func shouldAutoScroll(basedOn geometry: GeometryProxy) -> Bool {
@@ -101,7 +101,7 @@ struct BolusEntryView: View {
                 // Use a ZStack to allow horizontally clipping the predicted glucose chart,
                 // without clipping the point label on highlight, which draws outside the view's bounds.
                 ZStack(alignment: .topLeading) {
-                    Text("Glucose", comment: "Title for predicted glucose chart on bolus screen")
+                    Text("葡萄糖", comment: "Title for predicted glucose chart on bolus screen")
                         .font(.subheadline)
                         .bold()
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -120,7 +120,7 @@ struct BolusEntryView: View {
                         viewModel.activeAlert = .forecastInfo
                     }) {
                         HStack {
-                            Text("Forecasted blood glucose may still be higher than target range.")
+                            Text("预测的血糖仍可能高于目标范围。")
                                 .font(.footnote)
                                 .foregroundColor(.secondary)
                                 .fixedSize(horizontal: false, vertical: true)
@@ -141,7 +141,7 @@ struct BolusEntryView: View {
     @ViewBuilder
     private var activeCarbsLabel: some View {
         LabeledQuantity(
-            label: Text("Active Carbs", comment: "Title describing quantity of still-absorbing carbohydrates"),
+            label: Text("活性碳水化合物", comment: "Title describing quantity of still-absorbing carbohydrates"),
             quantity: viewModel.activeCarbs,
             unit: .gram()
         )
@@ -150,7 +150,7 @@ struct BolusEntryView: View {
     @ViewBuilder
     private var activeInsulinLabel: some View {
         LabeledQuantity(
-            label: Text("Active Insulin", comment: "Title describing quantity of still-absorbing insulin"),
+            label: Text("活性胰岛素", comment: "Title describing quantity of still-absorbing insulin"),
             quantity: viewModel.activeInsulin,
             unit: .internationalUnit(),
             maxFractionDigits: 2
@@ -201,7 +201,7 @@ struct BolusEntryView: View {
     }
     
     private var titleText: Text {
-        return Text("Bolus Summary", comment: "Title for card displaying carb entry and bolus recommendation")
+        return Text("推注摘要", comment: "Title for card displaying carb entry and bolus recommendation")
     }
 
     private var glucoseFormatter: NumberFormatter {
@@ -213,7 +213,7 @@ struct BolusEntryView: View {
     private var potentialCarbEntryRow: some View {
         if viewModel.carbEntryAmountAndEmojiString != nil && viewModel.carbEntryDateAndAbsorptionTimeString != nil {
             HStack {
-                Text("Carb Entry", comment: "Label for carb entry row on bolus screen")
+                Text("碳水化合物进入", comment: "Label for carb entry row on bolus screen")
 
                 Text(viewModel.carbEntryAmountAndEmojiString!)
                     .foregroundColor(Color(.carbTintColor))
@@ -229,7 +229,7 @@ struct BolusEntryView: View {
 
     private var recommendedBolusRow: some View {
         HStack {
-            Text("Recommended Bolus", comment: "Label for recommended bolus row on bolus screen")
+            Text("推荐的推注", comment: "Label for recommended bolus row on bolus screen")
             Spacer()
             HStack(alignment: .firstTextBaseline) {
                 Text(viewModel.recommendedBolusString)
@@ -250,7 +250,7 @@ struct BolusEntryView: View {
 
     private var bolusEntryRow: some View {
         HStack {
-            Text("Bolus", comment: "Label for bolus entry row on bolus screen")
+            Text("推注", comment: "Label for bolus entry row on bolus screen")
             Spacer()
             HStack(alignment: .firstTextBaseline) {
                 DismissibleKeyboardTextField(
@@ -310,29 +310,29 @@ struct BolusEntryView: View {
         case .predictedGlucoseBelowSuspendThreshold(suspendThreshold: let suspendThreshold):
             let suspendThresholdString = displayGlucosePreference.format(suspendThreshold)
             return WarningView(
-                title: Text("No Bolus Recommended", comment: "Title for bolus screen notice when no bolus is recommended"),
+                title: Text("不建议推注", comment: "Title for bolus screen notice when no bolus is recommended"),
                 caption: Text("Your glucose is below or predicted to go below your glucose safety limit, \(suspendThresholdString).", comment: "Caption for bolus screen notice when no bolus is recommended due to prediction dropping below glucose safety limit")
             )
         case .staleGlucoseData:
             return WarningView(
-                title: Text("No Recent Glucose Data", comment: "Title for bolus screen notice when glucose data is missing or stale"),
-                caption: Text("Enter a blood glucose from a meter for a recommended bolus amount.", comment: "Caption for bolus screen notice when glucose data is missing or stale")
+                title: Text("最近没有葡萄糖数据", comment: "Title for bolus screen notice when glucose data is missing or stale"),
+                caption: Text("从仪表中输入血糖以进行推荐的推注。", comment: "Caption for bolus screen notice when glucose data is missing or stale")
             )
         case .futureGlucoseData:
             return WarningView(
-                title: Text("Invalid Future Glucose", comment: "Title for bolus screen notice when glucose data is in the future"),
-                caption: Text("Check your device time and/or remove any invalid data from Apple Health.", comment: "Caption for bolus screen notice when glucose data is in the future")
+                title: Text("未来的葡萄糖无效", comment: "Title for bolus screen notice when glucose data is in the future"),
+                caption: Text("检查您的设备时间和/或从Apple Health中删除任何无效的数据。", comment: "Caption for bolus screen notice when glucose data is in the future")
             )
         case .stalePumpData:
             return WarningView(
-                title: Text("No Recent Pump Data", comment: "Title for bolus screen notice when pump data is missing or stale"),
+                title: Text("没有最近的泵数据", comment: "Title for bolus screen notice when pump data is missing or stale"),
                 caption: Text(String(format: NSLocalizedString("Your pump data is stale. %1$@ cannot recommend a bolus amount.", comment: "Caption for bolus screen notice when pump data is missing or stale"), appName)),
                 severity: .critical
             )
         case .predictedGlucoseInRange, .glucoseBelowTarget:
             return WarningView(
-                title: Text("No Bolus Recommended", comment: "Title for bolus screen notice when no bolus is recommended"),
-                caption: Text("Based on your predicted glucose, no bolus is recommended.", comment: "Caption for bolus screen notice when no bolus is recommended for the predicted glucose")
+                title: Text("不建议推注", comment: "Title for bolus screen notice when no bolus is recommended"),
+                caption: Text("根据您的预测葡萄糖，建议不建议推注。", comment: "Caption for bolus screen notice when no bolus is recommended for the predicted glucose")
             )
         }
     }
@@ -344,7 +344,7 @@ struct BolusEntryView: View {
                     self.viewModel.isManualGlucoseEntryEnabled = true
                 }
             },
-            label: { Text("Enter Fingerstick Glucose", comment: "Button text prompting manual glucose entry on bolus screen") }
+            label: { Text("进入指尖葡萄糖", comment: "Button text prompting manual glucose entry on bolus screen") }
         )
         .buttonStyle(ActionButtonStyle(viewModel.primaryButton == .manualGlucoseEntry ? .primary : .secondary))
         .padding([.top, .horizontal])
@@ -366,13 +366,13 @@ struct BolusEntryView: View {
             label: {
                 switch viewModel.actionButtonAction {
                 case .saveWithoutBolusing:
-                    return Text("Save without Bolusing", comment: "Button text to save carbs and/or manual glucose entry without a bolus")
+                    return Text("保存而无需加油", comment: "Button text to save carbs and/or manual glucose entry without a bolus")
                 case .saveAndDeliver:
-                    return Text("Save and Deliver", comment: "Button text to save carbs and/or manual glucose entry and deliver a bolus")
+                    return Text("保存和交付", comment: "Button text to save carbs and/or manual glucose entry and deliver a bolus")
                 case .enterBolus:
-                    return Text("Enter Bolus", comment: "Button text to begin entering a bolus")
+                    return Text("输入牛肉", comment: "Button text to begin entering a bolus")
                 case .deliver:
-                    return Text("Deliver", comment: "Button text to deliver a bolus")
+                    return Text("递送", comment: "Button text to deliver a bolus")
                 }
             }
         )
@@ -385,57 +385,57 @@ struct BolusEntryView: View {
         switch alert {
         case .recommendationChanged:
             return SwiftUI.Alert(
-                title: Text("Bolus Recommendation Updated", comment: "Alert title for an updated bolus recommendation"),
-                message: Text("The bolus recommendation has updated. Please reconfirm the bolus amount.", comment: "Alert message for an updated bolus recommendation")
+                title: Text("推注建议更新", comment: "Alert title for an updated bolus recommendation"),
+                message: Text("推注建议已更新。请重新确认推注。", comment: "Alert message for an updated bolus recommendation")
             )
         case .maxBolusExceeded:
             guard let maximumBolusAmountString = viewModel.maximumBolusAmountString else {
                 fatalError("Impossible to exceed max bolus without a configured max bolus")
             }
             return SwiftUI.Alert(
-                title: Text("Exceeds Maximum Bolus", comment: "Alert title for a maximum bolus validation error"),
+                title: Text("超过最大推注", comment: "Alert title for a maximum bolus validation error"),
                 message: Text("The maximum bolus amount is \(maximumBolusAmountString) U.", comment: "Alert message for a maximum bolus validation error (1: max bolus value)")
             )
         case .bolusTooSmall:
             return SwiftUI.Alert(
-                title: Text("Bolus Too Small", comment: "Alert title for a bolus too small validation error"),
-                message: Text("The bolus amount entered is smaller than the minimum deliverable.", comment: "Alert message for a bolus too small validation error")
+                title: Text("推注太小", comment: "Alert title for a bolus too small validation error"),
+                message: Text("输入的推注量小于最低可交付量。", comment: "Alert message for a bolus too small validation error")
             )
         case .noPumpManagerConfigured:
             return SwiftUI.Alert(
-                title: Text("No Pump Configured", comment: "Alert title for a missing pump error"),
-                message: Text("A pump must be configured before a bolus can be delivered.", comment: "Alert message for a missing pump error")
+                title: Text("没有配置泵", comment: "Alert title for a missing pump error"),
+                message: Text("必须在推注之前配置泵。", comment: "Alert message for a missing pump error")
             )
         case .noMaxBolusConfigured:
             return SwiftUI.Alert(
-                title: Text("No Maximum Bolus Configured", comment: "Alert title for a missing maximum bolus setting error"),
-                message: Text("The maximum bolus setting must be configured before a bolus can be delivered.", comment: "Alert message for a missing maximum bolus setting error")
+                title: Text("未配置最大推注", comment: "Alert title for a missing maximum bolus setting error"),
+                message: Text("必须在提供推注之前配置最大推注设置。", comment: "Alert message for a missing maximum bolus setting error")
             )
         case .carbEntryPersistenceFailure:
             return SwiftUI.Alert(
-                title: Text("Unable to Save Carb Entry", comment: "Alert title for a carb entry persistence error"),
-                message: Text("An error occurred while trying to save your carb entry.", comment: "Alert message for a carb entry persistence error")
+                title: Text("无法保存碳水化合物条目", comment: "Alert title for a carb entry persistence error"),
+                message: Text("试图保存碳水化合物条目时发生了错误。", comment: "Alert message for a carb entry persistence error")
             )
         case .manualGlucoseEntryOutOfAcceptableRange:
             let acceptableLowerBound = displayGlucosePreference.format(LoopConstants.validManualGlucoseEntryRange.lowerBound)
             let acceptableUpperBound = displayGlucosePreference.format(LoopConstants.validManualGlucoseEntryRange.upperBound)
             return SwiftUI.Alert(
-                title: Text("Glucose Entry Out of Range", comment: "Alert title for a manual glucose entry out of range error"),
+                title: Text("葡萄糖进入范围", comment: "Alert title for a manual glucose entry out of range error"),
                 message: Text("A manual glucose entry must be between \(acceptableLowerBound) and \(acceptableUpperBound)", comment: "Alert message for a manual glucose entry out of range error")
             )
         case .manualGlucoseEntryPersistenceFailure:
             return SwiftUI.Alert(
-                title: Text("Unable to Save Manual Glucose Entry", comment: "Alert title for a manual glucose entry persistence error"),
-                message: Text("An error occurred while trying to save your manual glucose entry.", comment: "Alert message for a manual glucose entry persistence error")
+                title: Text("无法保存手动葡萄糖输入", comment: "Alert title for a manual glucose entry persistence error"),
+                message: Text("试图保存您的手动葡萄糖输入时发生了错误。", comment: "Alert message for a manual glucose entry persistence error")
             )
         case .glucoseNoLongerStale:
             return SwiftUI.Alert(
-                title: Text("Glucose Data Now Available", comment: "Alert title when glucose data returns while on bolus screen"),
-                message: Text("An updated bolus recommendation is available.", comment: "Alert message when glucose data returns while on bolus screen")
+                title: Text("葡萄糖数据现已可用", comment: "Alert title when glucose data returns while on bolus screen"),
+                message: Text("提供更新的推注建议。", comment: "Alert message when glucose data returns while on bolus screen")
             )
         case .forecastInfo:
             return SwiftUI.Alert(
-                title: Text("Forecasted Glucose", comment: "Title for forecast explanation modal on bolus view"),
+                title: Text("预测的葡萄糖", comment: "Title for forecast explanation modal on bolus view"),
                 message: Text("The bolus dosing algorithm uses a more conservative estimate of forecasted blood glucose than what is used to adjust your basal rate.\n\nAs a result, your forecasted blood glucose after a bolus may still be higher than your target range.", comment: "Forecast explanation modal on bolus view")
             )
         }

@@ -200,7 +200,7 @@ extension CarbAndBolusFlow {
 
     private var continueToBolusEntryButton: some View {
         ActionButton(
-            title: Text("Continue", comment: "Button text to continue from carb entry to bolus entry on Apple Watch"),
+            title: Text("继续", comment: "Button text to continue from carb entry to bolus entry on Apple Watch"),
             color: .carbs
         ) {
             self.transitionToBolusEntry()
@@ -230,10 +230,10 @@ extension CarbAndBolusFlow {
         switch configuration {
         case .carbEntry:
             return bolusAmount > 0
-                ? Text("Save & Bolus", comment: "Button text to confirm carb entry and bolus on Apple Watch")
-                : Text("Save", comment: "Button text to confirm carb entry without bolusing on Apple Watch")
+                ? Text("节省", comment: "Button text to confirm carb entry and bolus on Apple Watch")
+                : Text("节省", comment: "Button text to confirm carb entry without bolusing on Apple Watch")
         case .manualBolus:
-            return Text("Bolus", comment: "Button text to confirm manual bolus on Apple Watch")
+            return Text("推注", comment: "Button text to confirm manual bolus on Apple Watch")
         }
     }
 
@@ -344,9 +344,9 @@ extension CarbAndBolusFlow {
 
     private var recommendedBolusUpdatedAlert: SwiftUI.Alert {
         SwiftUI.Alert(
-            title: Text("Bolus Recommendation Updated", comment: "Alert title for updated bolus recommendation on Apple Watch"),
-            message: Text("Please reconfirm the bolus amount.", comment: "Alert message for updated bolus recommendation on Apple Watch"),
-            dismissButton: .default(Text("OK"))
+            title: Text("推注建议更新", comment: "Alert title for updated bolus recommendation on Apple Watch"),
+            message: Text("请重新确认推注。", comment: "Alert message for updated bolus recommendation on Apple Watch"),
+            dismissButton: .default(Text("好的"))
         )
     }
 
@@ -362,7 +362,7 @@ extension CarbAndBolusFlow {
         return SwiftUI.Alert(
             title: Text(error.failureReason!),
             message: Text(error.recoverySuggestion!),
-            dismissButton: .default(Text("OK"), action: dismissAction)
+            dismissButton: .default(Text("好的"), action: dismissAction)
         )
     }
 }

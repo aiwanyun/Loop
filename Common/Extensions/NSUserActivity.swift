@@ -27,7 +27,7 @@ extension NSUserActivity {
             activity.isEligibleForPrediction = true
         }
         activity.requiredUserInfoKeys = []
-        activity.title = NSLocalizedString("Add Carb Entry", comment: "Title of the user activity for adding carbs")
+        activity.title = NSLocalizedString("添加碳水化合物输入", comment: "Title of the user activity for adding carbs")
         return activity
     }
 }

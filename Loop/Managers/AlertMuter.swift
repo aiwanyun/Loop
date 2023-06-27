@@ -131,7 +131,7 @@ public class AlertMuter: ObservableObject {
     }
 
     var formattedEndTime: String {
-        guard let endTime = configuration.mutingEndTime else { return NSLocalizedString("Unknown", comment: "result when time cannot be formatted") }
+        guard let endTime = configuration.mutingEndTime else { return NSLocalizedString("未知", comment: "result when time cannot be formatted") }
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         formatter.dateStyle = .none

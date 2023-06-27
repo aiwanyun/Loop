@@ -36,11 +36,11 @@ enum BolusActionError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidBolus:
-            return NSLocalizedString("Invalid Bolus Amount", comment: "Remote command error description: invalid bolus amount.")
+            return NSLocalizedString("无效的推注", comment: "Remote command error description: invalid bolus amount.")
         case .missingMaxBolus:
-            return NSLocalizedString("Missing maximum allowed bolus in settings", comment: "Remote command error description: missing maximum bolus in settings.")
+            return NSLocalizedString("在设置中缺少最大允许的推注", comment: "Remote command error description: missing maximum bolus in settings.")
         case .exceedsMaxBolus:
-            return NSLocalizedString("Exceeds maximum allowed bolus in settings", comment: "Remote command error description: bolus exceeds maximum bolus in settings.")
+            return NSLocalizedString("超过设置中最大允许的推注", comment: "Remote command error description: bolus exceeds maximum bolus in settings.")
         }
     }
 }

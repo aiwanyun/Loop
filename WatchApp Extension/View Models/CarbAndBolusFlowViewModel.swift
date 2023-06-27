@@ -239,18 +239,18 @@ extension CarbAndBolusFlowViewModel.Error: LocalizedError {
     var failureReason: String? {
         switch self {
         case .potentialCarbEntryMessageSendFailure:
-            return NSLocalizedString("Unable to Reach iPhone", comment: "The title of the alert controller displayed after a potential carb entry send attempt fails")
+            return NSLocalizedString("无法达到iPhone", comment: "The title of the alert controller displayed after a potential carb entry send attempt fails")
         case .bolusMessageSendFailure:
-            return NSLocalizedString("Bolus Failed", comment: "The title of the alert controller displayed after a bolus attempt fails")
+            return NSLocalizedString("推注失败", comment: "The title of the alert controller displayed after a bolus attempt fails")
         }
     }
 
     var recoverySuggestion: String? {
         switch self {
         case .potentialCarbEntryMessageSendFailure:
-            return NSLocalizedString("Make sure your iPhone is nearby and try again.", comment: "The recovery message displayed after a potential carb entry send attempt fails")
+            return NSLocalizedString("确保您的iPhone在附近，然后重试。", comment: "The recovery message displayed after a potential carb entry send attempt fails")
         case .bolusMessageSendFailure:
-            return NSLocalizedString("Make sure your iPhone is nearby and try again.", comment: "The recovery message displayed after a bolus attempt fails")
+            return NSLocalizedString("确保您的iPhone在附近，然后重试。", comment: "The recovery message displayed after a bolus attempt fails")
         }
     }
 }

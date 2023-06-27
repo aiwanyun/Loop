@@ -77,7 +77,7 @@ class QuantityRangeEntry: LessonSectionProviding {
 
     internal class func glucoseRange(minValue: HKQuantity, maxValue: HKQuantity, quantityFormatter: QuantityFormatter, unit: HKUnit) -> QuantityRangeEntry {
         return QuantityRangeEntry(
-            headerTitle: NSLocalizedString("Range", comment: "Section title for glucose range"),
+            headerTitle: NSLocalizedString("范围", comment: "Section title for glucose range"),
             minValue: minValue,
             maxValue: maxValue,
             quantityFormatter: quantityFormatter,

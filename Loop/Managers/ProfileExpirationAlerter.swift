@@ -44,11 +44,11 @@ class ProfileExpirationAlerter {
         let alertMessage = createVerboseAlertMessage(timeUntilExpirationStr: timeUntilExpirationStr!)
         
         let dialog = UIAlertController(
-            title: NSLocalizedString("Profile Expires Soon", comment: "The title for notification of upcoming profile expiration"),
+            title: NSLocalizedString("个人资料即将到期", comment: "The title for notification of upcoming profile expiration"),
             message: alertMessage,
             preferredStyle: .alert)
-        dialog.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Text for ok action on notification of upcoming profile expiration"), style: .default, handler: nil))
-        dialog.addAction(UIAlertAction(title: NSLocalizedString("More Info", comment: "Text for more info action on notification of upcoming profile expiration"), style: .default, handler: { (_) in
+        dialog.addAction(UIAlertAction(title: NSLocalizedString("好的", comment: "Text for ok action on notification of upcoming profile expiration"), style: .default, handler: nil))
+        dialog.addAction(UIAlertAction(title: NSLocalizedString("更多信息", comment: "Text for more info action on notification of upcoming profile expiration"), style: .default, handler: { (_) in
             UIApplication.shared.open(URL(string: "https://loopkit.github.io/loopdocs/build/updating/")!)
         }))
         viewControllerToPresentFrom.present(dialog, animated: true, completion: nil)
@@ -68,9 +68,9 @@ class ProfileExpirationAlerter {
         let nearExpiration = isNearProfileExpiration(profileExpiration: profileExpiration)
         let maxUnitCount = nearExpiration ? 2 : 1 // only include hours in the msg if near expiration
         let readableRelativeTime: String? = relativeTimeFormatter(maxUnitCount: maxUnitCount).string(from: profileExpiration.timeIntervalSinceNow)
-        let relativeTimeRemaining: String = readableRelativeTime ?? NSLocalizedString("Unknown time", comment: "Unknown amount of time in settings' profile expiration section")
+        let relativeTimeRemaining: String = readableRelativeTime ?? NSLocalizedString("未知时间", comment: "Unknown amount of time in settings' profile expiration section")
         let verboseMessage = createVerboseAlertMessage(timeUntilExpirationStr: relativeTimeRemaining)
-        let conciseMessage = relativeTimeRemaining + NSLocalizedString(" remaining", comment: "remaining time in setting's profile expiration section")
+        let conciseMessage = relativeTimeRemaining + NSLocalizedString("其余的", comment: "remaining time in setting's profile expiration section")
         return nearExpiration ? verboseMessage : conciseMessage
     }
     

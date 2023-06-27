@@ -24,13 +24,13 @@ final class ChartHUDController: HUDInterfaceController, WKCrownDelegate {
         var title: String {
             switch self {
             case .iob:
-                return NSLocalizedString("Active Insulin", comment: "HUD row title for IOB")
+                return NSLocalizedString("活性胰岛素", comment: "HUD row title for IOB")
             case .cob:
-                return NSLocalizedString("Active Carbs", comment: "HUD row title for COB")
+                return NSLocalizedString("活性碳水化合物", comment: "HUD row title for COB")
             case .netBasal:
-                return NSLocalizedString("Net Basal Rate", comment: "HUD row title for Net Basal Rate")
+                return NSLocalizedString("净基础率", comment: "HUD row title for Net Basal Rate")
             case .reservoirVolume:
-                return NSLocalizedString("Reservoir Volume", comment: "HUD row title for remaining reservoir volume")
+                return NSLocalizedString("水库量", comment: "HUD row title for remaining reservoir volume")
             }
         }
 

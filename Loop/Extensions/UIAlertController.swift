@@ -20,7 +20,7 @@ extension UIAlertController {
      */
     internal convenience init(workoutDurationSelectionHandler handler: @escaping (_ duration: TimeInterval) -> Void) {
         self.init(
-            title: NSLocalizedString("Use Workout Preset", comment: "The title of the alert controller used to select a duration for workout targets"),
+            title: NSLocalizedString("使用锻炼预设", comment: "The title of the alert controller used to select a duration for workout targets"),
             message: nil,
             preferredStyle: .actionSheet
         )
@@ -37,7 +37,7 @@ extension UIAlertController {
             })
         }
 
-        let distantFuture = NSLocalizedString("Until I turn off", comment: "The title of a target alert action specifying workout targets duration until it is turned off by the user")
+        let distantFuture = NSLocalizedString("直到我关闭", comment: "The title of a target alert action specifying workout targets duration until it is turned off by the user")
         addAction(UIAlertAction(title: distantFuture, style: .default) { _ in
             handler(.infinity)
         })
@@ -53,12 +53,12 @@ extension UIAlertController {
      */
     internal convenience init(premealDurationSelectionHandler handler: @escaping (_ duration: TimeInterval) -> Void) {
         self.init(
-            title: NSLocalizedString("Use Pre-Meal Preset", comment: "The title of the alert controller used to select a duration for pre-meal targets"),
+            title: NSLocalizedString("使用粉刷前的预设", comment: "The title of the alert controller used to select a duration for pre-meal targets"),
             message: nil,
             preferredStyle: .actionSheet
         )
 
-        let distantFuture = NSLocalizedString("Until I enter carbs", comment: "The title of a target alert action specifying pre-meal targets duration for 1 hour or until the user enters carbs (whichever comes first).")
+        let distantFuture = NSLocalizedString("直到我进入碳水化合物", comment: "The title of a target alert action specifying pre-meal targets duration for 1 hour or until the user enters carbs (whichever comes first).")
         addAction(UIAlertAction(title: distantFuture, style: .default) { _ in
             handler(.hours(1))
         })
@@ -74,7 +74,7 @@ extension UIAlertController {
     ///   - identifier: Identifier of the selected PumpManager
     internal convenience init(availablePumpManagers: [PumpManagerDescriptor], selectionHandler: @escaping (_ identifier: String) -> Void) {
         self.init(
-            title: NSLocalizedString("Add Pump", comment: "Action sheet title selecting Pump"),
+            title: NSLocalizedString("添加泵", comment: "Action sheet title selecting Pump"),
             message: nil,
             preferredStyle: .actionSheet
         )
@@ -98,7 +98,7 @@ extension UIAlertController {
     ///   - identifier: Identifier of the selected CGMManager
     internal convenience init(availableCGMManagers: [CGMManagerDescriptor], selectionHandler: @escaping (_ identifier: String) -> Void) {
         self.init(
-            title: NSLocalizedString("Add CGM", comment: "Action sheet title selecting CGM"),
+            title: NSLocalizedString("添加CGM", comment: "Action sheet title selecting CGM"),
             message: nil,
             preferredStyle: .actionSheet
         )
@@ -117,12 +117,12 @@ extension UIAlertController {
     internal convenience init(deleteCGMManagerHandler handler: @escaping (_ isDeleted: Bool) -> Void) {
         self.init(
             title: nil,
-            message: NSLocalizedString("Are you sure you want to delete this CGM?", comment: "Confirmation message for deleting a CGM"),
+            message: NSLocalizedString("您确定要删除此CGM吗？", comment: "Confirmation message for deleting a CGM"),
             preferredStyle: .actionSheet
         )
 
         addAction(UIAlertAction(
-            title: NSLocalizedString("Delete CGM", comment: "Button title to delete CGM"),
+            title: NSLocalizedString("删除CGM", comment: "Button title to delete CGM"),
             style: .destructive,
             handler: { (_) in
                 handler(true)
@@ -142,7 +142,7 @@ extension UIAlertController {
     ///   - identifier: The identifier of the selected service.
     internal convenience init(availableServices: [ServiceDescriptor], selectionHandler: @escaping (_ identifier: String) -> Void) {
         self.init(
-            title: NSLocalizedString("Add Service", comment: "Action sheet title selecting service"),
+            title: NSLocalizedString("添加服务", comment: "Action sheet title selecting service"),
             message: nil,
             preferredStyle: .actionSheet
         )
@@ -159,7 +159,7 @@ extension UIAlertController {
     }
 
     internal func addCancelAction(handler: ((UIAlertAction) -> Void)? = nil) {
-        let cancel = NSLocalizedString("Cancel", comment: "The title of the cancel action in an action sheet")
+        let cancel = NSLocalizedString("取消", comment: "The title of the cancel action in an action sheet")
         addAction(UIAlertAction(title: cancel, style: .cancel, handler: handler))
     }
 }

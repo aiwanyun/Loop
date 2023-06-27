@@ -109,12 +109,12 @@ extension AlertPermissionsChecker {
     static let unsafeNotificationPermissionsAlertIdentifier = Alert.Identifier(managerIdentifier: "LoopAppManager", alertIdentifier: "unsafeNotificationPermissionsAlert")
 
     private static let unsafeNotificationPermissionsAlertContent = Alert.Content(
-        title: NSLocalizedString("Warning! Safety notifications are turned OFF",
+        title: NSLocalizedString("警告！安全通知已关闭",
                                  comment: "Alert Permissions Need Attention alert title"),
         body: String(format: NSLocalizedString("You may not get sound, visual or vibration alerts regarding critical safety information.\n\nTo fix the issue, tap ‘Settings’ and make sure Notifications, Critical Alerts and Time Sensitive Notifications are turned ON.",
                                                comment: "Format for Notifications permissions disabled alert body. (1: app name)"),
                      Bundle.main.bundleDisplayName),
-        acknowledgeActionButtonLabel: NSLocalizedString("OK", comment: "Notifications permissions disabled alert button")
+        acknowledgeActionButtonLabel: NSLocalizedString("好的", comment: "Notifications permissions disabled alert button")
     )
 
     static let unsafeNotificationPermissionsAlert = Alert(identifier: unsafeNotificationPermissionsAlertIdentifier,
@@ -144,13 +144,13 @@ extension AlertPermissionsChecker {
         messageWithImageAttributed.append(NSMutableAttributedString(attachment: messageImageAttachment))
         alertController.setValue(messageWithImageAttributed, forKey: "attributedMessage")
 
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: "Label of button that navigation user to iOS Settings"),
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("设置", comment: "Label of button that navigation user to iOS Settings"),
                                                 style: .default,
                                                 handler: { _ in
             AlertPermissionsChecker.gotoSettings()
             acknowledgementCompletion()
         }))
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Close", comment: "The button label of the action used to dismiss the unsafe notification permission alert"),
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("关闭", comment: "The button label of the action used to dismiss the unsafe notification permission alert"),
                                                 style: .cancel,
                                                 handler: { _ in acknowledgementCompletion()
         }))
@@ -161,7 +161,7 @@ extension AlertPermissionsChecker {
     private static let scheduledDeliveryEnabledAlertIdentifier = Alert.Identifier(managerIdentifier: "LoopAppManager",
                                                                                   alertIdentifier: "scheduledDeliveryEnabledAlert")
     private static let scheduledDeliveryEnabledAlertContent = Alert.Content(
-        title: NSLocalizedString("Notifications Delayed",
+        title: NSLocalizedString("通知延迟",
                                  comment: "Scheduled Delivery Enabled alert title"),
         body: String(format: NSLocalizedString("""
                 Notification delivery is set to Scheduled Summary in your phone’s settings.
@@ -170,7 +170,7 @@ extension AlertPermissionsChecker {
                 """,
                                                comment: "Format for Critical Alerts permissions disabled alert body. (1: app name)"),
                      Bundle.main.bundleDisplayName),
-        acknowledgeActionButtonLabel: NSLocalizedString("OK", comment: "Critical Alert permissions disabled alert button")
+        acknowledgeActionButtonLabel: NSLocalizedString("好的", comment: "Critical Alert permissions disabled alert button")
     )
     static let scheduledDeliveryEnabledAlert = Alert(identifier: scheduledDeliveryEnabledAlertIdentifier,
                                                      foregroundContent: scheduledDeliveryEnabledAlertContent,

@@ -23,13 +23,13 @@ struct PredictionInputEffect: OptionSet {
     var localizedTitle: String? {
         switch self {
         case [.carbs]:
-            return NSLocalizedString("Carbohydrates", comment: "Title of the prediction input effect for carbohydrates")
+            return NSLocalizedString("碳水化合物", comment: "Title of the prediction input effect for carbohydrates")
         case [.insulin]:
-            return NSLocalizedString("Insulin", comment: "Title of the prediction input effect for insulin")
+            return NSLocalizedString("胰岛素", comment: "Title of the prediction input effect for insulin")
         case [.momentum]:
-            return NSLocalizedString("Glucose Momentum", comment: "Title of the prediction input effect for glucose momentum")
+            return NSLocalizedString("葡萄糖动量", comment: "Title of the prediction input effect for glucose momentum")
         case [.retrospection]:
-            return NSLocalizedString("Retrospective Correction", comment: "Title of the prediction input effect for retrospective correction")
+            return NSLocalizedString("回顾性校正", comment: "Title of the prediction input effect for retrospective correction")
         default:
             return nil
         }
@@ -42,9 +42,9 @@ struct PredictionInputEffect: OptionSet {
         case [.insulin]:
             return String(format: NSLocalizedString("Insulin Absorbed (U) × Insulin Sensitivity (%1$@/U)", comment: "Description of the prediction input effect for insulin"), unit.localizedShortUnitString)
         case [.momentum]:
-            return NSLocalizedString("15 min glucose regression coefficient (b₁), continued with decay over 30 min", comment: "Description of the prediction input effect for glucose momentum")
+            return NSLocalizedString("15分钟的葡萄糖回归系数（B₁），持续衰减30分钟", comment: "Description of the prediction input effect for glucose momentum")
         case [.retrospection]:
-            return NSLocalizedString("30 min comparison of glucose prediction vs actual, continued with decay over 60 min", comment: "Description of the prediction input effect for retrospective correction")
+            return NSLocalizedString("30分钟的葡萄糖预测与实际的比较，持续衰减超过60分钟", comment: "Description of the prediction input effect for retrospective correction")
         default:
             return nil
         }

@@ -13,7 +13,7 @@ import WatchKit
 extension WKAlertAction {
     static func dismissAction() -> Self {
         return self.init(
-            title: NSLocalizedString("Dismiss", comment: "The action button title to dismiss an error message"),
+            title: NSLocalizedString("解雇", comment: "The action button title to dismiss an error message"),
             style: .cancel,
             handler: { }
         )

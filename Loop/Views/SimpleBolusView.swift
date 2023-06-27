@@ -35,9 +35,9 @@ struct SimpleBolusView: View {
     
     var title: String {
         if viewModel.displayMealEntry {
-            return NSLocalizedString("Simple Meal Calculator", comment: "Title of simple bolus view when displaying meal entry")
+            return NSLocalizedString("简单的进餐计算器", comment: "Title of simple bolus view when displaying meal entry")
         } else {
-            return NSLocalizedString("Simple Bolus Calculator", comment: "Title of simple bolus view when not displaying meal entry")
+            return NSLocalizedString("简单的推注计算器", comment: "Title of simple bolus view when not displaying meal entry")
         }
     }
         
@@ -87,7 +87,7 @@ struct SimpleBolusView: View {
     private var infoSection: some View {
         HStack {
             Image("Open Loop")
-            Text("When out of Closed Loop mode, the app uses a simplified bolus calculator like a typical pump.")
+            Text("当不闭环模式出现时，该应用程序使用简化的推注计算器，例如典型的泵。")
                 .font(.footnote)
                 .foregroundColor(.secondary)
             infoButton
@@ -120,7 +120,7 @@ struct SimpleBolusView: View {
     
     private var carbEntryRow: some View {
         HStack(alignment: .center) {
-            Text("Carbohydrates", comment: "Label for carbohydrates entry row on simple bolus screen")
+            Text("碳水化合物", comment: "Label for carbohydrates entry row on simple bolus screen")
             Spacer()
             HStack {
                 DismissibleKeyboardTextField(
@@ -141,12 +141,12 @@ struct SimpleBolusView: View {
 
     private var glucoseEntryRow: some View {
         HStack {
-            Text("Current Glucose", comment: "Label for glucose entry row on simple bolus screen")
+            Text("电流葡萄糖", comment: "Label for glucose entry row on simple bolus screen")
             Spacer()
             HStack(alignment: .firstTextBaseline) {
                 DismissibleKeyboardTextField(
                     text: enteredManualGlucose,
-                    placeholder: NSLocalizedString("– – –", comment: "No glucose value representation (3 dashes for mg/dL)"),
+                    placeholder: NSLocalizedString(" -   -   - ", comment: "No glucose value representation (3 dashes for mg/dL)"),
                     font: .heavy(.title1),
                     textAlignment: .right,
                     keyboardType: .decimalPad,
@@ -164,7 +164,7 @@ struct SimpleBolusView: View {
     private var recommendedBolusRow: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("Recommended Bolus", comment: "Label for recommended bolus row on simple bolus screen")
+                Text("推荐的推注", comment: "Label for recommended bolus row on simple bolus screen")
                 Spacer()
                 HStack(alignment: .firstTextBaseline) {
                     Text(viewModel.recommendedBolus)
@@ -177,10 +177,10 @@ struct SimpleBolusView: View {
             .padding(.trailing, 8)
             if let activeInsulin = viewModel.activeInsulin {
                 HStack(alignment: .center, spacing: 3) {
-                    Text("Adjusted for")
+                    Text("调整")
                         .font(.footnote)
                         .foregroundColor(.secondary)
-                    Text("Active Insulin")
+                    Text("活性胰岛素")
                         .font(.footnote)
                         .bold()
                     Text(activeInsulin)
@@ -197,7 +197,7 @@ struct SimpleBolusView: View {
     
     private var bolusEntryRow: some View {
         HStack {
-            Text("Bolus", comment: "Label for bolus entry row on simple bolus screen")
+            Text("推注", comment: "Label for bolus entry row on simple bolus screen")
             Spacer()
             HStack(alignment: .firstTextBaseline) {
                 DismissibleKeyboardTextField(
@@ -263,13 +263,13 @@ struct SimpleBolusView: View {
             label: {
                 switch viewModel.actionButtonAction {
                 case .saveWithoutBolusing:
-                    return Text("Save without Bolusing", comment: "Button text to save carbs and/or manual glucose entry without a bolus")
+                    return Text("保存而无需加油", comment: "Button text to save carbs and/or manual glucose entry without a bolus")
                 case .saveAndDeliver:
-                    return Text("Save and Deliver", comment: "Button text to save carbs and/or manual glucose entry and deliver a bolus")
+                    return Text("保存和交付", comment: "Button text to save carbs and/or manual glucose entry and deliver a bolus")
                 case .enterBolus:
-                    return Text("Enter Bolus", comment: "Button text to begin entering a bolus")
+                    return Text("输入牛肉", comment: "Button text to begin entering a bolus")
                 case .deliver:
-                    return Text("Deliver", comment: "Button text to deliver a bolus")
+                    return Text("递送", comment: "Button text to deliver a bolus")
                 }
             }
         )
@@ -282,13 +282,13 @@ struct SimpleBolusView: View {
         switch alert {
         case .carbEntryPersistenceFailure:
             return SwiftUI.Alert(
-                title: Text("Unable to Save Carb Entry", comment: "Alert title for a carb entry persistence error"),
-                message: Text("An error occurred while trying to save your carb entry.", comment: "Alert message for a carb entry persistence error")
+                title: Text("无法保存碳水化合物条目", comment: "Alert title for a carb entry persistence error"),
+                message: Text("试图保存碳水化合物条目时发生了错误。", comment: "Alert message for a carb entry persistence error")
             )
         case .manualGlucoseEntryPersistenceFailure:
             return SwiftUI.Alert(
-                title: Text("Unable to Save Manual Glucose Entry", comment: "Alert title for a manual glucose entry persistence error"),
-                message: Text("An error occurred while trying to save your manual glucose entry.", comment: "Alert message for a manual glucose entry persistence error")
+                title: Text("无法保存手动葡萄糖输入", comment: "Alert title for a manual glucose entry persistence error"),
+                message: Text("试图保存您的手动葡萄糖输入时发生了错误。", comment: "Alert message for a manual glucose entry persistence error")
             )
         case .infoPopup:
             return closedLoopOffInformationalModal()
@@ -302,9 +302,9 @@ struct SimpleBolusView: View {
         case .glucoseBelowSuspendThreshold:
             let title: Text
             if viewModel.bolusRecommended {
-                title = Text("Low Glucose", comment: "Title for bolus screen warning when glucose is below suspend threshold, but a bolus is recommended")
+                title = Text("低葡萄糖", comment: "Title for bolus screen warning when glucose is below suspend threshold, but a bolus is recommended")
             } else {
-                title = Text("No Bolus Recommended", comment: "Title for bolus screen warning when glucose is below suspend threshold, and a bolus is not recommended")
+                title = Text("不建议推注", comment: "Title for bolus screen warning when glucose is below suspend threshold, and a bolus is not recommended")
             }
             let suspendThresholdString = formatGlucose(viewModel.suspendThreshold)
             return WarningView(
@@ -314,45 +314,45 @@ struct SimpleBolusView: View {
         case .glucoseWarning:
             let warningThresholdString = formatGlucose(LoopConstants.simpleBolusCalculatorGlucoseWarningLimit)
             return WarningView(
-                title: Text("Low Glucose", comment: "Title for bolus screen warning when glucose is below glucose warning limit."),
+                title: Text("低葡萄糖", comment: "Title for bolus screen warning when glucose is below glucose warning limit."),
                 caption: Text(String(format: NSLocalizedString("Your glucose is below %1$@. Are you sure you want to bolus?", comment: "Format string for simple bolus screen warning when glucose is below glucose warning limit."), warningThresholdString))
             )
         case .glucoseBelowRecommendationLimit:
             let caption: String
             if viewModel.displayMealEntry {
-                caption = NSLocalizedString("Your glucose is low. Eat carbs and consider waiting to bolus until your glucose is in a safe range.", comment: "Format string for meal bolus screen warning when no bolus is recommended due to glucose input value below recommendation threshold")
+                caption = NSLocalizedString("您的葡萄糖很低。吃碳水化合物并考虑等待推注，直到您的葡萄糖处于安全范围为止。", comment: "Format string for meal bolus screen warning when no bolus is recommended due to glucose input value below recommendation threshold")
             } else {
-                caption = NSLocalizedString("Your glucose is low. Eat carbs and monitor closely.", comment: "Bolus screen warning when no bolus is recommended due to glucose input value below recommendation threshold for meal bolus")
+                caption = NSLocalizedString("您的葡萄糖很低。吃碳水化合物并密切监测。", comment: "Bolus screen warning when no bolus is recommended due to glucose input value below recommendation threshold for meal bolus")
             }
             return WarningView(
-                title: Text("No Bolus Recommended", comment: "Title for bolus screen warning when no bolus is recommended"),
+                title: Text("不建议推注", comment: "Title for bolus screen warning when no bolus is recommended"),
                 caption: Text(caption)
             )
         case .glucoseOutOfAllowedInputRange:
             let glucoseMinString = formatGlucose(LoopConstants.validManualGlucoseEntryRange.lowerBound)
             let glucoseMaxString = formatGlucose(LoopConstants.validManualGlucoseEntryRange.upperBound)
             return WarningView(
-                title: Text("Glucose Entry Out of Range", comment: "Title for bolus screen warning when glucose entry is out of range"),
+                title: Text("葡萄糖进入范围", comment: "Title for bolus screen warning when glucose entry is out of range"),
                 caption: Text(String(format: NSLocalizedString("A manual glucose entry must be between %1$@ and %2$@.", comment: "Warning for simple bolus when glucose entry is out of range. (1: upper bound) (2: lower bound)"), glucoseMinString, glucoseMaxString)))
         case .maxBolusExceeded:
             return WarningView(
-                title: Text("Maximum Bolus Exceeded", comment: "Title for bolus screen warning when max bolus is exceeded"),
+                title: Text("最大推注超过", comment: "Title for bolus screen warning when max bolus is exceeded"),
                 caption: Text(String(format: NSLocalizedString("Your maximum bolus amount is %1$@.", comment: "Warning for simple bolus when max bolus is exceeded. (1: maximum bolus)"), viewModel.maximumBolusAmountString )))
         case .recommendationExceedsMaxBolus:
             return WarningView(
-                title: Text("Recommended Bolus Exceeds Maximum Bolus", comment: "Title for bolus screen warning when recommended bolus exceeds max bolus"),
+                title: Text("推荐的推注超过最大推注", comment: "Title for bolus screen warning when recommended bolus exceeds max bolus"),
                 caption: Text(String(format: NSLocalizedString("Your recommended bolus exceeds your maximum bolus amount of %1$@.", comment: "Warning for simple bolus when recommended bolus exceeds max bolus. (1: maximum bolus)"), viewModel.maximumBolusAmountString )))
         case .carbohydrateEntryTooLarge:
             let maximumCarbohydrateString = QuantityFormatter(for: .gram()).string(from: LoopConstants.maxCarbEntryQuantity)!
             return WarningView(
-                title: Text("Carbohydrate Entry Too Large", comment: "Title for bolus screen warning when carbohydrate entry is too large"),
+                title: Text("碳水化合物入口太大", comment: "Title for bolus screen warning when carbohydrate entry is too large"),
                 caption: Text(String(format: NSLocalizedString("The maximum amount allowed is %1$@.", comment: "Warning for simple bolus when carbohydrate entry is too large. (1: maximum carbohydrate entry)"), maximumCarbohydrateString)))
         }
     }
     
     private func closedLoopOffInformationalModal() -> SwiftUI.Alert {
         return SwiftUI.Alert(
-            title: Text("Closed Loop OFF", comment: "Alert title for closed loop off informational modal"),
+            title: Text("关闭循环", comment: "Alert title for closed loop off informational modal"),
             message: Text(String(format: NSLocalizedString("%1$@ is operating with Closed Loop in the OFF position. Your pump and CGM will continue operating, but the app will not adjust dosing automatically.", comment: "Alert message for closed loop off informational modal. (1: app name)"), Bundle.main.bundleDisplayName))
         )
     }

@@ -26,7 +26,7 @@ struct CriticalEventLogExportView: View {
             Spacer()
             Spacer()
         }
-        .navigationBarTitle(Text("Critical Event Logs", comment: "Critical event log export title"), displayMode: .automatic)
+        .navigationBarTitle(Text("关键事件日志", comment: "Critical event log export title"), displayMode: .automatic)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: cancelButton)
         .onAppear { self.viewModel.export() }
@@ -40,13 +40,13 @@ struct CriticalEventLogExportView: View {
             self.viewModel.cancel()
             self.presentationMode.wrappedValue.dismiss()
         }) {
-            Text("Cancel", comment: "Cancel export button title")
+            Text("取消", comment: "Cancel export button title")
         }
     }
 
     private var exportingView: some View {
         VStack {
-            Text("Preparing Critical Event Logs", comment: "Preparing critical event log text")
+            Text("准备关键事件日志", comment: "Preparing critical event log text")
                 .bold()
             ProgressView(progress: CGFloat(viewModel.progress))
                 .accentColor(.loopAccent)
@@ -62,7 +62,7 @@ struct CriticalEventLogExportView: View {
                 .frame(width: 50, height: 50)
                 .foregroundColor(.loopAccent)
                 .padding()
-            Text("Critical Event Log Ready", comment: "Critical event log ready text")
+            Text("关键事件日志准备就绪", comment: "Critical event log ready text")
                 .bold()
         }
         .sheet(isPresented: $viewModel.showingShare, onDismiss: {
@@ -74,8 +74,8 @@ struct CriticalEventLogExportView: View {
     }
 
     private var errorAlert: SwiftUI.Alert {
-        Alert(title: Text("Error Exporting Logs", comment: "Critical event log export error alert title"),
-              message: Text("Critical Event Logs were not able to be exported.", comment: "Critical event log export error alert message"),
+        Alert(title: Text("错误导出日志", comment: "Critical event log export error alert title"),
+              message: Text("关键事件日志无法导出。", comment: "Critical event log export error alert message"),
               primaryButton: errorAlertPrimaryButton,
               secondaryButton: errorAlertSecondaryButton)
     }
@@ -88,7 +88,7 @@ struct CriticalEventLogExportView: View {
     }
 
     private var errorAlertSecondaryButton: SwiftUI.Alert.Button {
-        .default(Text("Try Again", comment: "Critical event log export error alert try again button")) {
+        .default(Text("再试一次", comment: "Critical event log export error alert try again button")) {
             self.viewModel.export()
         }
     }

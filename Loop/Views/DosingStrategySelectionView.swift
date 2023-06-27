@@ -56,9 +56,9 @@ extension AutomaticDosingStrategy {
     var informationalText: String {
         switch self {
         case .tempBasalOnly:
-            return NSLocalizedString("Loop will set temporary basal rates to increase and decrease insulin delivery.", comment: "Description string for temp basal only dosing strategy")
+            return NSLocalizedString("循环将设定临时基础速率，以增加和减少胰岛素的递送。", comment: "Description string for temp basal only dosing strategy")
         case .automaticBolus:
-            return NSLocalizedString("Loop will automatically bolus when insulin needs are above scheduled basal, and will use temporary basal rates when needed to reduce insulin delivery below scheduled basal.", comment: "Description string for automatic bolus dosing strategy")
+            return NSLocalizedString("当胰岛素需求高于计划的基础上时，LOOP将自动推注，并在需要时使用临时基础速率，以将胰岛素输送在计划的基础以下。", comment: "Description string for automatic bolus dosing strategy")
         }
     }
 

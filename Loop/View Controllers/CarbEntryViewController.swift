@@ -192,16 +192,16 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
         tableView.register(DateAndDurationSteppableTableViewCell.nib(), forCellReuseIdentifier: DateAndDurationSteppableTableViewCell.className)
 
         if originalCarbEntry != nil {
-            title = NSLocalizedString("carb-entry-title-edit", value: "Edit Carb Entry", comment: "The title of the view controller to edit an existing carb entry")
+            title = NSLocalizedString("碳水化合物 - 符号编辑", value: "Edit Carb Entry", comment: "The title of the view controller to edit an existing carb entry")
         } else {
-            title = NSLocalizedString("carb-entry-title-add", value: "Add Carb Entry", comment: "The title of the view controller to create a new carb entry")
+            title = NSLocalizedString("碳水化合物添加", value: "Add Carb Entry", comment: "The title of the view controller to create a new carb entry")
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: footerView.primaryButton.titleLabel?.text, style: .plain, target: self, action: #selector(continueButtonPressed))
         navigationItem.rightBarButtonItem?.isEnabled = false
 
         // Sets text for back button on bolus screen
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Carb Entry", comment: "Back button text for bolus screen to return to carb entry screen"), style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("碳水化合物进入", comment: "Back button text for bolus screen to return to carb entry screen"), style: .plain, target: nil, action: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -310,7 +310,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
                 return nil
             }
                     
-            return NSLocalizedString("Choose a longer absorption time for larger meals, or those containing fats and proteins. This is only guidance to the algorithm and need not be exact.", comment: "Carb entry section footer text explaining absorption time")
+            return NSLocalizedString("为大餐或含有脂肪和蛋白质的食物选择更长的吸收时间。这只是对算法的指导，不必确切地说。", comment: "Carb entry section footer text explaining absorption time")
         }
         
         static func headerHeight(for section: Int, displayWarningSection: Bool) -> CGFloat {
@@ -361,7 +361,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
                 cell.imageView?.image = UIImage(systemName: "exclamationmark.triangle.fill")
                 cell.imageView?.tintColor = .warning
                 cell.textLabel?.numberOfLines = 0
-                cell.textLabel?.text = NSLocalizedString("An active override is modifying your carb ratio and insulin sensitivity. If you don't want this to affect your bolus calculation and projected glucose, consider turning off the override.", comment: "Warning to ensure the carb entry is accurate during an override")
+                cell.textLabel?.text = NSLocalizedString("积极的覆盖正在改变您的碳水化合物比率和胰岛素敏感性。如果您不希望这会影响推注计算并预测的葡萄糖，请考虑关闭覆盖。", comment: "Warning to ensure the carb entry is accurate during an override")
                 cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
                 cell.textLabel?.textColor = .secondaryLabel
                 cell.isUserInteractionEnabled = false
@@ -375,7 +375,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
                 cell.imageView?.image = UIImage(systemName: "exclamationmark.triangle.fill")
                 cell.imageView?.tintColor = .destructive
                 cell.textLabel?.numberOfLines = 0
-                cell.textLabel?.text = NSLocalizedString("Loop has detected an missed meal and estimated its size. Edit the carb amount to match the amount of any carbs you may have eaten.", comment: "Warning displayed when user is adding a meal from an missed meal notification")
+                cell.textLabel?.text = NSLocalizedString("LOOP检测到了一顿错餐并估计其大小。编辑碳水化合物量以匹配您可能吃的碳水化合物的量。", comment: "Warning displayed when user is adding a meal from an missed meal notification")
                 cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
                 cell.textLabel?.textColor = .secondaryLabel
                 cell.isUserInteractionEnabled = false
@@ -397,7 +397,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
             case .date:
                 let cell = tableView.dequeueReusableCell(withIdentifier: DateAndDurationSteppableTableViewCell.className) as! DateAndDurationSteppableTableViewCell
             
-                cell.titleLabel.text = NSLocalizedString("Time", comment: "Title of the carb entry date picker cell")
+                cell.titleLabel.text = NSLocalizedString("时间", comment: "Title of the carb entry date picker cell")
                 cell.datePicker.isEnabled = isSampleEditable
                 cell.datePicker.datePickerMode = .dateAndTime
                 #if swift(>=5.2)
@@ -444,7 +444,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
             case .absorptionTime:
                 let cell = tableView.dequeueReusableCell(withIdentifier: DateAndDurationTableViewCell.className) as! DateAndDurationTableViewCell
                 
-                cell.titleLabel.text = NSLocalizedString("Absorption Time", comment: "Title of the carb entry absorption time cell")
+                cell.titleLabel.text = NSLocalizedString("吸收时间", comment: "Title of the carb entry absorption time cell")
                 cell.datePicker.isEnabled = isSampleEditable
                 cell.datePicker.datePickerMode = .countDownTimer
                 cell.datePicker.minuteInterval = Int(absorptionTimePickerInterval.minutes)
@@ -615,7 +615,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
     }
 
     // Alerts
-    private lazy var dismissActionTitle = NSLocalizedString("com.loudnate.LoopKit.errorAlertActionTitle", value: "OK", comment: "The title of the action used to dismiss an error alert")
+    private lazy var dismissActionTitle = NSLocalizedString("com.loudnate.loopkit.erroralertactionTitle", value: "OK", comment: "The title of the action used to dismiss an error alert")
 
     public func showAbsorptionTimeValidationWarning(for viewController: UIViewController, maxAbsorptionTime: TimeInterval) {
         let formatter = DateComponentsFormatter()
@@ -625,7 +625,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
         let message = String(
             format: NSLocalizedString("The maximum absorption time is %@", comment: "Alert body displayed absorption time greater than max (1: maximum absorption time)"),
             formatter.string(from: maxAbsorptionTime) ?? String(describing: maxAbsorptionTime))
-        let validationTitle = NSLocalizedString("Maximum Duration Exceeded", comment: "Alert title when maximum duration exceeded.")
+        let validationTitle = NSLocalizedString("最大持续时间超过", comment: "Alert title when maximum duration exceeded.")
         let alert = UIAlertController(title: validationTitle, message: message, preferredStyle: .alert)
 
         let action = UIAlertAction(title: dismissActionTitle, style: .default)
@@ -636,7 +636,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
     }
 
     public func showWarningQuantityValidationWarning(for viewController: UIViewController, enteredGrams: Double, didConfirm: @escaping () -> Void) {
-        let warningTitle = NSLocalizedString("Large Meal Entered", comment: "Title of the warning shown when a large meal was entered")
+        let warningTitle = NSLocalizedString("大餐进入", comment: "Title of the warning shown when a large meal was entered")
 
         let message = String(
             format: NSLocalizedString("Did you intend to enter %1$@ grams as the amount of carbohydrates for this meal?", comment: "Alert body when entered carbohydrates is greater than threshold (1: entered quantity in grams)"),
@@ -644,11 +644,11 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
                 )
         let alert = UIAlertController(title: warningTitle, message: message, preferredStyle: .alert)
 
-        let editButtonText = NSLocalizedString("No, edit amount", comment: "The title of the action used when rejecting the the amount of carbohydrates entered.")
+        let editButtonText = NSLocalizedString("不，编辑金额", comment: "The title of the action used when rejecting the the amount of carbohydrates entered.")
         let editAction = UIAlertAction(title: editButtonText, style: .default)
         alert.addAction(editAction)
 
-        let confirmButtonText = NSLocalizedString("Yes", comment: "The title of the action used when confirming entered amount of carbohydrates.")
+        let confirmButtonText = NSLocalizedString("是的", comment: "The title of the action used when confirming entered amount of carbohydrates.")
         let confirm = UIAlertAction(title: confirmButtonText, style: .default) {_ in
             didConfirm();
         }
@@ -659,7 +659,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
     }
 
     public func showMaxQuantityValidationWarning(for viewController: UIViewController, maxQuantityGrams: Double) {
-        let errorTitle = NSLocalizedString("Input Maximum Exceeded", comment: "Title of the alert when carb input maximum was exceeded.")
+        let errorTitle = NSLocalizedString("输入最大超过", comment: "Title of the alert when carb input maximum was exceeded.")
         let message = String(
             format: NSLocalizedString("The maximum allowed amount is %@ grams.", comment: "Alert body displayed for quantity greater than max (1: maximum quantity in grams)"),
             NumberFormatter.localizedString(from: NSNumber(value: maxQuantityGrams), number: .none)

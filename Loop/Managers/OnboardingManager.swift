@@ -460,7 +460,7 @@ enum OnboardingError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidState:
-            return NSLocalizedString("An unexpected onboarding error state occurred.", comment: "Invalid onboarding state")
+            return NSLocalizedString("发生意外的入职错误状态。", comment: "Invalid onboarding state")
         }
     }
 }

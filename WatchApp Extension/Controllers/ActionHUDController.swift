@@ -43,9 +43,9 @@ final class ActionHUDController: HUDInterfaceController {
 
         // Update the override button description based on the feature flag; this cannot be done earlier than `-willActivate` (e.g. didSet on the IBOutlet is too soon)
         if FeatureFlags.sensitivityOverridesEnabled {
-            overrideButtonLabel?.setText(NSLocalizedString("Preset", comment: "The text for the Watch button for enabling a custom preset"))
+            overrideButtonLabel?.setText(NSLocalizedString("预设", comment: "The text for the Watch button for enabling a custom preset"))
         } else {
-            overrideButtonLabel?.setText(NSLocalizedString("Workout", comment: "The text for the Watch button for enabling workout mode"))
+            overrideButtonLabel?.setText(NSLocalizedString("锻炼", comment: "The text for the Watch button for enabling workout mode"))
         }
 
         let userActivity = NSUserActivity.forViewLoopStatus()
@@ -139,7 +139,7 @@ final class ActionHUDController: HUDInterfaceController {
         
         let buttonToSelect = loopManager.settings.preMealOverride?.isActive() == true ? SelectedButton.on : SelectedButton.off
         let viewModel = OnOffSelectionViewModel(
-            title: NSLocalizedString("Pre-Meal", comment: "Title for sheet to enable/disable pre-meal on watch"),
+            title: NSLocalizedString("预之前", comment: "Title for sheet to enable/disable pre-meal on watch"),
             message: formattedGlucoseRangeString(from: range),
             onSelection: setPreMealEnabled,
             selectedButton: buttonToSelect,
@@ -194,8 +194,8 @@ final class ActionHUDController: HUDInterfaceController {
                 updateForPreMeal(enabled: isPreMealEnabled)
                 updateForOverrideContext(overrideContext)
                 presentAlert(
-                    withTitle: NSLocalizedString("Send Failed", comment: "The title of the alert controller displayed after a glucose range override send attempt fails"),
-                    message: NSLocalizedString("Make sure your iPhone is nearby and try again", comment: "The recovery message displayed after a glucose range override send attempt fails"),
+                    withTitle: NSLocalizedString("发送失败", comment: "The title of the alert controller displayed after a glucose range override send attempt fails"),
+                    message: NSLocalizedString("确保您的iPhone在附近，然后重试", comment: "The recovery message displayed after a glucose range override send attempt fails"),
                     preferredStyle: .alert,
                     actions: [.dismissAction()]
                 )
@@ -212,7 +212,7 @@ final class ActionHUDController: HUDInterfaceController {
             let buttonToSelect = loopManager.settings.nonPreMealOverrideEnabled() == true ? SelectedButton.on : SelectedButton.off
             
             let viewModel = OnOffSelectionViewModel(
-                title: NSLocalizedString("Workout", comment: "Title for sheet to enable/disable workout mode on watch"),
+                title: NSLocalizedString("锻炼", comment: "Title for sheet to enable/disable workout mode on watch"),
                 message: formattedGlucoseRangeString(from: range),
                 onSelection: { isWorkoutEnabled in
                     let override = isWorkoutEnabled ? self.loopManager.settings.legacyWorkoutOverride(for: .infinity) : nil
@@ -280,8 +280,8 @@ final class ActionHUDController: HUDInterfaceController {
                 updateForOverrideContext(override?.context)
                 updateForPreMeal(enabled: isPreMealEnabled)
                 presentAlert(
-                    withTitle: NSLocalizedString("Send Failed", comment: "The title of the alert controller displayed after a glucose range override send attempt fails"),
-                    message: NSLocalizedString("Make sure your iPhone is nearby and try again", comment: "The recovery message displayed after a glucose range override send attempt fails"),
+                    withTitle: NSLocalizedString("发送失败", comment: "The title of the alert controller displayed after a glucose range override send attempt fails"),
+                    message: NSLocalizedString("确保您的iPhone在附近，然后重试", comment: "The recovery message displayed after a glucose range override send attempt fails"),
                     preferredStyle: .alert,
                     actions: [.dismissAction()]
                 )

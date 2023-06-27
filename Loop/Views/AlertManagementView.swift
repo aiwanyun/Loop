@@ -70,7 +70,7 @@ struct AlertManagementView: View {
                 missedMealAlertSection
             }
         }
-        .navigationTitle(NSLocalizedString("Alert Management", comment: "Title of alert management screen"))
+        .navigationTitle(NSLocalizedString("警报管理", comment: "Title of alert management screen"))
     }
 
     private var alertPermissionsSection: some View {
@@ -79,7 +79,7 @@ struct AlertManagementView: View {
                             NotificationsCriticalAlertPermissionsView(mode: .flow, checker: checker))
             {
                 HStack {
-                    Text(NSLocalizedString("Alert Permissions", comment: "Alert Permissions button text"))
+                    Text(NSLocalizedString("警报许可", comment: "Alert Permissions button text"))
                     if checker.showWarning ||
                         checker.notificationCenterSettings.scheduledDeliveryEnabled {
                         Spacer()
@@ -99,7 +99,7 @@ struct AlertManagementView: View {
                 Button(action: { showMuteAlertOptions = true }) {
                     HStack {
                         muteAlertIcon
-                        Text(NSLocalizedString("Mute All Alerts", comment: "Label for button to mute all alerts"))
+                        Text(NSLocalizedString("静音所有警报", comment: "Label for button to mute all alerts"))
                     }
                 }
                 .actionSheet(isPresented: $showMuteAlertOptions) {
@@ -109,11 +109,11 @@ struct AlertManagementView: View {
                 Button(action: alertMuter.unmuteAlerts) {
                     HStack {
                         unmuteAlertIcon
-                        Text(NSLocalizedString("Tap to Unmute Alerts", comment: "Label for button to unmute all alerts"))
+                        Text(NSLocalizedString("点击取消静音警报", comment: "Label for button to unmute all alerts"))
                     }
                 }
                 HStack {
-                    Text(NSLocalizedString("All alerts muted until", comment: "Label for when mute alert will end"))
+                    Text(NSLocalizedString("所有警报都静音直到", comment: "Label for when mute alert will end"))
                     Spacer()
                     Text(alertMuter.formattedEndTime)
                         .foregroundColor(.secondary)
@@ -142,7 +142,7 @@ struct AlertManagementView: View {
     private var howMuteAlertsWork: some View {
         Button(action: { showHowMuteAlertWork = true }) {
             HStack {
-                Text(NSLocalizedString("Take a closer look at how mute alerts works", comment: "Label for link to learn how mute alerts work"))
+                Text(NSLocalizedString("仔细研究一下静音警报的工作方式", comment: "Label for link to learn how mute alerts work"))
                     .font(.footnote)
                     .foregroundColor(.secondary)
                 Spacer()
@@ -163,14 +163,14 @@ struct AlertManagementView: View {
         muteAlertDurationOptions.append(.cancel())
 
         return ActionSheet(
-            title: Text(NSLocalizedString("Mute All Alerts Temporarily", comment: "Title for mute alert duration selection action sheet")),
-            message: Text(NSLocalizedString("No alerts or alarms will sound while muted. Select how long you would you like to mute for.", comment: "Message for mute alert duration selection action sheet")),
+            title: Text(NSLocalizedString("暂时静音所有警报", comment: "Title for mute alert duration selection action sheet")),
+            message: Text(NSLocalizedString("静音时不会发出警报或警报。选择您想静音多长时间。", comment: "Message for mute alert duration selection action sheet")),
             buttons: muteAlertDurationOptions)
     }
     
     private var missedMealAlertSection: some View {
-        Section(footer: DescriptiveText(label: NSLocalizedString("When enabled, Loop can notify you when it detects a meal that wasn't logged.", comment: "Description of missed meal notifications."))) {
-            Toggle(NSLocalizedString("Missed Meal Notifications", comment: "Title for missed meal notifications toggle"), isOn: missedMealNotificationsEnabled)
+        Section(footer: DescriptiveText(label: NSLocalizedString("启用后，循环在发现未登录的餐点时会通知您。", comment: "Description of missed meal notifications."))) {
+            Toggle(NSLocalizedString("错过的通知", comment: "Title for missed meal notifications toggle"), isOn: missedMealNotificationsEnabled)
         }
     }
 }

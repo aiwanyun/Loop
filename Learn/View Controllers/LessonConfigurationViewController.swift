@@ -76,7 +76,7 @@ class LessonConfigurationViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == lesson.configurationSections.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: TextButtonTableViewCell.className, for: indexPath) as! TextButtonTableViewCell
-            cell.textLabel?.text = NSLocalizedString("Continue", comment: "Title of the button to begin lesson execution")
+            cell.textLabel?.text = NSLocalizedString("继续", comment: "Title of the button to begin lesson execution")
 
             switch state {
             case .editing:

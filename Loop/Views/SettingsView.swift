@@ -76,7 +76,7 @@ public struct SettingsView: View {
                 }
             }
             .insetGroupedListStyle()
-            .navigationBarTitle(Text(NSLocalizedString("Settings", comment: "Settings screen title")))
+            .navigationBarTitle(Text(NSLocalizedString("设置", comment: "Settings screen title")))
             .navigationBarItems(trailing: dismissButton)
         }
         .navigationViewStyle(.stack)
@@ -130,7 +130,7 @@ extension SettingsView {
         
     private var dismissButton: some View {
         Button(action: dismiss) {
-            Text("Done").bold()
+            Text("完毕").bold()
         }
     }
     
@@ -138,10 +138,10 @@ extension SettingsView {
         Section(header: SectionHeader(label: localizedAppNameAndVersion)) {
             Toggle(isOn: closedLoopToggleState) {
                 VStack(alignment: .leading) {
-                    Text("Closed Loop", comment: "The title text for the looping enabled switch cell")
+                    Text("闭环", comment: "The title text for the looping enabled switch cell")
                         .padding(.vertical, 3)
                     if !viewModel.isOnboardingComplete {
-                        DescriptiveText(label: NSLocalizedString("Closed Loop requires Setup to be Complete", comment: "The description text for the looping enabled switch cell when onboarding is not complete"))
+                        DescriptiveText(label: NSLocalizedString("闭环需要设置才能完成", comment: "The description text for the looping enabled switch cell when onboarding is not complete"))
                     } else if let closedLoopDescriptiveText = viewModel.closedLoopDescriptiveText {
                         DescriptiveText(label: closedLoopDescriptiveText)
                     }
@@ -155,7 +155,7 @@ extension SettingsView {
     private var softwareUpdateSection: some View {
         Section(footer: Text(viewModel.versionUpdateViewModel.footer(appName: appName))) {
             NavigationLink(destination: viewModel.versionUpdateViewModel.softwareUpdateView) {
-                Text(NSLocalizedString("Software Update", comment: "Software update button link text"))
+                Text(NSLocalizedString("软件更新", comment: "Software update button link text"))
                 Spacer()
                 viewModel.versionUpdateViewModel.icon
             }
@@ -163,7 +163,7 @@ extension SettingsView {
     }
 
     private var dosingStrategySection: some View {
-        Section(header: SectionHeader(label: NSLocalizedString("Dosing Strategy", comment: "The title of the Dosing Strategy section in settings"))) {
+        Section(header: SectionHeader(label: NSLocalizedString("给药策略", comment: "The title of the Dosing Strategy section in settings"))) {
             
             NavigationLink(destination: DosingStrategySelectionView(automaticDosingStrategy: $viewModel.automaticDosingStrategy))
             {
@@ -179,7 +179,7 @@ extension SettingsView {
             NavigationLink(destination: AlertManagementView(checker: viewModel.alertPermissionsChecker, alertMuter: viewModel.alertMuter))
             {
                 HStack {
-                    Text(NSLocalizedString("Alert Management", comment: "Alert Permissions button text"))
+                    Text(NSLocalizedString("警报管理", comment: "Alert Permissions button text"))
                     if viewModel.alertPermissionsChecker.showWarning ||
                         viewModel.alertPermissionsChecker.notificationCenterSettings.scheduledDeliveryEnabled {
                         Spacer()
@@ -199,12 +199,12 @@ extension SettingsView {
     }
         
     private var configurationSection: some View {
-        Section(header: SectionHeader(label: NSLocalizedString("Configuration", comment: "The title of the Configuration section in settings"))) {
+        Section(header: SectionHeader(label: NSLocalizedString("配置", comment: "The title of the Configuration section in settings"))) {
             LargeButton(action: { self.therapySettingsIsPresented = true },
                             includeArrow: true,
                             imageView: AnyView(Image("Therapy Icon")),
-                            label: NSLocalizedString("Therapy Settings", comment: "Title text for button to Therapy Settings"),
-                            descriptiveText: NSLocalizedString("Diabetes Treatment", comment: "Descriptive text for Therapy Settings"))
+                            label: NSLocalizedString("治疗环境", comment: "Title text for button to Therapy Settings"),
+                            descriptiveText: NSLocalizedString("糖尿病治疗", comment: "Descriptive text for Therapy Settings"))
                 .sheet(isPresented: $therapySettingsIsPresented) {
                     TherapySettingsView(mode: .settings,
                                         viewModel: TherapySettingsViewModel(therapySettings: self.viewModel.therapySettings(),
@@ -249,15 +249,15 @@ extension SettingsView {
                         includeArrow: true,
                         imageView: deviceImage(uiImage: viewModel.pumpManagerSettingsViewModel.image()),
                         label: viewModel.pumpManagerSettingsViewModel.name(),
-                        descriptiveText: NSLocalizedString("Insulin Pump", comment: "Descriptive text for Insulin Pump"))
+                        descriptiveText: NSLocalizedString("胰岛素泵", comment: "Descriptive text for Insulin Pump"))
         } else if viewModel.isOnboardingComplete {
             LargeButton(action: { self.pumpChooserIsPresented = true },
                         includeArrow: false,
                         imageView: AnyView(plusImage),
-                        label: NSLocalizedString("Add Pump", comment: "Title text for button to add pump device"),
-                        descriptiveText: NSLocalizedString("Tap here to set up a pump", comment: "Descriptive text for button to add pump device"))
+                        label: NSLocalizedString("添加泵", comment: "Title text for button to add pump device"),
+                        descriptiveText: NSLocalizedString("点击这里设置泵", comment: "Descriptive text for button to add pump device"))
                 .actionSheet(isPresented: $pumpChooserIsPresented) {
-                    ActionSheet(title: Text("Add Pump", comment: "The title of the pump chooser in settings"), buttons: pumpChoices)
+                    ActionSheet(title: Text("添加泵", comment: "The title of the pump chooser in settings"), buttons: pumpChoices)
             }
         } else {
             EmptyView()
@@ -281,15 +281,15 @@ extension SettingsView {
                         includeArrow: true,
                         imageView: deviceImage(uiImage: viewModel.cgmManagerSettingsViewModel.image()),
                         label: viewModel.cgmManagerSettingsViewModel.name(),
-                        descriptiveText: NSLocalizedString("Continuous Glucose Monitor", comment: "Descriptive text for Continuous Glucose Monitor"))
+                        descriptiveText: NSLocalizedString("连续的葡萄糖监测器", comment: "Descriptive text for Continuous Glucose Monitor"))
         } else {
             LargeButton(action: { self.cgmChooserIsPresented = true },
                         includeArrow: false,
                         imageView: AnyView(plusImage),
-                        label: NSLocalizedString("Add CGM", comment: "Title text for button to add CGM device"),
-                        descriptiveText: NSLocalizedString("Tap here to set up a CGM", comment: "Descriptive text for button to add CGM device"))
+                        label: NSLocalizedString("添加CGM", comment: "Title text for button to add CGM device"),
+                        descriptiveText: NSLocalizedString("点击这里设置CGM", comment: "Descriptive text for button to add CGM device"))
                 .actionSheet(isPresented: $cgmChooserIsPresented) {
-                    ActionSheet(title: Text("Add CGM", comment: "The title of the CGM chooser in settings"), buttons: cgmChoices)
+                    ActionSheet(title: Text("添加CGM", comment: "The title of the CGM chooser in settings"), buttons: cgmChoices)
             }
         }
     }
@@ -307,7 +307,7 @@ extension SettingsView {
     }
     
     private var servicesSection: some View {
-        Section(header: SectionHeader(label: NSLocalizedString("Services", comment: "The title of the services section in settings"))) {
+        Section(header: SectionHeader(label: NSLocalizedString("服务", comment: "The title of the services section in settings"))) {
             ForEach(viewModel.servicesViewModel.activeServices().indices, id: \.self) { index in
                 LargeButton(action: { self.viewModel.servicesViewModel.didTapService(index) },
                             includeArrow: true,
@@ -319,10 +319,10 @@ extension SettingsView {
                 LargeButton(action: { self.serviceChooserIsPresented = true },
                             includeArrow: false,
                             imageView: AnyView(plusImage),
-                            label: NSLocalizedString("Add Service", comment: "The title of the add service button in settings"),
-                            descriptiveText: NSLocalizedString("Tap here to set up a Service", comment: "The descriptive text of the add service button in settings"))
+                            label: NSLocalizedString("添加服务", comment: "The title of the add service button in settings"),
+                            descriptiveText: NSLocalizedString("点击这里设置服务", comment: "The descriptive text of the add service button in settings"))
                     .actionSheet(isPresented: $serviceChooserIsPresented) {
-                        ActionSheet(title: Text("Add Service", comment: "The title of the add service action sheet in settings"), buttons: serviceChoices)
+                        ActionSheet(title: Text("添加服务", comment: "The title of the add service action sheet in settings"), buttons: serviceChoices)
                 }
             }
         }
@@ -344,7 +344,7 @@ extension SettingsView {
                 Button(action: { self.deletePumpDataAlertIsPresented.toggle() }) {
                     HStack {
                         Spacer()
-                        Text("Delete Testing Pump Data").accentColor(.destructive)
+                        Text("删除测试泵数据").accentColor(.destructive)
                         Spacer()
                     }
                 }
@@ -356,7 +356,7 @@ extension SettingsView {
                 Button(action: { self.deleteCGMDataAlertIsPresented.toggle() }) {
                     HStack {
                         Spacer()
-                        Text("Delete Testing CGM Data").accentColor(.destructive)
+                        Text("删除测试CGM数据").accentColor(.destructive)
                         Spacer()
                     }
                 }
@@ -368,18 +368,18 @@ extension SettingsView {
     }
     
     private func makeDeleteAlert<T>(for model: DeviceViewModel<T>) -> SwiftUI.Alert {
-        return SwiftUI.Alert(title: Text("Delete Testing Data"),
+        return SwiftUI.Alert(title: Text("删除测试数据"),
                              message: Text("Are you sure you want to delete all your \(model.name()) Data?\n(This action is not reversible)"),
                              primaryButton: .cancel(),
-                             secondaryButton: .destructive(Text("Delete"), action: model.deleteTestingDataFunc()))
+                             secondaryButton: .destructive(Text("删除"), action: model.deleteTestingDataFunc()))
     }
     
     private var supportSection: some View {
-        Section(header: SectionHeader(label: NSLocalizedString("Support", comment: "The title of the support section in settings"))) {
+        Section(header: SectionHeader(label: NSLocalizedString("支持", comment: "The title of the support section in settings"))) {
             Button(action: {
                 self.viewModel.didTapIssueReport()
             }) {
-                Text("Issue Report", comment: "The title text for the issue report menu item")
+                Text("问题报告", comment: "The title text for the issue report menu item")
             }
 
             ForEach(pluginMenuItems.filter( { $0.section == .support })) {
@@ -387,7 +387,7 @@ extension SettingsView {
             }
 
             NavigationLink(destination: CriticalEventLogExportView(viewModel: viewModel.criticalEventLogExportViewModel)) {
-                Text(NSLocalizedString("Export Critical Event Logs", comment: "The title of the export critical event logs in support"))
+                Text(NSLocalizedString("导出关键事件日志", comment: "The title of the export critical event logs in support"))
             }
         }
     }
@@ -400,13 +400,13 @@ extension SettingsView {
         let profileExpirationMsg = ProfileExpirationAlerter.createProfileExpirationSettingsMessage(profileExpiration: profileExpiration)
         let readableExpirationTime = Self.dateFormatter.string(from: profileExpiration)
         
-        return Section(header: SectionHeader(label: NSLocalizedString("App Profile", comment: "Settings app profile section")),
-                       footer: Text(NSLocalizedString("Profile expires ", comment: "Time that profile expires") + readableExpirationTime)) {
+        return Section(header: SectionHeader(label: NSLocalizedString("应用配置文件", comment: "Settings app profile section")),
+                       footer: Text(NSLocalizedString("配置文件到期", comment: "Time that profile expires") + readableExpirationTime)) {
             if(nearExpiration) {
                 Text(profileExpirationMsg).foregroundColor(.red)
             } else {
                 HStack {
-                    Text("Profile Expiration", comment: "Settings App Profile expiration view")
+                    Text("配置文件到期", comment: "Settings App Profile expiration view")
                     Spacer()
                     Text(profileExpirationMsg).foregroundColor(Color.secondary)
                 }
@@ -414,7 +414,7 @@ extension SettingsView {
             Button(action: {
                 UIApplication.shared.open(URL(string: "https://loopkit.github.io/loopdocs/build/updating/")!)
             }) {
-                Text(NSLocalizedString("How to update (LoopDocs)", comment: "The title text for how to update"))
+                Text(NSLocalizedString("如何更新（loopdocs）", comment: "The title text for how to update"))
             }
         }
     }

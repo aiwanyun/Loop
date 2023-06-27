@@ -12,9 +12,9 @@ import LoopKit
 import os.log
 
 final class ModalDayLesson: Lesson {
-    let title = NSLocalizedString("Modal Day", comment: "Lesson title")
+    let title = NSLocalizedString("模式日", comment: "Lesson title")
 
-    let subtitle = NSLocalizedString("Visualizes the most frequent glucose values by time of day", comment: "Lesson subtitle")
+    let subtitle = NSLocalizedString("通过一天中的时间可视化最常见的葡萄糖值", comment: "Lesson subtitle")
 
     let configurationSections: [LessonSectionProviding]
 
@@ -57,7 +57,7 @@ final class ModalDayLesson: Lesson {
             case .success(let buckets):
                 guard buckets.count > 0 else {
                     completion([
-                        LessonSection(cells: [TextCell(text: NSLocalizedString("No data available", comment: "Lesson result text for no data"))])
+                        LessonSection(cells: [TextCell(text: NSLocalizedString("无可用数据", comment: "Lesson result text for no data"))])
                         ])
                     return
                 }

@@ -55,9 +55,9 @@ enum CarbActionError: LocalizedError {
     var errorDescription: String? {
              switch  self {
              case .exceedsMaxCarbs:
-                 return NSLocalizedString("Exceeds maximum allowed carbs", comment: "Remote command error description: carbs exceed maximum amount.")
+                 return NSLocalizedString("超过最大允许的碳水化合物", comment: "Remote command error description: carbs exceed maximum amount.")
              case .invalidCarbs:
-                 return NSLocalizedString("Invalid carb amount", comment: "Remote command error description: invalid carb amount.")
+                 return NSLocalizedString("无效的碳水化合物量", comment: "Remote command error description: invalid carb amount.")
              case .invalidAbsorptionTime(let absorptionTime):
                  return String(format: NSLocalizedString("Invalid absorption time: %d hours", comment: "Remote command error description: invalid absorption time."), absorptionTime.hours)
              case .invalidStartDate(let startDate):

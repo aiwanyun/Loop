@@ -105,8 +105,8 @@ class StatusViewController: UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        activeCarbsTitleLabel.text = NSLocalizedString("Active Carbs", comment: "Widget label title describing the active carbs")
-        activeInsulinTitleLabel.text = NSLocalizedString("Active Insulin", comment: "Widget label title describing the active insulin")
+        activeCarbsTitleLabel.text = NSLocalizedString("活性碳水化合物", comment: "Widget label title describing the active carbs")
+        activeInsulinTitleLabel.text = NSLocalizedString("活性胰岛素", comment: "Widget label title describing the active insulin")
         activeCarbsTitleLabel.textColor = .secondaryLabel
         activeCarbsAmountLabel.textColor = .label
         activeInsulinTitleLabel.textColor = .secondaryLabel
@@ -260,7 +260,7 @@ class StatusViewController: UIViewController, NCWidgetProviding {
             {
                 self.activeInsulinAmountLabel.text = String(format: NSLocalizedString("%1$@ U", comment: "The subtitle format describing units of active insulin. (1: localized insulin value description)"), valueStr)
             } else {
-                self.activeInsulinAmountLabel.text = NSLocalizedString("? U", comment: "Displayed in the widget when the amount of active insulin cannot be determined.")
+                self.activeInsulinAmountLabel.text = NSLocalizedString("？你", comment: "Displayed in the widget when the amount of active insulin cannot be determined.")
             }
 
             self.hudView.pumpStatusHUD.presentStatusHighlight(context.pumpStatusHighlightContext)

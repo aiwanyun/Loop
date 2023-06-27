@@ -22,7 +22,7 @@ public final class BasalRateHUDView: BaseHUDView {
             basalRateLabel?.text = String(format: basalRateFormatString, "–")
             basalRateLabel?.textColor = .secondaryLabel
 
-            accessibilityValue = LocalizedString("Unknown", comment: "Accessibility value for an unknown value")
+            accessibilityValue = LocalizedString("未知", comment: "Accessibility value for an unknown value")
         }
     }
 

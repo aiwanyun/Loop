@@ -49,9 +49,9 @@ final class DeviceDataManager {
 
     var closedLoopDisallowedLocalizedDescription: String? {
         if !cgmHasValidSensorSession {
-            return NSLocalizedString("Closed Loop requires an active CGM Sensor Session", comment: "The description text for the looping enabled switch cell when closed loop is not allowed because the sensor is inactive")
+            return NSLocalizedString("闭环需要一个主动的CGM传感器会话", comment: "The description text for the looping enabled switch cell when closed loop is not allowed because the sensor is inactive")
         } else if !pumpIsAllowingAutomation {
-            return NSLocalizedString("Your pump is delivering a manual temporary basal rate.", comment: "The description text for the looping enabled switch cell when closed loop is not allowed because the pump is delivering a manual temp basal.")
+            return NSLocalizedString("您的泵正在提供手动临时基础速度。", comment: "The description text for the looping enabled switch cell when closed loop is not allowed because the pump is delivering a manual temp basal.")
         } else {
             return nil
         }

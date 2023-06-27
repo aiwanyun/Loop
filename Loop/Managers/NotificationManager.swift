@@ -25,7 +25,7 @@ extension NotificationManager {
 
         let retryBolusAction = UNNotificationAction(
             identifier: Action.retryBolus.rawValue,
-            title: NSLocalizedString("Retry", comment: "The title of the notification action to retry a bolus command"),
+            title: NSLocalizedString("重试", comment: "The title of the notification action to retry a bolus command"),
             options: []
         )
 
@@ -38,7 +38,7 @@ extension NotificationManager {
         
         let acknowledgeAlertAction = UNNotificationAction(
             identifier: Action.acknowledgeAlert.rawValue,
-            title: NSLocalizedString("OK", comment: "The title of the notification action to acknowledge a device alert"),
+            title: NSLocalizedString("好的", comment: "The title of the notification action to acknowledge a device alert"),
             options: .foreground
         )
         
@@ -83,7 +83,7 @@ extension NotificationManager {
     static func sendRemoteCommandExpiredNotification(timeExpired: TimeInterval) {
         let notification = UNMutableNotificationContent()
 
-        notification.title = NSLocalizedString("Remote Command Expired", comment: "The notification title for the remote command expiration error")
+        notification.title = NSLocalizedString("远程命令过期", comment: "The notification title for the remote command expiration error")
 
         notification.body = String(format: NSLocalizedString("The remote command expired %.0f minutes ago.", comment: "The notification body for a remote command expiration. (1: Expiration in minutes)"), fabs(timeExpired / 60.0))
         notification.sound = .default
@@ -103,9 +103,9 @@ extension NotificationManager {
     static func sendBolusFailureNotification(for error: PumpManagerError, units: Double, at startDate: Date, activationType: BolusActivationType) {
         let notification = UNMutableNotificationContent()
 
-        notification.title = NSLocalizedString("Bolus Issue", comment: "The notification title for a bolus issue")
+        notification.title = NSLocalizedString("推注问题", comment: "The notification title for a bolus issue")
 
-        let fullStopCharacter = NSLocalizedString(".", comment: "Full stop character")
+        let fullStopCharacter = NSLocalizedString("。", comment: "Full stop character")
         let sentenceFormat = NSLocalizedString("%1@%2@", comment: "Adds a full-stop to a statement (1: statement, 2: full stop character)")
 
         let body = [error.errorDescription, error.failureReason, error.recoverySuggestion].compactMap({ $0 }).map({
@@ -227,8 +227,8 @@ extension NotificationManager {
         /// Notifications should expire after the missed meal is no longer relevant
         let expirationDate = mealStart.addingTimeInterval(LoopCoreConstants.defaultCarbAbsorptionTimes.slow)
 
-        notification.title =  String(format: NSLocalizedString("Possible Missed Meal", comment: "The notification title for a meal that was possibly not logged in Loop."))
-        notification.body = String(format: NSLocalizedString("It looks like you may not have logged a meal you ate. Tap to log it now.", comment: "The notification description for a meal that was possibly not logged in Loop."))
+        notification.title =  String(format: NSLocalizedString("可能错过的用餐", comment: "The notification title for a meal that was possibly not logged in Loop."))
+        notification.body = String(format: NSLocalizedString("看来您可能没有记录您吃的一顿饭。点击立即记录它。", comment: "The notification description for a meal that was possibly not logged in Loop."))
         notification.sound = .default
         
         notification.userInfo = [

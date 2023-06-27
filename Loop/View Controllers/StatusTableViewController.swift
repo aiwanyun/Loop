@@ -285,15 +285,15 @@ final class StatusTableViewController: LoopChartsTableViewController {
     private func updateToolbarItems() {
         let isPumpOnboarded = onboardingManager.isComplete || deviceManager.pumpManager?.isOnboarded == true
 
-        toolbarItems![0].accessibilityLabel = NSLocalizedString("Add Meal", comment: "The label of the carb entry button")
+        toolbarItems![0].accessibilityLabel = NSLocalizedString("加餐", comment: "The label of the carb entry button")
         toolbarItems![0].isEnabled = isPumpOnboarded
         toolbarItems![0].tintColor = UIColor.carbTintColor
         toolbarItems![2].isEnabled = isPumpOnboarded && (automaticDosingStatus.automaticDosingEnabled || !FeatureFlags.simpleBolusCalculatorEnabled)
-        toolbarItems![4].accessibilityLabel = NSLocalizedString("Bolus", comment: "The label of the bolus entry button")
+        toolbarItems![4].accessibilityLabel = NSLocalizedString("推注", comment: "The label of the bolus entry button")
         toolbarItems![4].isEnabled = isPumpOnboarded
         toolbarItems![4].tintColor = UIColor.insulinTintColor
         toolbarItems![6].isEnabled = isPumpOnboarded
-        toolbarItems![8].accessibilityLabel = NSLocalizedString("Settings", comment: "The label of the settings button")
+        toolbarItems![8].accessibilityLabel = NSLocalizedString("设置", comment: "The label of the settings button")
         toolbarItems![8].tintColor = UIColor.secondaryLabel
     }
 
@@ -879,14 +879,14 @@ final class StatusTableViewController: LoopChartsTableViewController {
             var contentConfig = defaultContentConfiguration().updated(for: state)
             let titleImageAttachment = NSTextAttachment()
             titleImageAttachment.image = UIImage(systemName: "exclamationmark.triangle.fill")?.withTintColor(.white)
-            let title = NSMutableAttributedString(string: NSLocalizedString(" Safety Notifications are OFF", comment: "Warning text for when Notifications or Critical Alerts Permissions is disabled"))
+            let title = NSMutableAttributedString(string: NSLocalizedString("安全通知已关闭", comment: "Warning text for when Notifications or Critical Alerts Permissions is disabled"))
             let titleWithImage = NSMutableAttributedString(attachment: titleImageAttachment)
             titleWithImage.append(title)
             contentConfig.attributedText = titleWithImage
             contentConfig.textProperties.color = .white
             contentConfig.textProperties.font = .systemFont(ofSize: adjustViewForNarrowDisplay ? 16 : 18, weight: .bold)
             contentConfig.textProperties.adjustsFontSizeToFitWidth = true
-            contentConfig.secondaryText = NSLocalizedString("Fix now by turning Notifications, Critical Alerts and Time Sensitive Notifications ON.", comment: "Secondary text for alerts disabled warning, which appears on the main status screen.")
+            contentConfig.secondaryText = NSLocalizedString("现在通过打开通知，关键警报和时间敏感通知来解决。", comment: "Secondary text for alerts disabled warning, which appears on the main status screen.")
             contentConfig.secondaryTextProperties.color = .white
             contentConfig.secondaryTextProperties.font = .systemFont(ofSize: adjustViewForNarrowDisplay ? 13 : 15)
             contentConfiguration = contentConfig
@@ -907,7 +907,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
     }
 
     private class MuteAlertsWarningCell: UITableViewCell {
-        var formattedAlertMuteEndTime: String = NSLocalizedString("Unknown", comment: "label for when the alert mute end time is unknown")
+        var formattedAlertMuteEndTime: String = NSLocalizedString("未知", comment: "label for when the alert mute end time is unknown")
 
         fileprivate class GradientView: UIView {
             override static var layerClass: AnyClass { CAGradientLayer.self }
@@ -919,7 +919,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
             let adjustViewForNarrowDisplay = bounds.width < 350
 
             var contentConfig = defaultContentConfiguration().updated(for: state)
-            let title = NSMutableAttributedString(string: NSLocalizedString("All Alerts Muted", comment: "Warning text for when alerts are muted"))
+            let title = NSMutableAttributedString(string: NSLocalizedString("所有警报都静音", comment: "Warning text for when alerts are muted"))
             let image = UIImage(systemName: "speaker.slash.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25, weight: .thin, scale: .large))
             contentConfig.image = image
             contentConfig.imageProperties.tintColor = .white
@@ -976,23 +976,23 @@ final class StatusTableViewController: LoopChartsTableViewController {
                 cell.setChartGenerator(generator: { [weak self] (frame) in
                     return self?.statusCharts.glucoseChart(withFrame: frame)?.view
                 })
-                cell.setTitleLabelText(label: NSLocalizedString("Glucose", comment: "The title of the glucose and prediction graph"))
+                cell.setTitleLabelText(label: NSLocalizedString("葡萄糖", comment: "The title of the glucose and prediction graph"))
                 cell.doesNavigate = automaticDosingStatus.automaticDosingEnabled || !FeatureFlags.simpleBolusCalculatorEnabled
             case .iob:
                 cell.setChartGenerator(generator: { [weak self] (frame) in
                     return self?.statusCharts.iobChart(withFrame: frame)?.view
                 })
-                cell.setTitleLabelText(label: NSLocalizedString("Active Insulin", comment: "The title of the Insulin On-Board graph"))
+                cell.setTitleLabelText(label: NSLocalizedString("活性胰岛素", comment: "The title of the Insulin On-Board graph"))
             case .dose:
                 cell.setChartGenerator(generator: { [weak self] (frame) in
                     return self?.statusCharts.doseChart(withFrame: frame)?.view
                 })
-                cell.setTitleLabelText(label: NSLocalizedString("Insulin Delivery", comment: "The title of the insulin delivery graph"))
+                cell.setTitleLabelText(label: NSLocalizedString("胰岛素输送", comment: "The title of the insulin delivery graph"))
             case .cob:
                 cell.setChartGenerator(generator: { [weak self] (frame) in
                     return self?.statusCharts.cobChart(withFrame: frame)?.view
                 })
-                cell.setTitleLabelText(label: NSLocalizedString("Active Carbohydrates", comment: "The title of the Carbs On-Board graph"))
+                cell.setTitleLabelText(label: NSLocalizedString("活性碳水化合物", comment: "The title of the Carbs On-Board graph"))
             }
 
             self.tableView(tableView, updateSubtitleFor: cell, at: indexPath)
@@ -1029,19 +1029,19 @@ final class StatusTableViewController: LoopChartsTableViewController {
                         symbolAttachment.image = UIImage(named: "Pre-Meal-symbol")?.withTintColor(.carbTintColor)
 
                         let attributedString = NSMutableAttributedString(attachment: symbolAttachment)
-                        attributedString.append(NSAttributedString(string: NSLocalizedString(" Pre-meal Preset", comment: "Status row title for premeal override enabled (leading space is to separate from symbol)")))
+                        attributedString.append(NSAttributedString(string: NSLocalizedString("预设前预设", comment: "Status row title for premeal override enabled (leading space is to separate from symbol)")))
                         cell.titleLabel.attributedText = attributedString
                     case .legacyWorkout:
                         let symbolAttachment = NSTextAttachment()
                         symbolAttachment.image = UIImage(named: "workout-symbol")?.withTintColor(.glucoseTintColor)
 
                         let attributedString = NSMutableAttributedString(attachment: symbolAttachment)
-                        attributedString.append(NSAttributedString(string: NSLocalizedString(" Workout Preset", comment: "Status row title for workout override enabled (leading space is to separate from symbol)")))
+                        attributedString.append(NSAttributedString(string: NSLocalizedString("锻炼预设", comment: "Status row title for workout override enabled (leading space is to separate from symbol)")))
                         cell.titleLabel.attributedText = attributedString
                     case .preset(let preset):
                         cell.titleLabel.text = String(format: NSLocalizedString("%@ %@", comment: "The format for an active custom preset. (1: preset symbol)(2: preset name)"), preset.symbol, preset.name)
                     case .custom:
-                        cell.titleLabel.text = NSLocalizedString("Custom Preset", comment: "The title of the cell indicating a generic custom preset is enabled")
+                        cell.titleLabel.text = NSLocalizedString("自定义预设", comment: "The title of the cell indicating a generic custom preset is enabled")
                     }
 
                     if override.isActive() {
@@ -1060,7 +1060,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
                     return cell
                 case .enactingBolus:
                     let cell = getTitleSubtitleCell()
-                    cell.titleLabel.text = NSLocalizedString("Starting Bolus", comment: "The title of the cell indicating a bolus is being sent")
+                    cell.titleLabel.text = NSLocalizedString("开始推注", comment: "The title of the cell indicating a bolus is being sent")
 
                     let indicatorView = UIActivityIndicatorView(style: .default)
                     indicatorView.startAnimating()
@@ -1076,7 +1076,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
                     return progressCell
                 case .cancelingBolus:
                     let cell = getTitleSubtitleCell()
-                    cell.titleLabel.text = NSLocalizedString("Canceling Bolus", comment: "The title of the cell indicating a bolus is being canceled")
+                    cell.titleLabel.text = NSLocalizedString("取消推注", comment: "The title of the cell indicating a bolus is being canceled")
 
                     let indicatorView = UIActivityIndicatorView(style: .default)
                     indicatorView.startAnimating()
@@ -1084,14 +1084,14 @@ final class StatusTableViewController: LoopChartsTableViewController {
                     return cell
                 case .pumpSuspended(let resuming):
                     let cell = getTitleSubtitleCell()
-                    cell.titleLabel.text = NSLocalizedString("Insulin Suspended", comment: "The title of the cell indicating the pump is suspended")
+                    cell.titleLabel.text = NSLocalizedString("胰岛素暂停", comment: "The title of the cell indicating the pump is suspended")
 
                     if resuming {
                         let indicatorView = UIActivityIndicatorView(style: .default)
                         indicatorView.startAnimating()
                         cell.accessoryView = indicatorView
                     } else {
-                        cell.subtitleLabel.text = NSLocalizedString("Tap to Resume", comment: "The subtitle of the cell displaying an action to resume insulin delivery")
+                        cell.subtitleLabel.text = NSLocalizedString("点击恢复", comment: "The subtitle of the cell displaying an action to resume insulin delivery")
                     }
                     cell.selectionStyle = .default
                     return cell
@@ -1103,14 +1103,14 @@ final class StatusTableViewController: LoopChartsTableViewController {
                     cell.iconImageView.tintColor = .warning
                     cell.iconImageView.contentMode = .scaleAspectFit
                     cell.iconImageView.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 28)
-                    cell.titleLabel.text = NSLocalizedString("Setup Incomplete", comment: "The title of the cell indicating that onboarding is suspended")
-                    cell.subtitleLabel.text = NSLocalizedString("Tap to Resume", comment: "The subtitle of the cell displaying an action to resume onboarding")
+                    cell.titleLabel.text = NSLocalizedString("设置不完整", comment: "The title of the cell indicating that onboarding is suspended")
+                    cell.subtitleLabel.text = NSLocalizedString("点击恢复", comment: "The subtitle of the cell displaying an action to resume onboarding")
                     cell.accessoryView = nil
                     return cell
                 case .recommendManualGlucoseEntry:
                     let cell = getTitleSubtitleCell()
-                    cell.titleLabel.text = NSLocalizedString("No Recent Glucose", comment: "The title of the cell indicating that there is no recent glucose")
-                    cell.subtitleLabel.text = NSLocalizedString("Tap to Add", comment: "The subtitle of the cell displaying an action to add a manually measurement glucose value")
+                    cell.titleLabel.text = NSLocalizedString("最近没有葡萄糖", comment: "The title of the cell indicating that there is no recent glucose")
+                    cell.subtitleLabel.text = NSLocalizedString("点击要添加", comment: "The subtitle of the cell displaying an action to add a manually measurement glucose value")
                     cell.selectionStyle = .default
                     let imageView = UIImageView(image: UIImage(named: "drop.circle"))
                     imageView.tintColor = .glucoseTintColor
@@ -1204,7 +1204,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
                     deviceManager.pumpManager?.resumeDelivery() { (error) in
                         DispatchQueue.main.async {
                             if let error = error {
-                                let alert = UIAlertController(with: error, title: NSLocalizedString("Failed to Resume Insulin Delivery", comment: "The alert title for a resume error"))
+                                let alert = UIAlertController(with: error, title: NSLocalizedString("无法恢复胰岛素输送", comment: "The alert title for a resume error"))
                                 self.present(alert, animated: true, completion: nil)
                                 if case .suspended = self.basalDeliveryState {
                                     self.updateBannerAndHUDandStatusRows(statusRowMode: .pumpSuspended(resuming: false), newSize: nil, animated: true)
@@ -1268,10 +1268,10 @@ final class StatusTableViewController: LoopChartsTableViewController {
     }
 
     private func presentUnmuteAlertConfirmation() {
-        let title = NSLocalizedString("Unmute Alerts?", comment: "The alert title for unmute alert confirmation")
-        let body = NSLocalizedString("Tap Unmute to resume sound for your alerts and alarms.", comment: "The alert body for unmute alert confirmation")
+        let title = NSLocalizedString("取消静音警报？", comment: "The alert title for unmute alert confirmation")
+        let body = NSLocalizedString("点击取消静音以恢复警报和警报。", comment: "The alert body for unmute alert confirmation")
         let action = UIAlertAction(
-            title: NSLocalizedString("Unmute", comment: "The title of the action used to unmute alerts"),
+            title: NSLocalizedString("取消静音", comment: "The title of the action used to unmute alerts"),
             style: .default) { _ in
                 self.alertMuter.unmuteAlerts()
             }
@@ -1283,10 +1283,10 @@ final class StatusTableViewController: LoopChartsTableViewController {
 
     private func presentErrorCancelingBolus(_ error: (Error)) {
         log.error("Error Canceling Bolus: %@", error.localizedDescription)
-        let title = NSLocalizedString("Error Canceling Bolus", comment: "The alert title for an error while canceling a bolus")
-        let body = NSLocalizedString("Unable to stop the bolus in progress. Move your iPhone closer to the pump and try again. Check your insulin delivery history for details, and monitor your glucose closely.", comment: "The alert body for an error while canceling a bolus")
+        let title = NSLocalizedString("错误取消推注", comment: "The alert title for an error while canceling a bolus")
+        let body = NSLocalizedString("无法阻止推注。将iPhone移到泵上，然后重试。检查您的胰岛素输送历史记录以获取详细信息，并密切监视葡萄糖。", comment: "The alert body for an error while canceling a bolus")
         let action = UIAlertAction(
-            title: NSLocalizedString("com.loudnate.LoopKit.errorAlertActionTitle", value: "OK", comment: "The title of the action used to dismiss an error alert"), style: .default)
+            title: NSLocalizedString("com.loudnate.loopkit.erroralertactionTitle", value: "OK", comment: "The title of the action used to dismiss an error alert"), style: .default)
         let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
@@ -1399,13 +1399,13 @@ final class StatusTableViewController: LoopChartsTableViewController {
 
     private func createPreMealButtonItem(selected: Bool, isEnabled: Bool) -> UIBarButtonItem {
         let item = UIBarButtonItem(image: UIImage.preMealImage(selected: selected), style: .plain, target: self, action: #selector(togglePreMealMode(_:)))
-        item.accessibilityLabel = NSLocalizedString("Pre-Meal Targets", comment: "The label of the pre-meal mode toggle button")
+        item.accessibilityLabel = NSLocalizedString("粉刷前目标", comment: "The label of the pre-meal mode toggle button")
 
         if selected {
             item.accessibilityTraits.insert(.selected)
-            item.accessibilityHint = NSLocalizedString("Disables", comment: "The action hint of the workout mode toggle button when enabled")
+            item.accessibilityHint = NSLocalizedString("禁用", comment: "The action hint of the workout mode toggle button when enabled")
         } else {
-            item.accessibilityHint = NSLocalizedString("Enables", comment: "The action hint of the workout mode toggle button when disabled")
+            item.accessibilityHint = NSLocalizedString("启用", comment: "The action hint of the workout mode toggle button when disabled")
         }
 
         item.tintColor = UIColor.carbTintColor
@@ -1416,13 +1416,13 @@ final class StatusTableViewController: LoopChartsTableViewController {
 
     private func createWorkoutButtonItem(selected: Bool, isEnabled: Bool) -> UIBarButtonItem {
         let item = UIBarButtonItem(image: UIImage.workoutImage(selected: selected), style: .plain, target: self, action: #selector(toggleWorkoutMode(_:)))
-        item.accessibilityLabel = NSLocalizedString("Workout Targets", comment: "The label of the workout mode toggle button")
+        item.accessibilityLabel = NSLocalizedString("锻炼目标", comment: "The label of the workout mode toggle button")
 
         if selected {
             item.accessibilityTraits.insert(.selected)
-            item.accessibilityHint = NSLocalizedString("Disables", comment: "The action hint of the workout mode toggle button when enabled")
+            item.accessibilityHint = NSLocalizedString("禁用", comment: "The action hint of the workout mode toggle button when enabled")
         } else {
-            item.accessibilityHint = NSLocalizedString("Enables", comment: "The action hint of the workout mode toggle button when disabled")
+            item.accessibilityHint = NSLocalizedString("启用", comment: "The action hint of the workout mode toggle button when disabled")
         }
 
         item.tintColor = UIColor.glucoseTintColor
@@ -1604,7 +1604,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
 
             let statusTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(showLoopCompletionMessage(_:)))
             hudView.loopCompletionHUD.addGestureRecognizer(statusTapGestureRecognizer)
-            hudView.loopCompletionHUD.accessibilityHint = NSLocalizedString("Shows last loop error", comment: "Loop Completion HUD accessibility hint")
+            hudView.loopCompletionHUD.accessibilityHint = NSLocalizedString("显示最后循环错误", comment: "Loop Completion HUD accessibility hint")
 
             let pumpStatusTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(pumpStatusTapped(_:)))
             hudView.pumpStatusHUD.addGestureRecognizer(pumpStatusTapGestureRecognizer)
@@ -1665,7 +1665,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
     }
 
     private func presentLoopCompletionMessage(title: String, message: String) {
-        let action = UIAlertAction(title: NSLocalizedString("Dismiss", comment: "The button label of the action used to dismiss an error alert"),
+        let action = UIAlertAction(title: NSLocalizedString("解雇", comment: "The button label of the action used to dismiss an error alert"),
                                    style: .default)
         let alertController = UIAlertController(title: title,
                                                 message: message,
@@ -1688,7 +1688,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
         }
         if let error = error {
             let alertController = UIAlertController(with: error)
-            let manualLoopAction = UIAlertAction(title: NSLocalizedString("Retry", comment: "The button text for attempting a manual loop"), style: .default, handler: { _ in
+            let manualLoopAction = UIAlertAction(title: NSLocalizedString("重试", comment: "The button text for attempting a manual loop"), style: .default, handler: { _ in
                 self.deviceManager.refreshDeviceData()
             })
             alertController.addAction(manualLoopAction)
@@ -2157,7 +2157,7 @@ extension StatusTableViewController: SettingsViewModelDelegate {
         // we want this screen to belong in the navigation flow
         dismiss(animated: true) {
             let vc = CommandResponseViewController.generateDiagnosticReport(deviceManager: self.deviceManager)
-            vc.title = NSLocalizedString("Issue Report", comment: "The view controller title for the issue report screen")
+            vc.title = NSLocalizedString("问题报告", comment: "The view controller title for the issue report screen")
             self.show(vc, sender: nil)
         }
     }

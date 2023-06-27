@@ -51,7 +51,7 @@ enum OverrideActionError: LocalizedError {
         case .durationExceedsMax(let maxDurationTime):
             return String(format: NSLocalizedString("Duration exceeds: %1$.1f hours", comment: "Remote command error description: duration exceed max (1: max duration in hours)."), maxDurationTime.hours)
         case .negativeDuration:
-            return String(format: NSLocalizedString("Negative duration not allowed", comment: "Remote command error description: negative duration error."))
+            return String(format: NSLocalizedString("负持续时间不允许", comment: "Remote command error description: negative duration error."))
         }
     }
 }

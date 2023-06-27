@@ -21,19 +21,19 @@ enum ConfigurationErrorDetail: String, Codable {
     func localized() -> String {
         switch self {
         case .pumpManager:
-            return NSLocalizedString("Pump Manager", comment: "Details for configuration error when pump manager is missing")
+            return NSLocalizedString("泵管理员", comment: "Details for configuration error when pump manager is missing")
         case .basalRateSchedule:
-            return NSLocalizedString("Basal Rate Schedule", comment: "Details for configuration error when basal rate schedule is missing")
+            return NSLocalizedString("基础费率时间表", comment: "Details for configuration error when basal rate schedule is missing")
         case .carbRatioSchedule:
-            return NSLocalizedString("Carb Ratio Schedule", comment: "Details for configuration error when carb ratio schedule is missing")
+            return NSLocalizedString("碳水化合物比率时间表", comment: "Details for configuration error when carb ratio schedule is missing")
         case .glucoseTargetRangeSchedule:
-            return NSLocalizedString("Glucose Target Range Schedule", comment: "Details for configuration error when glucose target range schedule is missing")
+            return NSLocalizedString("葡萄糖目标范围时间表", comment: "Details for configuration error when glucose target range schedule is missing")
         case .insulinSensitivitySchedule:
-            return NSLocalizedString("Insulin Sensitivity Schedule", comment: "Details for configuration error when insulin sensitivity schedule is missing")
+            return NSLocalizedString("胰岛素灵敏度时间表", comment: "Details for configuration error when insulin sensitivity schedule is missing")
         case .maximumBasalRatePerHour:
-            return NSLocalizedString("Maximum Basal Rate Per Hour", comment: "Details for configuration error when maximum basal rate per hour is missing")
+            return NSLocalizedString("每小时最大基础速率", comment: "Details for configuration error when maximum basal rate per hour is missing")
         case .maximumBolus:
-            return NSLocalizedString("Maximum Bolus", comment: "Details for configuration error when maximum bolus is missing")
+            return NSLocalizedString("最大推注", comment: "Details for configuration error when maximum bolus is missing")
         }
     }
 }
@@ -49,24 +49,24 @@ enum MissingDataErrorDetail: String, Codable {
     var localizedDetail: String {
         switch self {
         case .glucose:
-            return NSLocalizedString("Glucose data not available", comment: "Description of error when glucose data is missing")
+            return NSLocalizedString("葡萄糖数据不可用", comment: "Description of error when glucose data is missing")
         case .momentumEffect:
-            return NSLocalizedString("Momentum effects", comment: "Details for missing data error when momentum effects are missing")
+            return NSLocalizedString("动量影响", comment: "Details for missing data error when momentum effects are missing")
         case .carbEffect:
-            return NSLocalizedString("Carb effects", comment: "Details for missing data error when carb effects are missing")
+            return NSLocalizedString("碳水化合物效应", comment: "Details for missing data error when carb effects are missing")
         case .insulinEffect:
-            return NSLocalizedString("Insulin effects", comment: "Details for missing data error when insulin effects are missing")
+            return NSLocalizedString("胰岛素作用", comment: "Details for missing data error when insulin effects are missing")
         case .activeInsulin:
-            return NSLocalizedString("Active Insulin", comment: "Details for missing data error when active insulin amount is missing")
+            return NSLocalizedString("活性胰岛素", comment: "Details for missing data error when active insulin amount is missing")
         case .insulinEffectIncludingPendingInsulin:
-            return NSLocalizedString("Insulin effects", comment: "Details for missing data error when insulin effects including pending insulin are missing")
+            return NSLocalizedString("胰岛素作用", comment: "Details for missing data error when insulin effects including pending insulin are missing")
         }
     }
     
     var localizedRecovery: String? {
         switch self {
         case .glucose:
-            return NSLocalizedString("Check your CGM data source", comment: "Recovery suggestion when glucose data is missing")
+            return NSLocalizedString("检查您的CGM数据源", comment: "Recovery suggestion when glucose data is missing")
         case .momentumEffect:
             return nil
         case .carbEffect:
@@ -185,7 +185,7 @@ extension LoopError: LocalizedError {
         case .configurationError(let details):
             return String(format: NSLocalizedString("Configuration Error: %1$@", comment: "The error message displayed for configuration errors. (1: configuration error details)"), details.localized())
         case .connectionError:
-            return NSLocalizedString("No connected devices, or failure during device connection", comment: "The error message displayed for device connection errors.")
+            return NSLocalizedString("没有连接的设备或设备连接期间故障", comment: "The error message displayed for device connection errors.")
         case .missingDataError(let details):
             return String(format: NSLocalizedString("Missing data: %1$@", comment: "The error message for missing data. (1: missing data details)"), details.localizedDetail)
         case .glucoseTooOld(let date):
@@ -201,7 +201,7 @@ extension LoopError: LocalizedError {
             let minutes = formatter.string(from: -date.timeIntervalSinceNow) ?? ""
             return String(format: NSLocalizedString("Recommendation expired: %1$@ old", comment: "The error message when a recommendation has expired. (1: age of recommendation in minutes)"), minutes)
         case .pumpSuspended:
-            return NSLocalizedString("Pump Suspended. Automatic dosing is disabled.", comment: "The error message displayed for pumpSuspended errors.")
+            return NSLocalizedString("泵悬挂。自动剂量被禁用。", comment: "The error message displayed for pumpSuspended errors.")
         case .pumpManagerError(let pumpManagerError):
             return String(format: NSLocalizedString("Pump Manager Error: %1$@", comment: "The error message displayed for pump manager errors. (1: pump manager error)"), pumpManagerError.errorDescription!)
         case .unknownError(let error):

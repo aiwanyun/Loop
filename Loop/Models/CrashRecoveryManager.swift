@@ -44,15 +44,15 @@ class CrashRecoveryManager {
     }
 
     private func issueCrashAlert() {
-        let title = NSLocalizedString("Loop Crashed", comment: "Title for crash recovery alert")
-        let modalBody = NSLocalizedString("Oh no! Loop crashed while dosing, and insulin adjustments have been paused until this dialog is closed. Dosing history may not be accurate. Please review Insulin Delivery charts, and monitor your blood glucose carefully.", comment: "Modal body for crash recovery alert")
+        let title = NSLocalizedString("循环崩溃了", comment: "Title for crash recovery alert")
+        let modalBody = NSLocalizedString("不好了！给药时环崩溃了，胰岛素调整已暂停，直到关闭此对话框为止。剂量历史可能不准确。请查看胰岛素输送图，并仔细监测您的血糖。", comment: "Modal body for crash recovery alert")
         let modalContent = Alert.Content(title: title,
                                          body: modalBody,
-                                         acknowledgeActionButtonLabel: NSLocalizedString("Continue", comment: "Default alert dismissal"))
-        let notificationBody = NSLocalizedString("Insulin adjustments have been disabled!", comment: "Notification body for crash recovery alert")
+                                         acknowledgeActionButtonLabel: NSLocalizedString("继续", comment: "Default alert dismissal"))
+        let notificationBody = NSLocalizedString("胰岛素调整已被禁用！", comment: "Notification body for crash recovery alert")
         let notificationContent = Alert.Content(title: title,
                                                 body: notificationBody,
-                                                acknowledgeActionButtonLabel: NSLocalizedString("Continue", comment: "Default alert dismissal"))
+                                                acknowledgeActionButtonLabel: NSLocalizedString("继续", comment: "Default alert dismissal"))
 
         let identifier = Alert.Identifier(managerIdentifier: managerIdentifier, alertIdentifier: crashAlertIdentifier)
 

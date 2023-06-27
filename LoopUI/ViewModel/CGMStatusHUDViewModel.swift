@@ -11,7 +11,7 @@ import LoopKit
 
 public class CGMStatusHUDViewModel {
     
-    static let staleGlucoseRepresentation: String = NSLocalizedString("– – –", comment: "No glucose value representation (3 dashes for mg/dL)")
+    static let staleGlucoseRepresentation: String = NSLocalizedString(" -   -   - ", comment: "No glucose value representation (3 dashes for mg/dL)")
     
     var trend: GlucoseTrend?
     
@@ -141,9 +141,9 @@ public class CGMStatusHUDViewModel {
                 startStalenessTimerIfNeeded()
                 switch glucoseDisplay?.glucoseRangeCategory {
                 case .some(.belowRange):
-                    glucoseValueString = LocalizedString("LOW", comment: "String displayed instead of a glucose value below the CGM range")
+                    glucoseValueString = LocalizedString("低的", comment: "String displayed instead of a glucose value below the CGM range")
                 case .some(.aboveRange):
-                    glucoseValueString = LocalizedString("HIGH", comment: "String displayed instead of a glucose value above the CGM range")
+                    glucoseValueString = LocalizedString("高的", comment: "String displayed instead of a glucose value above the CGM range")
                 default:
                     glucoseValueString = valueString
                 }

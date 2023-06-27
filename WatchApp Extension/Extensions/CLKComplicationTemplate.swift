@@ -128,7 +128,7 @@ extension CLKComplicationTemplate {
                 eventualGlucoseText = eventualGlucoseString
             }
 
-            let format = NSLocalizedString("UtilitarianLargeFlat", tableName: "ckcomplication", comment: "Utilitarian large flat format string (1: Glucose & Trend symbol) (2: Eventual Glucose) (3: Time)")
+            let format = NSLocalizedString("功利主义性", tableName: "ckcomplication", comment: "Utilitarian large flat format string (1: Glucose & Trend symbol) (2: Eventual Glucose) (3: Time)")
 
             return CLKComplicationTemplateUtilitarianLargeFlat(
                 textProvider: CLKSimpleTextProvider(text: String(format: format, arguments: [

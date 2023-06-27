@@ -50,7 +50,7 @@ After the mute period ends, your alert sounds will resume.
                             Image(systemName: "moon.fill")
                                 .foregroundColor(.accentColor)
                             
-                            Text(NSLocalizedString("iOS Focus Mode", comment: "Section title for description of how mute alerts work with focus mode"))
+                            Text(NSLocalizedString("iOS焦点模式", comment: "Section title for description of how mute alerts work with focus mode"))
                                 .bold()
                         }
                         Text(String(format: NSLocalizedString("If iOS Focus Mode is ON and Mute Alerts is OFF, Critical Alerts will still be delivered, but non-Critical Alerts will be silenced until %1$@ is added to each Focus mode as an Allowed App.", comment: "Format string for description of how mute alerts works with focus mode (1: app name)"), appName))
@@ -62,14 +62,14 @@ After the mute period ends, your alert sounds will resume.
                 }
             }
             .insetGroupedListStyle()
-            .navigationTitle(NSLocalizedString("Using Mute Alerts", comment: "View title for how mute alerts work"))
+            .navigationTitle(NSLocalizedString("使用静音警报", comment: "View title for how mute alerts work"))
             .navigationBarItems(trailing: closeButton)
         }
     }
 
     private var closeButton: some View {
         Button(action: dismiss) {
-            Text(NSLocalizedString("Close", comment: "Button title to close view"))
+            Text(NSLocalizedString("关闭", comment: "Button title to close view"))
         }
     }
 }

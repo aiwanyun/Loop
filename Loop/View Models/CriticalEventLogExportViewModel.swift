@@ -153,9 +153,9 @@ public class CriticalEventLogExportViewModel: ObservableObject, Identifiable, Cr
     private func remainingDurationAsString(_ remainingDuration: TimeInterval) -> String? {
         switch remainingDuration {
         case 0..<15:
-            return NSLocalizedString("A few seconds remaining", comment: "Estimated remaining duration with a few seconds")
+            return NSLocalizedString("剩下几秒钟", comment: "Estimated remaining duration with a few seconds")
         case 15..<60:
-            return NSLocalizedString("Less than a minute remaining", comment: "Estimated remaining duration with less than a minute")
+            return NSLocalizedString("剩下不到一分钟", comment: "Estimated remaining duration with less than a minute")
         default:
             guard let durationString = durationFormatter.string(from: remainingDuration + remainingDurationApproximationOffset) else {
                 return nil

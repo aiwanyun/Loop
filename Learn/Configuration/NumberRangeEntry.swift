@@ -48,14 +48,14 @@ class NumberRangeEntry: LessonSectionProviding {
             NumberEntry(
                 number: minValue,
                 formatter: formatter,
-                placeholder: NSLocalizedString("Minimum", comment: "Placeholder for lower range entry"),
+                placeholder: NSLocalizedString("最低限度", comment: "Placeholder for lower range entry"),
                 unitString: unitString,
                 keyboardType: keyboardType
             ),
             NumberEntry(
                 number: maxValue,
                 formatter: formatter,
-                placeholder: NSLocalizedString("Maximum", comment: "Placeholder for upper range entry"),
+                placeholder: NSLocalizedString("最大限度", comment: "Placeholder for upper range entry"),
                 unitString: unitString,
                 keyboardType: keyboardType
             ),
