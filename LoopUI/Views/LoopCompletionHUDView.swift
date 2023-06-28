@@ -162,24 +162,24 @@ public final class LoopCompletionHUDView: BaseHUDView {
                      UIContentSizeCategory.medium,
                      UIContentSizeCategory.large:
                     // Use a longer form only for smaller text sizes
-                    caption?.text = String(format: LocalizedString("%@ ago", comment: "Format string describing the time interval since the last completion date. (1: The localized date components"), timeString)
+                    caption?.text = String(format: LocalizedString("%@ 前", comment: "Format string describing the time interval since the last completion date. (1: The localized date components"), timeString)
                 default:
                     caption?.text = timeString
                 }
 
-                accessibilityLabel = String(format: LocalizedString("Loop ran %@ ago", comment: "Accessbility format label describing the time interval since the last completion date. (1: The localized date components)"), timeString)
+                accessibilityLabel = String(format: LocalizedString("循环运行于 %@ 前", comment: "Accessbility format label describing the time interval since the last completion date. (1: The localized date components)"), timeString)
 
                 var fullTimeStr: String = ""
                 if ago >= timeAgoToIncludeDate {
-                    fullTimeStr = String(format: LocalizedString("was at %1$@", comment: "Format string describing last completion. (1: the date"), timeDateFormatter.string(from: date))
+                    fullTimeStr = String(format: LocalizedString("位于%1$@", comment: "Format string describing last completion. (1: the date"), timeDateFormatter.string(from: date))
                 } else if ago >= timeAgoToIncludeTimeStamp {
-                    fullTimeStr = String(format: LocalizedString("%1$@ ago at %2$@", comment: "Format string describing last completion. (1: time ago, (2: the date"), timeAgoFormatter.string(from: ago)!, timeFormatter.string(from: date))
+                    fullTimeStr = String(format: LocalizedString("%1$@ 前于 %2$@", comment: "Format string describing last completion. (1: time ago, (2: the date"), timeAgoFormatter.string(from: ago)!, timeFormatter.string(from: date))
                 } else if ago < .minutes(1) {
                     fullTimeStr = String(format: LocalizedString("<1分钟前", comment: "Format string describing last completion"))
                 } else {
-                    fullTimeStr = String(format: LocalizedString("%1$@ ago", comment: "Format string describing last completion. (1: time ago"), timeAgoFormatter.string(from: ago)!)
+                    fullTimeStr = String(format: LocalizedString("%1$@ 前", comment: "Format string describing last completion. (1: time ago"), timeAgoFormatter.string(from: ago)!)
                 }
-                lastLoopMessage = String(format: LocalizedString("Last completed loop %1$@.", comment: "Last loop time completed message (1: last loop time string)"), fullTimeStr)
+                lastLoopMessage = String(format: LocalizedString("最后完成的循环%1$@。", comment: "Last loop time completed message (1: last loop time string)"), fullTimeStr)
             } else {
                 caption?.text = "–"
                 accessibilityLabel = nil
@@ -210,17 +210,17 @@ extension LoopCompletionHUDView {
             if loopStateView.open {
                 let reason = closedLoopDisallowedLocalizedDescription ?? LocalizedString("如果您希望该应用程序自动化胰岛素，请点击设置以切换闭环。", comment: "Instructions for user to close loop if it is allowed.")
                 return (title: LocalizedString("关闭循环", comment: "Title of green open loop OFF message"),
-                        message: String(format: LocalizedString("\n%1$@ is operating with Closed Loop in the OFF position. Your pump and CGM will continue operating, but the app will not adjust dosing automatically.\n\n%2$@", comment: "Green closed loop OFF message (1: app name)(2: reason for open loop)"), Bundle.main.bundleDisplayName, reason))
+                        message: String(format: LocalizedString("\n%1$@ 在关闭位置闭环运行。 您的泵和 CGM 将继续运行，但应用程序不会自动调整剂量。\n\n%2$@", comment: "Green closed loop OFF message (1: app name)(2: reason for open loop)"), Bundle.main.bundleDisplayName, reason))
             } else {
                 return (title: LocalizedString("闭环开", comment: "Title of green closed loop ON message"),
-                        message: String(format: LocalizedString("\n%1$@\n\n%2$@ is operating with Closed Loop in the ON position.", comment: "Green closed loop ON message (1: last loop string) (2: app name)"), lastLoopMessage, Bundle.main.bundleDisplayName))
+                        message: String(format: LocalizedString("\n%1$@\n\n%2$@ 正在运行，闭环处于 ON 位置", comment: "Green closed loop ON message (1: last loop string) (2: app name)"), lastLoopMessage, Bundle.main.bundleDisplayName))
             }
         case .aging:
             return (title: LocalizedString("循环警告", comment: "Title of yellow loop message"),
-                    message: String(format: LocalizedString("\n%1$@\n\nTap your CGM and insulin pump status icons for more information. %2$@ will continue trying to complete a loop, but watch for potential communication issues with your pump and CGM.", comment: "Yellow loop message (1: last loop string) (2: app name)"), lastLoopMessage, Bundle.main.bundleDisplayName))
+                    message: String(format: LocalizedString("\n%1$@\n\n点击您的 CGM 和胰岛素泵状态图标以获取更多信息。 %2$@ 将继续尝试完成循环，但请注意泵和 CGM 的潜在通信问题。", comment: "Yellow loop message (1: last loop string) (2: app name)"), lastLoopMessage, Bundle.main.bundleDisplayName))
         case .stale:
             return (title: LocalizedString("循环故障", comment: "Title of red loop message"),
-                    message: String(format: LocalizedString("\n%1$@\n\nTap your CGM and insulin pump status icons for more information. %2$@ will continue trying to complete a loop, but check for potential communication issues with your pump and CGM.", comment: "Red loop message (1: last loop  string) (2: app name)"), lastLoopMessage, Bundle.main.bundleDisplayName))
+                    message: String(format: LocalizedString("\n%1$@\n\n点击您的 CGM 和胰岛素泵状态图标以获取更多信息。 %2$@ 将继续尝试完成循环，但检查您的泵和 CGM 是否存在潜在的通信问题。", comment: "Red loop message (1: last loop  string) (2: app name)"), lastLoopMessage, Bundle.main.bundleDisplayName))
         }
     }
 }

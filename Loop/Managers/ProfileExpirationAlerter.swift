@@ -57,7 +57,7 @@ class ProfileExpirationAlerter {
     }
     
     static func createVerboseAlertMessage(timeUntilExpirationStr:String) -> String {
-        return String(format: NSLocalizedString("%1$@ will stop working in %2$@. You will need to update before that, with a new provisioning profile.", comment: "Format string for body for notification of upcoming provisioning profile expiration. (1: app name) (2: amount of time until expiration"), Bundle.main.bundleDisplayName, timeUntilExpirationStr)
+        return String(format: NSLocalizedString("%1$@ 将停止在 %2$@ 中工作。 在此之前，您需要使用新的配置文件进行更新。", comment: "Format string for body for notification of upcoming provisioning profile expiration. (1: app name) (2: amount of time until expiration"), Bundle.main.bundleDisplayName, timeUntilExpirationStr)
     }
     
     static func isNearProfileExpiration(profileExpiration:Date) -> Bool {

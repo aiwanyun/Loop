@@ -74,7 +74,7 @@ struct AlertManagementView: View {
     }
 
     private var alertPermissionsSection: some View {
-        Section(footer: DescriptiveText(label: String(format: NSLocalizedString("Notifications give you important %1$@ app information without requiring you to open the app.", comment: "Alert Permissions descriptive text (1: app name)"), appName))) {
+        Section(footer: DescriptiveText(label: String(format: NSLocalizedString("通知会向您提供重要的 %1$@ 应用程序信息，而无需您打开应用程序。", comment: "Alert Permissions descriptive text (1: app name)"), appName))) {
             NavigationLink(destination:
                             NotificationsCriticalAlertPermissionsView(mode: .flow, checker: checker))
             {
@@ -93,7 +93,7 @@ struct AlertManagementView: View {
 
     @ViewBuilder
     private var muteAlertsSection: some View {
-        Section(footer: DescriptiveText(label: String(format: NSLocalizedString("When muted, %1$@ alerts will temporarily display without sounds and will vibrate only. Once the mute period ends, your alerts will resume as normal.", comment: "Description of temporary mute alerts (1: app name)"), appName))) {
+        Section(footer: DescriptiveText(label: String(format: NSLocalizedString("静音时，%1$@ 警报将暂时显示，不发出声音，仅振动。 静音期结束后，您的警报将恢复正常。", comment: "Description of temporary mute alerts (1: app name)"), appName))) {
             if !alertMuter.configuration.shouldMute {
                 howMuteAlertsWork
                 Button(action: { showMuteAlertOptions = true }) {

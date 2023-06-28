@@ -927,7 +927,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
             contentConfig.textProperties.color = .white
             contentConfig.textProperties.font = .systemFont(ofSize: adjustViewForNarrowDisplay ? 16 : 18, weight: .semibold)
             contentConfig.textProperties.adjustsFontSizeToFitWidth = true
-            contentConfig.secondaryText = String(format: NSLocalizedString("Until %1$@", comment: "indication of when alerts will be unmuted (1: time when alerts unmute)"), formattedAlertMuteEndTime)
+            contentConfig.secondaryText = String(format: NSLocalizedString("直到 %1$@", comment: "indication of when alerts will be unmuted (1: time when alerts unmute)"), formattedAlertMuteEndTime)
             contentConfig.secondaryTextProperties.color = .white
             contentConfig.secondaryTextProperties.font = .systemFont(ofSize: adjustViewForNarrowDisplay ? 13 : 15)
             contentConfiguration = contentConfig
@@ -1048,13 +1048,13 @@ final class StatusTableViewController: LoopChartsTableViewController {
                         switch override.duration {
                         case .finite:
                             let endTimeText = DateFormatter.localizedString(from: override.activeInterval.end, dateStyle: .none, timeStyle: .short)
-                            cell.subtitleLabel.text = String(format: NSLocalizedString("until %@", comment: "The format for the description of a custom preset end date"), endTimeText)
+                            cell.subtitleLabel.text = String(format: NSLocalizedString("直到 %@", comment: "The format for the description of a custom preset end date"), endTimeText)
                         case .indefinite:
                             cell.subtitleLabel.text = nil
                         }
                     } else {
                         let startTimeText = DateFormatter.localizedString(from: override.startDate, dateStyle: .none, timeStyle: .short)
-                        cell.subtitleLabel.text = String(format: NSLocalizedString("starting at %@", comment: "The format for the description of a custom preset start date"), startTimeText)
+                        cell.subtitleLabel.text = String(format: NSLocalizedString("开始于 %@", comment: "The format for the description of a custom preset start date"), startTimeText)
                     }
 
                     return cell
@@ -1127,7 +1127,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
             switch ChartRow(rawValue: indexPath.row)! {
             case .glucose:
                 if let eventualGlucose = eventualGlucoseDescription {
-                    cell.setSubtitleLabel(label: String(format: NSLocalizedString("Eventually %@", comment: "The subtitle format describing eventual glucose. (1: localized glucose value description)"), eventualGlucose))
+                    cell.setSubtitleLabel(label: String(format: NSLocalizedString("最终 %@", comment: "The subtitle format describing eventual glucose. (1: localized glucose value description)"), eventualGlucose))
                 } else {
                     cell.setSubtitleLabel(label: nil)
                 }
@@ -1144,7 +1144,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
 
                 if  let total = totalDelivery,
                     let totalString = integerFormatter.string(from: total) {
-                    cell.setSubtitleLabel(label: String(format: NSLocalizedString("%@ U Total", comment: "The subtitle format describing total insulin. (1: localized insulin total)"), totalString))
+                    cell.setSubtitleLabel(label: String(format: NSLocalizedString("%@ U 总计", comment: "The subtitle format describing total insulin. (1: localized insulin total)"), totalString))
                 } else {
                     cell.setSubtitleLabel(label: nil)
                 }
@@ -1286,7 +1286,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
         let title = NSLocalizedString("错误取消推注", comment: "The alert title for an error while canceling a bolus")
         let body = NSLocalizedString("无法阻止推注。将iPhone移到泵上，然后重试。检查您的胰岛素输送历史记录以获取详细信息，并密切监视葡萄糖。", comment: "The alert body for an error while canceling a bolus")
         let action = UIAlertAction(
-            title: NSLocalizedString("com.loudnate.loopkit.erroralertactionTitle", value: "OK", comment: "The title of the action used to dismiss an error alert"), style: .default)
+            title: NSLocalizedString("com.loudnate.LoopKit.errorAlertActionTitle", value: "OK", comment: "The title of the action used to dismiss an error alert"), style: .default)
         let alert = UIAlertController(title: title, message: body, preferredStyle: .alert)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)

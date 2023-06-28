@@ -85,7 +85,7 @@ extension NotificationManager {
 
         notification.title = NSLocalizedString("远程命令过期", comment: "The notification title for the remote command expiration error")
 
-        notification.body = String(format: NSLocalizedString("The remote command expired %.0f minutes ago.", comment: "The notification body for a remote command expiration. (1: Expiration in minutes)"), fabs(timeExpired / 60.0))
+        notification.body = String(format: NSLocalizedString("远程命令在 %.0f 分钟前过期。", comment: "The notification body for a remote command expiration. (1: Expiration in minutes)"), fabs(timeExpired / 60.0))
         notification.sound = .default
          
         notification.categoryIdentifier = LoopNotificationCategory.remoteCommandExpired.rawValue
@@ -105,7 +105,7 @@ extension NotificationManager {
 
         notification.title = NSLocalizedString("推注问题", comment: "The notification title for a bolus issue")
 
-        let fullStopCharacter = NSLocalizedString("。", comment: "Full stop character")
+        let fullStopCharacter = NSLocalizedString(".", comment: "Full stop character")
         let sentenceFormat = NSLocalizedString("%1@%2@", comment: "Adds a full-stop to a statement (1: statement, 2: full stop character)")
 
         let body = [error.errorDescription, error.failureReason, error.recoverySuggestion].compactMap({ $0 }).map({
@@ -143,7 +143,7 @@ extension NotificationManager {
         guard let amountDescription = quantityFormatter.numberFormatter.string(from: amount) else {
             return
         }
-        notification.title =  String(format: NSLocalizedString("Remote Bolus Entry: %@ U", comment: "The notification title for a remote bolus. (1: Bolus amount)"), amountDescription)
+        notification.title =  String(format: NSLocalizedString("远程推注输入： %@ U", comment: "The notification title for a remote bolus. (1: Bolus amount)"), amountDescription)
         
         let body = "Success!"
 
@@ -167,7 +167,7 @@ extension NotificationManager {
             return
         }
 
-        notification.title =  String(format: NSLocalizedString("Remote Bolus Entry: %@ U", comment: "The notification title for a remote failure. (1: Bolus amount)"), amountDescription)
+        notification.title =  String(format: NSLocalizedString("远程推注输入： %@ U", comment: "The notification title for a remote failure. (1: Bolus amount)"), amountDescription)
         notification.body = error.localizedDescription
         notification.sound = .default
 
@@ -285,6 +285,6 @@ extension NotificationManager {
     }
     
     private static func remoteCarbEntryNotificationBody(amountInGrams: Double) -> String {
-        return String(format: NSLocalizedString("Remote Carbs Entry: %d grams", comment: "The carb amount message for a remote carbs entry notification. (1: Carb amount in grams)"), Int(amountInGrams))
+        return String(format: NSLocalizedString("远程碳水化合物输入：%d 克", comment: "The carb amount message for a remote carbs entry notification. (1: Carb amount in grams)"), Int(amountInGrams))
     }
 }

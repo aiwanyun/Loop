@@ -174,7 +174,7 @@ final class ManualEntryDoseViewModel: ObservableObject {
     func saveManualDose(onSuccess completion: @escaping () -> Void) {
         // Authenticate before saving anything
         if enteredBolus.doubleValue(for: .internationalUnit()) > 0 {
-            let message = String(format: NSLocalizedString("Authenticate to log %@ Units", comment: "The message displayed during a device authentication prompt to log an insulin dose"), enteredBolusAmountString)
+            let message = String(format: NSLocalizedString("验证以记录 %@ 单位", comment: "The message displayed during a device authentication prompt to log an insulin dose"), enteredBolusAmountString)
             authenticate(message) {
                 switch $0 {
                 case .success:

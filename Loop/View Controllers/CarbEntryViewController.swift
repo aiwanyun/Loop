@@ -615,7 +615,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
     }
 
     // Alerts
-    private lazy var dismissActionTitle = NSLocalizedString("com.loudnate.loopkit.erroralertactionTitle", value: "OK", comment: "The title of the action used to dismiss an error alert")
+    private lazy var dismissActionTitle = NSLocalizedString("com.loudnate.LoopKit.errorAlertActionTitle", value: "OK", comment: "The title of the action used to dismiss an error alert")
 
     public func showAbsorptionTimeValidationWarning(for viewController: UIViewController, maxAbsorptionTime: TimeInterval) {
         let formatter = DateComponentsFormatter()
@@ -623,7 +623,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
         formatter.unitsStyle = .full
 
         let message = String(
-            format: NSLocalizedString("The maximum absorption time is %@", comment: "Alert body displayed absorption time greater than max (1: maximum absorption time)"),
+            format: NSLocalizedString("最大吸收时间为%@", comment: "Alert body displayed absorption time greater than max (1: maximum absorption time)"),
             formatter.string(from: maxAbsorptionTime) ?? String(describing: maxAbsorptionTime))
         let validationTitle = NSLocalizedString("最大持续时间超过", comment: "Alert title when maximum duration exceeded.")
         let alert = UIAlertController(title: validationTitle, message: message, preferredStyle: .alert)
@@ -639,7 +639,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
         let warningTitle = NSLocalizedString("大餐进入", comment: "Title of the warning shown when a large meal was entered")
 
         let message = String(
-            format: NSLocalizedString("Did you intend to enter %1$@ grams as the amount of carbohydrates for this meal?", comment: "Alert body when entered carbohydrates is greater than threshold (1: entered quantity in grams)"),
+            format: NSLocalizedString("您是否打算输入 %1$@ 克作为本餐的碳水化合物含量？", comment: "Alert body when entered carbohydrates is greater than threshold (1: entered quantity in grams)"),
             NumberFormatter.localizedString(from: NSNumber(value: enteredGrams), number: .none)
                 )
         let alert = UIAlertController(title: warningTitle, message: message, preferredStyle: .alert)
@@ -661,7 +661,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
     public func showMaxQuantityValidationWarning(for viewController: UIViewController, maxQuantityGrams: Double) {
         let errorTitle = NSLocalizedString("输入最大超过", comment: "Title of the alert when carb input maximum was exceeded.")
         let message = String(
-            format: NSLocalizedString("The maximum allowed amount is %@ grams.", comment: "Alert body displayed for quantity greater than max (1: maximum quantity in grams)"),
+            format: NSLocalizedString("最大允许量为%@ 克。", comment: "Alert body displayed for quantity greater than max (1: maximum quantity in grams)"),
             NumberFormatter.localizedString(from: NSNumber(value: maxQuantityGrams), number: .none)
         )
         let alert = UIAlertController(title: errorTitle, message: message, preferredStyle: .alert)

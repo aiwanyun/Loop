@@ -326,7 +326,7 @@ struct BolusEntryView: View {
         case .stalePumpData:
             return WarningView(
                 title: Text("没有最近的泵数据", comment: "Title for bolus screen notice when pump data is missing or stale"),
-                caption: Text(String(format: NSLocalizedString("Your pump data is stale. %1$@ cannot recommend a bolus amount.", comment: "Caption for bolus screen notice when pump data is missing or stale"), appName)),
+                caption: Text(String(format: NSLocalizedString("您的泵数据已过时。 %1$@ 无法推荐推注。", comment: "Caption for bolus screen notice when pump data is missing or stale"), appName)),
                 severity: .critical
             )
         case .predictedGlucoseInRange, .glucoseBelowTarget:
@@ -394,7 +394,7 @@ struct BolusEntryView: View {
             }
             return SwiftUI.Alert(
                 title: Text("超过最大推注", comment: "Alert title for a maximum bolus validation error"),
-                message: Text("The maximum bolus amount is \(maximumBolusAmountString) U.", comment: "Alert message for a maximum bolus validation error (1: max bolus value)")
+                message: Text("最大推注量为 \(maximumBolusAmountString) U。", comment: "Alert message for a maximum bolus validation error (1: max bolus value)")
             )
         case .bolusTooSmall:
             return SwiftUI.Alert(
@@ -421,7 +421,7 @@ struct BolusEntryView: View {
             let acceptableUpperBound = displayGlucosePreference.format(LoopConstants.validManualGlucoseEntryRange.upperBound)
             return SwiftUI.Alert(
                 title: Text("葡萄糖进入范围", comment: "Alert title for a manual glucose entry out of range error"),
-                message: Text("A manual glucose entry must be between \(acceptableLowerBound) and \(acceptableUpperBound)", comment: "Alert message for a manual glucose entry out of range error")
+                message: Text("手动葡萄糖输入必须介于 \(acceptableLowerBound) 和 \(acceptableUpperBound) 之间", comment: "Alert message for a manual glucose entry out of range error")
             )
         case .manualGlucoseEntryPersistenceFailure:
             return SwiftUI.Alert(
@@ -436,7 +436,7 @@ struct BolusEntryView: View {
         case .forecastInfo:
             return SwiftUI.Alert(
                 title: Text("预测的葡萄糖", comment: "Title for forecast explanation modal on bolus view"),
-                message: Text("The bolus dosing algorithm uses a more conservative estimate of forecasted blood glucose than what is used to adjust your basal rate.\n\nAs a result, your forecasted blood glucose after a bolus may still be higher than your target range.", comment: "Forecast explanation modal on bolus view")
+                message: Text("推注剂量算法对预测血糖的估计比用于调整基础速率的估计更为保守。\n\n因此，推注后的预测血糖可能仍高于目标范围。", comment: "Forecast explanation modal on bolus view")
             )
         }
     }

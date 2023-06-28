@@ -47,9 +47,9 @@ enum OverrideActionError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .unknownPreset(let presetName):
-            return String(format: NSLocalizedString("Unknown preset: %1$@", comment: "Remote command error description: unknown preset (1: preset name)."), presetName)
+            return String(format: NSLocalizedString("未知预设：%1$@", comment: "Remote command error description: unknown preset (1: preset name)."), presetName)
         case .durationExceedsMax(let maxDurationTime):
-            return String(format: NSLocalizedString("Duration exceeds: %1$.1f hours", comment: "Remote command error description: duration exceed max (1: max duration in hours)."), maxDurationTime.hours)
+            return String(format: NSLocalizedString("持续时间超过：%1$.1f 小时", comment: "Remote command error description: duration exceed max (1: max duration in hours)."), maxDurationTime.hours)
         case .negativeDuration:
             return String(format: NSLocalizedString("负持续时间不允许", comment: "Remote command error description: negative duration error."))
         }

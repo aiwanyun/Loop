@@ -19,9 +19,8 @@ struct HowMuteAlertWorkView: View {
             List {
                 VStack(alignment: .leading) {
                     Text(NSLocalizedString("""
-Mute Alerts allows you to temporarily silence your alerts and alarms.
-
-When using Mute Alerts, also consider the impact of using iOS Focus Modes.
+静音警报允许您暂时静音警报和警报。
+使用静音警报时，还要考虑使用 iOS 焦点模式的影响。
 """, comment: "Description of how mute alerts work"))
                     .fixedSize(horizontal: false, vertical: true)
                     
@@ -33,15 +32,15 @@ When using Mute Alerts, also consider the impact of using iOS Focus Modes.
                                 .background(guidanceColors.warning)
                                 .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                             
-                            Text(String(format: NSLocalizedString("%1$@ Mute Alerts", comment: "Format string for Section title for description that mute alerts is temporary (1: app name)"), appName))
+                            Text(String(format: NSLocalizedString("%1$@ 静音警报", comment: "Format string for Section title for description that mute alerts is temporary (1: app name)"), appName))
                                 .bold()
                                 .fixedSize(horizontal: false, vertical: true)
                         }
                         
                         Text(NSLocalizedString("""
-All Tidepool Loop alerts, including Critical Alerts, will be silenced for up to 4 hours.
+所有 Tidepool Loop 警报（包括严重警报）将被静音长达 4 小时。
 
-After the mute period ends, your alert sounds will resume.
+静音期结束后，警报声将恢复。
 """, comment: "Description that mute alerts is temporary"))
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.bottom)
@@ -53,7 +52,7 @@ After the mute period ends, your alert sounds will resume.
                             Text(NSLocalizedString("iOS焦点模式", comment: "Section title for description of how mute alerts work with focus mode"))
                                 .bold()
                         }
-                        Text(String(format: NSLocalizedString("If iOS Focus Mode is ON and Mute Alerts is OFF, Critical Alerts will still be delivered, but non-Critical Alerts will be silenced until %1$@ is added to each Focus mode as an Allowed App.", comment: "Format string for description of how mute alerts works with focus mode (1: app name)"), appName))
+                        Text(String(format: NSLocalizedString("如果 iOS 焦点模式处于开启状态并且静音警报处于关闭状态，则仍会发送严重警报，但非严重警报将被静音，直到 %1$@ 作为允许的应用程序添加到每个焦点模式中。", comment: "Format string for description of how mute alerts works with focus mode (1: app name)"), appName))
                             .fixedSize(horizontal: false, vertical: true)
                     }
                     .padding()

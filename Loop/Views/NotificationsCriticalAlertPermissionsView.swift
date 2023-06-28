@@ -46,9 +46,9 @@ public struct NotificationsCriticalAlertPermissionsView: View {
     private func content() -> some View {
         List {
             Section(footer: DescriptiveText(label: String(format: NSLocalizedString("""
-                Notifications give you important %1$@ app information without requiring you to open the app.
+                通知会向您提供重要的 %1$@ 应用程序信息，而无需您打开应用程序。
                 
-                Keep these turned ON in your phone’s settings to ensure you receive %1$@ Notifications, Critical Alerts, and Time Sensitive Notifications.
+                在手机设置中将这些功能保持打开状态，以确保您收到 %1$@ 通知、重要警报和时间敏感通知。
                 """, comment: "Alert Permissions descriptive text (1: app name)"), appName)))
             {
                 manageNotifications

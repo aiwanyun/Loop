@@ -38,9 +38,9 @@ struct PredictionInputEffect: OptionSet {
     func localizedDescription(forGlucoseUnit unit: HKUnit) -> String? {
         switch self {
         case [.carbs]:
-            return String(format: NSLocalizedString("Carbs Absorbed (g) ÷ Carb Ratio (g/U) × Insulin Sensitivity (%1$@/U)", comment: "Description of the prediction input effect for carbohydrates. (1: The glucose unit string)"), unit.localizedShortUnitString)
+            return String(format: NSLocalizedString("吸收的碳水化合物 (g) ÷ 碳水化合物比率 (g/U) × 胰岛素敏感性 (%1$@/U)", comment: "Description of the prediction input effect for carbohydrates. (1: The glucose unit string)"), unit.localizedShortUnitString)
         case [.insulin]:
-            return String(format: NSLocalizedString("Insulin Absorbed (U) × Insulin Sensitivity (%1$@/U)", comment: "Description of the prediction input effect for insulin"), unit.localizedShortUnitString)
+            return String(format: NSLocalizedString("胰岛素吸收 (U) × 胰岛素敏感性 (%1$@/U)", comment: "Description of the prediction input effect for insulin"), unit.localizedShortUnitString)
         case [.momentum]:
             return NSLocalizedString("15分钟的葡萄糖回归系数（B₁），持续衰减30分钟", comment: "Description of the prediction input effect for glucose momentum")
         case [.retrospection]:

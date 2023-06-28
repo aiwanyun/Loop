@@ -371,7 +371,7 @@ final class BolusEntryViewModel: ObservableObject {
 
         // Authenticate the bolus before saving anything
         if amountToDeliver > 0 {
-            let message = String(format: NSLocalizedString("Authenticate to Bolus %@ Units", comment: "The message displayed during a device authentication prompt for bolus specification"), amountToDeliverString)
+            let message = String(format: NSLocalizedString("验证 Bolus %@ 单位", comment: "The message displayed during a device authentication prompt for bolus specification"), amountToDeliverString)
 
             if !(await authenticationHandler(message)) {
                 return false

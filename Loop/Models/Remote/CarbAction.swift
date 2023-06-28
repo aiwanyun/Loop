@@ -59,9 +59,9 @@ enum CarbActionError: LocalizedError {
              case .invalidCarbs:
                  return NSLocalizedString("无效的碳水化合物量", comment: "Remote command error description: invalid carb amount.")
              case .invalidAbsorptionTime(let absorptionTime):
-                 return String(format: NSLocalizedString("Invalid absorption time: %d hours", comment: "Remote command error description: invalid absorption time."), absorptionTime.hours)
+                 return String(format: NSLocalizedString("无效吸收时间：%d小时", comment: "Remote command error description: invalid absorption time."), absorptionTime.hours)
              case .invalidStartDate(let startDate):
-                 return String(format: NSLocalizedString("Start time is out of range: %@", comment: "Remote command error description: invalid start time is out of range."), Self.dateFormatter.string(from: startDate))
+                 return String(format: NSLocalizedString("开始时间超出范围：%@", comment: "Remote command error description: invalid start time is out of range."), Self.dateFormatter.string(from: startDate))
              }
     }
     

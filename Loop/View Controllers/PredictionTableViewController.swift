@@ -243,7 +243,7 @@ class PredictionTableViewController: LoopChartsTableViewController, Identifiable
         }
 
         if let eventualGlucose = eventualGlucoseDescription {
-            cell.setTitleLabelText(label: String(format: NSLocalizedString("Eventually %@", comment: "The subtitle format describing eventual glucose. (1: localized glucose value description)"), eventualGlucose))
+            cell.setTitleLabelText(label: String(format: NSLocalizedString("最终 %@", comment: "The subtitle format describing eventual glucose. (1: localized glucose value description)"), eventualGlucose))
         } else {
             cell.setTitleLabelText(label: SettingsTableViewCell.NoValueString)
         }
@@ -272,7 +272,7 @@ class PredictionTableViewController: LoopChartsTableViewController, Identifiable
             values.append(formatter.string(from: lastDiscrepancy.quantity) ?? "?")
 
             let retro = String(
-                format: NSLocalizedString("Predicted: %1$@\nActual: %2$@ (%3$@)", comment: "Format string describing retrospective glucose prediction comparison. (1: Predicted glucose)(2: Actual glucose)(3: difference)"),
+                format: NSLocalizedString("预测：%1$@\n实际：%2$@ (%3$@)", comment: "Format string describing retrospective glucose prediction comparison. (1: Predicted glucose)(2: Actual glucose)(3: difference)"),
                 values[0], values[1], values[2]
             )
 

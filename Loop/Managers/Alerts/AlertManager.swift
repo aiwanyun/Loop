@@ -191,7 +191,7 @@ public final class AlertManager {
 
             let notificationContent = UNMutableNotificationContent()
             if let failureIntervalString = formatter.string(from: warningInterval)?.localizedLowercase {
-                notificationContent.body = String(format: NSLocalizedString("Loop has not completed successfully in %@", comment: "The notification alert describing a long-lasting loop failure. The substitution parameter is the time interval since the last loop"), failureIntervalString)
+                notificationContent.body = String(format: NSLocalizedString("循环未在 %@ 成功完成", comment: "The notification alert describing a long-lasting loop failure. The substitution parameter is the time interval since the last loop"), failureIntervalString)
             }
 
             notificationContent.title = NSLocalizedString("循环故障", comment: "The notification title for a loop failure")
@@ -337,7 +337,7 @@ extension AlertManager: AlertManagerResponder {
             if let localizedError = error as? LocalizedError {
                 message = [localizedError.localizedDescription, localizedError.recoverySuggestion].compactMap({$0}).joined(separator: "\n\n")
             } else {
-                message = String(format: NSLocalizedString("%1$@ is unable to clear the alert from your device", comment: "Message for alert shown when alert acknowledgement fails for a device, and the device does not provide a LocalizedError. (1: app name)"), Bundle.main.bundleDisplayName)
+                message = String(format: NSLocalizedString("%1$@ 无法清除您设备上的警报", comment: "Message for alert shown when alert acknowledgement fails for a device, and the device does not provide a LocalizedError. (1: app name)"), Bundle.main.bundleDisplayName)
             }
             self.log.info("Alert acknowledgement failed: %{public}@", message)
 
@@ -799,8 +799,8 @@ extension AlertManager {
     }
     
     func presentCouldNotResetLoopAlert(error: Error) {
-        let titleString = String(format: NSLocalizedString("Could Not Restart %1$@", comment: "Format string for title of reset loop alert. (1: App name)"), Bundle.main.bundleDisplayName)
-        let message = String(format: NSLocalizedString("While trying to restart %1$@ an error occured.\n\n%2$@", comment: "Format string for message of reset loop alert. (1: App name) (2: error description)"), Bundle.main.bundleDisplayName, error.localizedDescription)
+        let titleString = String(format: NSLocalizedString("无法重新启动%1$@", comment: "Format string for title of reset loop alert. (1: App name)"), Bundle.main.bundleDisplayName)
+        let message = String(format: NSLocalizedString("尝试重新启动 %1$@ 时发生错误。\n\n%2$@", comment: "Format string for message of reset loop alert. (1: App name) (2: error description)"), Bundle.main.bundleDisplayName, error.localizedDescription)
         let alert = UIAlertController(title: titleString, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("取消", comment: "Cancel button for reset loop alert"), style: .cancel))
         

@@ -322,7 +322,7 @@ public final class InsulinDeliveryTableViewController: UITableViewController {
                         self.iobDateLabel.text = nil
                     case .success(let iob):
                         self.iobValueLabel.text = self.iobNumberFormatter.string(from: iob.value)
-                        self.iobDateLabel.text = String(format: NSLocalizedString("com.loudnate.insulinkit.iobdatelabel", value: "at %1$@", comment: "The format string describing the date of an IOB value. The first format argument is the localized date."), self.timeFormatter.string(from: iob.startDate))
+                        self.iobDateLabel.text = String(format: NSLocalizedString("com.loudnate.InsulinKit.IOBDateLabel", value: "at %1$@", comment: "The format string describing the date of an IOB value. The first format argument is the localized date."), self.timeFormatter.string(from: iob.startDate))
                     }
                 }
             }
@@ -341,7 +341,7 @@ public final class InsulinDeliveryTableViewController: UITableViewController {
                         self.totalDateLabel.text = nil
                     case .success(let result):
                         self.totalValueLabel.text = NumberFormatter.localizedString(from: NSNumber(value: result.value), number: .none)
-                        self.totalDateLabel.text = String(format: NSLocalizedString("com.loudnate.insulinkit.totaldatelabel", value: "since %1$@", comment: "The format string describing the starting date of a total value. The first format argument is the localized date."), DateFormatter.localizedString(from: result.startDate, dateStyle: .none, timeStyle: .short))
+                        self.totalDateLabel.text = String(format: NSLocalizedString("com.loudnate.InsulinKit.totalDateLabel", value: "since %1$@", comment: "The format string describing the starting date of a total value. The first format argument is the localized date."), DateFormatter.localizedString(from: result.startDate, dateStyle: .none, timeStyle: .short))
                     }
                 }
             }
@@ -465,7 +465,7 @@ public final class InsulinDeliveryTableViewController: UITableViewController {
                 let time = timeFormatter.string(from: entry.startDate)
                 let font = UIFont.preferredFont(forTextStyle: .body)
 
-                let description = String(format: NSLocalizedString("Manual Dose: <b>%1$@</b> %2$@", comment: "Description of a bolus dose entry (1: value (? if no value) in bold, 2: unit)"), numberFormatter.string(from: entry.programmedUnits) ?? "?", DoseEntry.units.shortLocalizedUnitString(avoidLineBreaking: false))
+                let description = String(format: NSLocalizedString("手动剂量： <b>%1$@</b> %2$@", comment: "Description of a bolus dose entry (1: value (? if no value) in bold, 2: unit)"), numberFormatter.string(from: entry.programmedUnits) ?? "?", DoseEntry.units.shortLocalizedUnitString(avoidLineBreaking: false))
 
                 let attributedDescription = createAttributedDescription(from: description, with: font)
                 cell.textLabel?.attributedText = attributedDescription
@@ -641,7 +641,7 @@ extension PersistedPumpEvent {
                 if let deliveredUnits = dose.deliveredUnits,
                    deliveredUnits != dose.programmedUnits
                 {
-                    description = String(format: NSLocalizedString("Interrupted %1$@: <b>%2$@</b> of %3$@ %4$@", comment: "Description of an interrupted bolus dose entry (1: title for dose type, 2: value (? if no value) in bold, 3: programmed value (? if no value), 4: unit)"), eventTitle, numberFormatter.string(from: deliveredUnits) ?? "?", numberFormatter.string(from: dose.programmedUnits) ?? "?", DoseEntry.units.shortLocalizedUnitString())
+                    description = String(format: NSLocalizedString("被打断 %1$@: <b>%2$@</b> of %3$@ %4$@", comment: "Description of an interrupted bolus dose entry (1: title for dose type, 2: value (? if no value) in bold, 3: programmed value (? if no value), 4: unit)"), eventTitle, numberFormatter.string(from: deliveredUnits) ?? "?", numberFormatter.string(from: dose.programmedUnits) ?? "?", DoseEntry.units.shortLocalizedUnitString())
                 } else {
                     description = String(format: NSLocalizedString("%1$@: <b>%2$@</b> %3$@", comment: "Description of a bolus dose entry (1: title for dose type, 2: value (? if no value) in bold, 3: unit)"), eventTitle, numberFormatter.string(from: dose.programmedUnits) ?? "?", DoseEntry.units.shortLocalizedUnitString(avoidLineBreaking: false))
                 }

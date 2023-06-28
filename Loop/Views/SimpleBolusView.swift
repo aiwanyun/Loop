@@ -309,13 +309,13 @@ struct SimpleBolusView: View {
             let suspendThresholdString = formatGlucose(viewModel.suspendThreshold)
             return WarningView(
                 title: title,
-                caption: Text(String(format: NSLocalizedString("Your glucose is below your glucose safety limit, %1$@.", comment: "Format string for bolus screen warning when no bolus is recommended due input value below glucose safety limit. (1: suspendThreshold)"), suspendThresholdString))
+                caption: Text(String(format: NSLocalizedString("您的血糖低于您的血糖安全限值，%1$@。", comment: "Format string for bolus screen warning when no bolus is recommended due input value below glucose safety limit. (1: suspendThreshold)"), suspendThresholdString))
             )
         case .glucoseWarning:
             let warningThresholdString = formatGlucose(LoopConstants.simpleBolusCalculatorGlucoseWarningLimit)
             return WarningView(
                 title: Text("低葡萄糖", comment: "Title for bolus screen warning when glucose is below glucose warning limit."),
-                caption: Text(String(format: NSLocalizedString("Your glucose is below %1$@. Are you sure you want to bolus?", comment: "Format string for simple bolus screen warning when glucose is below glucose warning limit."), warningThresholdString))
+                caption: Text(String(format: NSLocalizedString("您的血糖低于%1$@。 您确定要推注吗？", comment: "Format string for simple bolus screen warning when glucose is below glucose warning limit."), warningThresholdString))
             )
         case .glucoseBelowRecommendationLimit:
             let caption: String
@@ -333,27 +333,27 @@ struct SimpleBolusView: View {
             let glucoseMaxString = formatGlucose(LoopConstants.validManualGlucoseEntryRange.upperBound)
             return WarningView(
                 title: Text("葡萄糖进入范围", comment: "Title for bolus screen warning when glucose entry is out of range"),
-                caption: Text(String(format: NSLocalizedString("A manual glucose entry must be between %1$@ and %2$@.", comment: "Warning for simple bolus when glucose entry is out of range. (1: upper bound) (2: lower bound)"), glucoseMinString, glucoseMaxString)))
+                caption: Text(String(format: NSLocalizedString("手动葡萄糖输入必须介于 %1$@ 和 %2$@ 之间。", comment: "Warning for simple bolus when glucose entry is out of range. (1: upper bound) (2: lower bound)"), glucoseMinString, glucoseMaxString)))
         case .maxBolusExceeded:
             return WarningView(
                 title: Text("最大推注超过", comment: "Title for bolus screen warning when max bolus is exceeded"),
-                caption: Text(String(format: NSLocalizedString("Your maximum bolus amount is %1$@.", comment: "Warning for simple bolus when max bolus is exceeded. (1: maximum bolus)"), viewModel.maximumBolusAmountString )))
+                caption: Text(String(format: NSLocalizedString("您的最大推注量为%1$@。", comment: "Warning for simple bolus when max bolus is exceeded. (1: maximum bolus)"), viewModel.maximumBolusAmountString )))
         case .recommendationExceedsMaxBolus:
             return WarningView(
                 title: Text("推荐的推注超过最大推注", comment: "Title for bolus screen warning when recommended bolus exceeds max bolus"),
-                caption: Text(String(format: NSLocalizedString("Your recommended bolus exceeds your maximum bolus amount of %1$@.", comment: "Warning for simple bolus when recommended bolus exceeds max bolus. (1: maximum bolus)"), viewModel.maximumBolusAmountString )))
+                caption: Text(String(format: NSLocalizedString("您推荐的推注量超过了最大推注量 %1$@。", comment: "Warning for simple bolus when recommended bolus exceeds max bolus. (1: maximum bolus)"), viewModel.maximumBolusAmountString )))
         case .carbohydrateEntryTooLarge:
             let maximumCarbohydrateString = QuantityFormatter(for: .gram()).string(from: LoopConstants.maxCarbEntryQuantity)!
             return WarningView(
                 title: Text("碳水化合物入口太大", comment: "Title for bolus screen warning when carbohydrate entry is too large"),
-                caption: Text(String(format: NSLocalizedString("The maximum amount allowed is %1$@.", comment: "Warning for simple bolus when carbohydrate entry is too large. (1: maximum carbohydrate entry)"), maximumCarbohydrateString)))
+                caption: Text(String(format: NSLocalizedString("允许的最大量为%1$@。", comment: "Warning for simple bolus when carbohydrate entry is too large. (1: maximum carbohydrate entry)"), maximumCarbohydrateString)))
         }
     }
     
     private func closedLoopOffInformationalModal() -> SwiftUI.Alert {
         return SwiftUI.Alert(
             title: Text("关闭循环", comment: "Alert title for closed loop off informational modal"),
-            message: Text(String(format: NSLocalizedString("%1$@ is operating with Closed Loop in the OFF position. Your pump and CGM will continue operating, but the app will not adjust dosing automatically.", comment: "Alert message for closed loop off informational modal. (1: app name)"), Bundle.main.bundleDisplayName))
+            message: Text(String(format: NSLocalizedString("%1$@ 在关闭位置闭环运行。 您的泵和 CGM 将继续运行，但应用程序不会自动调整剂量。", comment: "Alert message for closed loop off informational modal. (1: app name)"), Bundle.main.bundleDisplayName))
         )
     }
 

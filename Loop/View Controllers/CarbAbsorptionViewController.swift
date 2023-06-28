@@ -362,7 +362,7 @@ final class CarbAbsorptionViewController: LoopChartsTableViewController, Identif
 
                 if let observedCarbsText = carbFormatter.string(from: observedCarbs, unit: unit.unitString) {
                     cell.observedValueText = String(
-                        format: NSLocalizedString("%@ absorbed", comment: "Formats absorbed carb value"),
+                        format: NSLocalizedString("%@ 吸收", comment: "Formats absorbed carb value"),
                         observedCarbsText
                     )
 
@@ -404,7 +404,7 @@ final class CarbAbsorptionViewController: LoopChartsTableViewController, Identif
 
         if let carbsOnBoard = carbsOnBoard, carbsOnBoard.quantity.doubleValue(for: unit) > 0 {
             cell.COBDateLabel.text = String(
-                format: NSLocalizedString("at %@", comment: "Format fragment for a specific time"),
+                format: NSLocalizedString("在 %@", comment: "Format fragment for a specific time"),
                 timeFormatter.string(from: carbsOnBoard.startDate)
             )
             cell.COBValueLabel.text = carbFormatter.string(from: carbsOnBoard.quantity.doubleValue(for: unit))
@@ -428,7 +428,7 @@ final class CarbAbsorptionViewController: LoopChartsTableViewController, Identif
 
         if let carbTotal = carbTotal {
             cell.totalDateLabel.text = String(
-                format: NSLocalizedString("since %@", comment: "Format fragment for a start time"),
+                format: NSLocalizedString("自从 %@", comment: "Format fragment for a start time"),
                 timeFormatter.string(from: carbTotal.startDate)
             )
             cell.totalValueLabel.text = carbFormatter.string(from: carbTotal.quantity.doubleValue(for: unit))
