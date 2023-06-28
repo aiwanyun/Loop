@@ -400,21 +400,17 @@ extension SettingsView {
         let profileExpirationMsg = ProfileExpirationAlerter.createProfileExpirationSettingsMessage(profileExpiration: profileExpiration)
         let readableExpirationTime = Self.dateFormatter.string(from: profileExpiration)
         
-        return Section(header: SectionHeader(label: NSLocalizedString("应用配置文件", comment: "Settings app profile section")),
-                       footer: Text(NSLocalizedString("配置文件到期", comment: "Time that profile expires") + readableExpirationTime)) {
-            if(nearExpiration) {
-                Text(profileExpirationMsg).foregroundColor(.red)
-            } else {
-                HStack {
-                    Text("配置文件到期", comment: "Settings App Profile expiration view")
-                    Spacer()
-                    Text(profileExpirationMsg).foregroundColor(Color.secondary)
-                }
+        return Section(header: SectionHeader(label: NSLocalizedString("小羊", comment: "Settings app profile section")),
+                       footer: Text("")) {
+            HStack {
+                Text("欢迎使用!", comment: "Settings App Profile expiration view")
+                Spacer()
+                Text("").foregroundColor(Color.secondary)
             }
             Button(action: {
-                UIApplication.shared.open(URL(string: "https://loopkit.github.io/loopdocs/build/updating/")!)
+                UIApplication.shared.open(URL(string: "https://www.aiyundiy.com/")!)
             }) {
-                Text(NSLocalizedString("如何更新（loopdocs）", comment: "The title text for how to update"))
+                Text(NSLocalizedString("爱云diy", comment: "The title text for how to update"))
             }
         }
     }
