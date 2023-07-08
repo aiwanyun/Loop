@@ -139,7 +139,7 @@ final class ActionHUDController: HUDInterfaceController {
         
         let buttonToSelect = loopManager.settings.preMealOverride?.isActive() == true ? SelectedButton.on : SelectedButton.off
         let viewModel = OnOffSelectionViewModel(
-            title: NSLocalizedString("预之前", comment: "Title for sheet to enable/disable pre-meal on watch"),
+            title: NSLocalizedString("餐前模式", comment: "Title for sheet to enable/disable pre-meal on watch"),
             message: formattedGlucoseRangeString(from: range),
             onSelection: setPreMealEnabled,
             selectedButton: buttonToSelect,

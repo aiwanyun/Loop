@@ -13,7 +13,7 @@
 /* Class = "UILabel"; text = "Detail"; ObjectID = "aCb-Qs-bpu"; */
 "aCb-Qs-bpu.text" = "Detalle";
 
-/* Class = "UILabel"; text = "Food Type"; ObjectID = "ap1-M6-naG"; */
+/* Class = "UILabel"; text = "食物类型"; ObjectID = "ap1-M6-naG"; */
 "ap1-M6-naG.text" = "Típo de Comida";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "bIL-Ub-qYp"; */
@@ -70,7 +70,7 @@
 /* Class = "UIButton"; normalTitle = "🌮"; ObjectID = "QhO-Yi-AqQ"; */
 "QhO-Yi-AqQ.normalTitle" = "🌮";
 
-/* Class = "UILabel"; text = "Food Type"; ObjectID = "qPH-vU-xlu"; */
+/* Class = "UILabel"; text = "食物类型"; ObjectID = "qPH-vU-xlu"; */
 "qPH-vU-xlu.text" = "Típo de Comida";
 
 /* Class = "UILabel"; text = "eventually 92 mg/dL"; ObjectID = "Rse-x8-amW"; */
@@ -91,7 +91,7 @@
 /* Class = "UINavigationItem"; title = "Carbohydrates"; ObjectID = "Vpi-5b-bY5"; */
 "Vpi-5b-bY5.title" = "Carbohidratos";
 
-/* Class = "UILabel"; text = "Amount Consumed"; ObjectID = "Wx8-Tf-FnG"; */
+/* Class = "UILabel"; text = "总量"; ObjectID = "Wx8-Tf-FnG"; */
 "Wx8-Tf-FnG.text" = "Cantidad Consumida";
 
 /* Class = "UILabel"; text = "Recommended Basal"; ObjectID = "xhx-PI-bBI"; */

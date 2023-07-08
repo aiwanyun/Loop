@@ -194,7 +194,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
         if originalCarbEntry != nil {
             title = NSLocalizedString("碳水化合物 - 符号编辑", value: "Edit Carb Entry", comment: "The title of the view controller to edit an existing carb entry")
         } else {
-            title = NSLocalizedString("碳水化合物添加", value: "Add Carb Entry", comment: "The title of the view controller to create a new carb entry")
+            title = NSLocalizedString("碳水化合物添加", value: "录入碳水化合物", comment: "The title of the view controller to create a new carb entry")
         }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: footerView.primaryButton.titleLabel?.text, style: .plain, target: self, action: #selector(continueButtonPressed))
@@ -361,7 +361,7 @@ final class CarbEntryViewController: LoopChartsTableViewController, Identifiable
                 cell.imageView?.image = UIImage(systemName: "exclamationmark.triangle.fill")
                 cell.imageView?.tintColor = .warning
                 cell.textLabel?.numberOfLines = 0
-                cell.textLabel?.text = NSLocalizedString("积极的覆盖正在改变您的碳水化合物比率和胰岛素敏感性。如果您不希望这会影响推注计算并预测的葡萄糖，请考虑关闭覆盖。", comment: "Warning to ensure the carb entry is accurate during an override")
+                cell.textLabel?.text = NSLocalizedString("积极的覆盖正在改变您的碳水系数和胰岛素敏感性。如果您不希望这会影响推注计算并预测的葡萄糖，请考虑关闭覆盖。", comment: "Warning to ensure the carb entry is accurate during an override")
                 cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .caption1)
                 cell.textLabel?.textColor = .secondaryLabel
                 cell.isUserInteractionEnabled = false

@@ -12,9 +12,9 @@ public extension AutomaticDosingStrategy {
     var title: String {
         switch self {
         case .tempBasalOnly:
-            return LocalizedString("仅温度基础", comment: "Title string for temp basal only dosing strategy")
+            return LocalizedString("临时基础率输入", comment: "Title string for temp basal only dosing strategy")
         case .automaticBolus:
-            return LocalizedString("自动推注", comment: "Title string for automatic bolus dosing strategy")
+            return LocalizedString("自动大剂量输入", comment: "Title string for automatic bolus dosing strategy")
         }
     }
 }

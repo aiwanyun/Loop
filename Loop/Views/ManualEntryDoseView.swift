@@ -186,7 +186,7 @@ struct ManualEntryDoseView: View {
 
     private var bolusEntryRow: some View {
         HStack {
-            Text("推注", comment: "Label for bolus entry row on bolus screen")
+            Text("大剂量", comment: "Label for bolus entry row on bolus screen")
             Spacer()
             HStack(alignment: .firstTextBaseline) {
                 DismissibleKeyboardTextField(

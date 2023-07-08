@@ -289,7 +289,7 @@ final class StatusTableViewController: LoopChartsTableViewController {
         toolbarItems![0].isEnabled = isPumpOnboarded
         toolbarItems![0].tintColor = UIColor.carbTintColor
         toolbarItems![2].isEnabled = isPumpOnboarded && (automaticDosingStatus.automaticDosingEnabled || !FeatureFlags.simpleBolusCalculatorEnabled)
-        toolbarItems![4].accessibilityLabel = NSLocalizedString("推注", comment: "The label of the bolus entry button")
+        toolbarItems![4].accessibilityLabel = NSLocalizedString("大剂量", comment: "The label of the bolus entry button")
         toolbarItems![4].isEnabled = isPumpOnboarded
         toolbarItems![4].tintColor = UIColor.insulinTintColor
         toolbarItems![6].isEnabled = isPumpOnboarded

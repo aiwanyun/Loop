@@ -25,7 +25,7 @@ enum ConfigurationErrorDetail: String, Codable {
         case .basalRateSchedule:
             return NSLocalizedString("基础费率时间表", comment: "Details for configuration error when basal rate schedule is missing")
         case .carbRatioSchedule:
-            return NSLocalizedString("碳水化合物比率时间表", comment: "Details for configuration error when carb ratio schedule is missing")
+            return NSLocalizedString("碳水系数时间表", comment: "Details for configuration error when carb ratio schedule is missing")
         case .glucoseTargetRangeSchedule:
             return NSLocalizedString("葡萄糖目标范围时间表", comment: "Details for configuration error when glucose target range schedule is missing")
         case .insulinSensitivitySchedule:

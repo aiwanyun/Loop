@@ -78,7 +78,7 @@ struct BolusEntryView: View {
     
     private var title: Text {
         if viewModel.potentialCarbEntry == nil {
-            return Text("推注", comment: "Title for bolus entry screen")
+            return Text("大剂量", comment: "Title for bolus entry screen")
         }
         return Text("进餐推注", comment: "Title for bolus entry screen when also entering carbs")
     }
@@ -250,7 +250,7 @@ struct BolusEntryView: View {
 
     private var bolusEntryRow: some View {
         HStack {
-            Text("推注", comment: "Label for bolus entry row on bolus screen")
+            Text("大剂量", comment: "Label for bolus entry row on bolus screen")
             Spacer()
             HStack(alignment: .firstTextBaseline) {
                 DismissibleKeyboardTextField(
@@ -366,11 +366,11 @@ struct BolusEntryView: View {
             label: {
                 switch viewModel.actionButtonAction {
                 case .saveWithoutBolusing:
-                    return Text("保存而无需加油", comment: "Button text to save carbs and/or manual glucose entry without a bolus")
+                    return Text("输入大剂量", comment: "Button text to save carbs and/or manual glucose entry without a bolus")
                 case .saveAndDeliver:
                     return Text("保存和交付", comment: "Button text to save carbs and/or manual glucose entry and deliver a bolus")
                 case .enterBolus:
-                    return Text("输入牛肉", comment: "Button text to begin entering a bolus")
+                    return Text("输入大剂量", comment: "Button text to begin entering a bolus")
                 case .deliver:
                     return Text("递送", comment: "Button text to deliver a bolus")
                 }
