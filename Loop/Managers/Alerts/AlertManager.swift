@@ -126,7 +126,7 @@ public final class AlertManager {
     private func onBluetoothPermissionDenied() {
         log.default("Bluetooth permission denied")
         let title = NSLocalizedString("蓝牙不可用的警报", comment: "Bluetooth unavailable alert title")
-        let body = NSLocalizedString("LOOP检测到您的蓝牙设置问题，并且在启用蓝牙之前将无法成功使用。您将不会收到葡萄糖读数或能够推广。", comment: "Bluetooth unavailable alert body.")
+        let body = NSLocalizedString("LOOP检测到您的蓝牙设置问题，并且在启用蓝牙之前将无法成功使用。您将不会收到血糖读数或能够推广。", comment: "Bluetooth unavailable alert body.")
         let content = Alert.Content(title: title,
                                       body: body,
                                       acknowledgeActionButtonLabel: NSLocalizedString("解雇", comment: "Default alert dismissal"))
@@ -141,11 +141,11 @@ public final class AlertManager {
     private func onBluetoothPoweredOff() {
         log.default("Bluetooth powered off")
         let title = NSLocalizedString("蓝牙警报", comment: "Bluetooth off alert title")
-        let bgBody = NSLocalizedString("在启用蓝牙之前，循环将无法成功工作。您将不会收到葡萄糖读数或能够推广。", comment: "Bluetooth off background alert body.")
+        let bgBody = NSLocalizedString("在启用蓝牙之前，闭环将无法成功工作。您将不会收到血糖读数或能够推广。", comment: "Bluetooth off background alert body.")
         let bgcontent = Alert.Content(title: title,
                                       body: bgBody,
                                       acknowledgeActionButtonLabel: NSLocalizedString("解雇", comment: "Default alert dismissal"))
-        let fgBody = NSLocalizedString("打开蓝牙以接收警报，警报或传感器葡萄糖读数。", comment: "Bluetooth off foreground alert body")
+        let fgBody = NSLocalizedString("打开蓝牙以接收警报，警报或传感器血糖读数。", comment: "Bluetooth off foreground alert body")
         let fgcontent = Alert.Content(title: title,
                                       body: fgBody,
                                       acknowledgeActionButtonLabel: NSLocalizedString("解雇", comment: "Default alert dismissal"))
@@ -191,10 +191,10 @@ public final class AlertManager {
 
             let notificationContent = UNMutableNotificationContent()
             if let failureIntervalString = formatter.string(from: warningInterval)?.localizedLowercase {
-                notificationContent.body = String(format: NSLocalizedString("循环未在 %@ 成功完成", comment: "The notification alert describing a long-lasting loop failure. The substitution parameter is the time interval since the last loop"), failureIntervalString)
+                notificationContent.body = String(format: NSLocalizedString("Loop has not completed successfully in %@", comment: "The notification alert describing a long-lasting loop failure. The substitution parameter is the time interval since the last loop"), failureIntervalString)
             }
 
-            notificationContent.title = NSLocalizedString("循环故障", comment: "The notification title for a loop failure")
+            notificationContent.title = NSLocalizedString("闭环故障", comment: "The notification title for a loop failure")
             let shouldMuteAlert = alertMuter.shouldMuteAlert(scheduledAt: timeUntilNotification)
             if isCritical, FeatureFlags.criticalAlertsEnabled {
                 if #available(iOS 15.0, *) {
@@ -286,8 +286,8 @@ public final class AlertManager {
     }
 
     private var workoutOverrideReminderAlert: Alert {
-        let title = NSLocalizedString("锻炼温度调整仍在", comment: "Workout override still on reminder alert title")
-        let body = NSLocalizedString("锻炼温度调整已打开超过24小时。确保您仍然希望启用它，或在应用程序中将其关闭。", comment: "Workout override still on reminder alert body.")
+        let title = NSLocalizedString("Workout Temp Adjust Still On", comment: "Workout override still on reminder alert title")
+        let body = NSLocalizedString("Workout Temp Adjust has been turned on for more than 24 hours. Make sure you still want it enabled, or turn it off in the app.", comment: "Workout override still on reminder alert body.")
         let content = Alert.Content(title: title,
                                     body: body,
                                     acknowledgeActionButtonLabel: NSLocalizedString("解雇", comment: "Default alert dismissal"))
@@ -337,7 +337,7 @@ extension AlertManager: AlertManagerResponder {
             if let localizedError = error as? LocalizedError {
                 message = [localizedError.localizedDescription, localizedError.recoverySuggestion].compactMap({$0}).joined(separator: "\n\n")
             } else {
-                message = String(format: NSLocalizedString("%1$@ 无法清除您设备上的警报", comment: "Message for alert shown when alert acknowledgement fails for a device, and the device does not provide a LocalizedError. (1: app name)"), Bundle.main.bundleDisplayName)
+                message = String(format: NSLocalizedString("%1$@ is unable to clear the alert from your device", comment: "Message for alert shown when alert acknowledgement fails for a device, and the device does not provide a LocalizedError. (1: app name)"), Bundle.main.bundleDisplayName)
             }
             self.log.info("Alert acknowledgement failed: %{public}@", message)
 
@@ -799,8 +799,8 @@ extension AlertManager {
     }
     
     func presentCouldNotResetLoopAlert(error: Error) {
-        let titleString = String(format: NSLocalizedString("无法重新启动%1$@", comment: "Format string for title of reset loop alert. (1: App name)"), Bundle.main.bundleDisplayName)
-        let message = String(format: NSLocalizedString("尝试重新启动 %1$@ 时发生错误。\n\n%2$@", comment: "Format string for message of reset loop alert. (1: App name) (2: error description)"), Bundle.main.bundleDisplayName, error.localizedDescription)
+        let titleString = String(format: NSLocalizedString("Could Not Restart %1$@", comment: "Format string for title of reset loop alert. (1: App name)"), Bundle.main.bundleDisplayName)
+        let message = String(format: NSLocalizedString("While trying to restart %1$@ an error occured.\n\n%2$@", comment: "Format string for message of reset loop alert. (1: App name) (2: error description)"), Bundle.main.bundleDisplayName, error.localizedDescription)
         let alert = UIAlertController(title: titleString, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("取消", comment: "Cancel button for reset loop alert"), style: .cancel))
         

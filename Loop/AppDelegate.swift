@@ -22,6 +22,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, WindowProvider {
 
         setenv("CFNETWORK_DIAGNOSTICS", "3", 1)
 
+        log.default("lastPathComponent = %{public}@", String(describing: Bundle.main.appStoreReceiptURL?.lastPathComponent))
+
         loopAppManager.initialize(windowProvider: self, launchOptions: launchOptions)
         loopAppManager.launch()
         return loopAppManager.isLaunchComplete
@@ -80,6 +82,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate, WindowProvider {
         log.default(#function)
 
         completionHandler(loopAppManager.handleRemoteNotification(userInfo as? [String: AnyObject]) ? .noData : .failed)
+    }
+    
+    // MARK: - UIApplicationDelegate - Deeplinking
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        loopAppManager.handle(url)
     }
 
     // MARK: - UIApplicationDelegate - Continuity

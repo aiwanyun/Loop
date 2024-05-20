@@ -28,7 +28,7 @@ extension CommandResponseViewController {
                 }
             }
 
-            return NSLocalizedString("加载...", comment: "The loading message for the diagnostic report screen")
+            return NSLocalizedString("加载中...", comment: "The loading message for the diagnostic report screen")
         })
         vc.fileName = "Loop Report \(ISO8601DateFormatter.string(from: date, timeZone: .current, formatOptions: [.withSpaceBetweenDateAndTime, .withInternetDateTime])).md"
 

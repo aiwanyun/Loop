@@ -100,7 +100,7 @@ public class CriticalEventLogExportViewModel: ObservableObject, Identifiable, Cr
         self.progressLatestDate = nil
         self.activityItems = []
 
-        let filename = String(format: NSLocalizedString("导出-%1$@", comment: "The export file name formatted string (1: timestamp)"), self.timestampFormatter.string(from: Date()))
+        let filename = String(format: NSLocalizedString("Export-%1$@", comment: "The export file name formatted string (1: timestamp)"), self.timestampFormatter.string(from: Date()))
         let url = FileManager.default.temporaryDirectory.appendingPathComponent(filename).appendingPathExtension("zip")
 
         var exporter = exporterFactory.createExporter(to: url)
@@ -160,7 +160,7 @@ public class CriticalEventLogExportViewModel: ObservableObject, Identifiable, Cr
             guard let durationString = durationFormatter.string(from: remainingDuration + remainingDurationApproximationOffset) else {
                 return nil
             }
-            return String(format: NSLocalizedString("%@ 剩余", comment: "Estimated remaining duration with more than a minute"), durationString)
+            return String(format: NSLocalizedString("%@ remaining", comment: "Estimated remaining duration with more than a minute"), durationString)
         }
     }
 

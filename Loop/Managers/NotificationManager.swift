@@ -79,27 +79,6 @@ extension NotificationManager {
 
     // MARK: - Notifications
     
-    @MainActor
-    static func sendRemoteCommandExpiredNotification(timeExpired: TimeInterval) {
-        let notification = UNMutableNotificationContent()
-
-        notification.title = NSLocalizedString("远程命令过期", comment: "The notification title for the remote command expiration error")
-
-        notification.body = String(format: NSLocalizedString("远程命令在 %.0f 分钟前过期。", comment: "The notification body for a remote command expiration. (1: Expiration in minutes)"), fabs(timeExpired / 60.0))
-        notification.sound = .default
-         
-        notification.categoryIdentifier = LoopNotificationCategory.remoteCommandExpired.rawValue
-
-        let request = UNNotificationRequest(
-            // Only support 1 expiration notification at once
-            identifier: LoopNotificationCategory.remoteCommandExpired.rawValue,
-            content: notification,
-            trigger: nil
-        )
-
-        UNUserNotificationCenter.current().add(request)
-    }
-
     static func sendBolusFailureNotification(for error: PumpManagerError, units: Double, at startDate: Date, activationType: BolusActivationType) {
         let notification = UNMutableNotificationContent()
 
@@ -143,7 +122,7 @@ extension NotificationManager {
         guard let amountDescription = quantityFormatter.numberFormatter.string(from: amount) else {
             return
         }
-        notification.title =  String(format: NSLocalizedString("远程推注输入： %@ U", comment: "The notification title for a remote bolus. (1: Bolus amount)"), amountDescription)
+        notification.title =  String(format: NSLocalizedString("Remote Bolus Entry: %@ U", comment: "The notification title for a remote bolus. (1: Bolus amount)"), amountDescription)
         
         let body = "Success!"
 
@@ -160,14 +139,14 @@ extension NotificationManager {
     }
     
     @MainActor
-    static func sendRemoteBolusFailureNotification(for error: Error, amount: Double) {
+    static func sendRemoteBolusFailureNotification(for error: Error, amountInUnits: Double) {
         let notification = UNMutableNotificationContent()
         let quantityFormatter = QuantityFormatter(for: .internationalUnit())
-        guard let amountDescription = quantityFormatter.numberFormatter.string(from: amount) else {
+        guard let amountDescription = quantityFormatter.numberFormatter.string(from: amountInUnits) else {
             return
         }
 
-        notification.title =  String(format: NSLocalizedString("远程推注输入： %@ U", comment: "The notification title for a remote failure. (1: Bolus amount)"), amountDescription)
+        notification.title =  String(format: NSLocalizedString("Remote Bolus Entry: %@ U", comment: "The notification title for a remote failure. (1: Bolus amount)"), amountDescription)
         notification.body = error.localizedDescription
         notification.sound = .default
 
@@ -285,6 +264,6 @@ extension NotificationManager {
     }
     
     private static func remoteCarbEntryNotificationBody(amountInGrams: Double) -> String {
-        return String(format: NSLocalizedString("远程碳水化合物输入：%d 克", comment: "The carb amount message for a remote carbs entry notification. (1: Carb amount in grams)"), Int(amountInGrams))
+        return String(format: NSLocalizedString("Remote Carbs Entry: %d grams", comment: "The carb amount message for a remote carbs entry notification. (1: Carb amount in grams)"), Int(amountInGrams))
     }
 }

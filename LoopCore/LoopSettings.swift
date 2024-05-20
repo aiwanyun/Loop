@@ -12,9 +12,9 @@ public extension AutomaticDosingStrategy {
     var title: String {
         switch self {
         case .tempBasalOnly:
-            return LocalizedString("临时基础率输入", comment: "Title string for temp basal only dosing strategy")
+            return LocalizedString("仅临时基础率", comment: "Title string for temp basal only dosing strategy")
         case .automaticBolus:
-            return LocalizedString("自动大剂量输入", comment: "Title string for automatic bolus dosing strategy")
+            return LocalizedString("自动推注", comment: "Title string for automatic bolus dosing strategy")
         }
     }
 }
@@ -74,7 +74,7 @@ public struct LoopSettings: Equatable {
     public var automaticDosingStrategy: AutomaticDosingStrategy = .tempBasalOnly
 
     public var defaultRapidActingModel: ExponentialInsulinModelPreset?
-
+    
     public var glucoseUnit: HKUnit? {
         return glucoseTargetRangeSchedule?.unit
     }
@@ -295,7 +295,7 @@ extension LoopSettings: RawRepresentable {
         raw["maximumBolus"] = maximumBolus
         raw["minimumBGGuard"] = suspendThreshold?.rawValue
         raw["dosingStrategy"] = automaticDosingStrategy.rawValue
-
+        
         return raw
     }
 }

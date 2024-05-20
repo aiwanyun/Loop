@@ -26,13 +26,13 @@ struct ManualGlucoseEntryRow: View {
 
     var body: some View {
         HStack {
-            Text("指尖葡萄糖", comment: "Label for manual glucose entry row on bolus screen")
+            Text("指尖血糖", comment: "Label for manual glucose entry row on bolus screen")
             Spacer()
 
             HStack(alignment: .firstTextBaseline) {
                 DismissibleKeyboardTextField(
                     text: $valueText,
-                    placeholder: NSLocalizedString(" -   -   - ", comment: "No glucose value representation (3 dashes for mg/dL)"),
+                    placeholder: NSLocalizedString("– – –", comment: "No glucose value representation (3 dashes for mg/dL)"),
                     font: .heavy(.title1),
                     textAlignment: .right,
                     keyboardType: .decimalPad,

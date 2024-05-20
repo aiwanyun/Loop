@@ -20,7 +20,7 @@ extension UIAlertController {
      */
     internal convenience init(workoutDurationSelectionHandler handler: @escaping (_ duration: TimeInterval) -> Void) {
         self.init(
-            title: NSLocalizedString("使用锻炼预设", comment: "The title of the alert controller used to select a duration for workout targets"),
+            title: NSLocalizedString("Use Workout Preset", comment: "The title of the alert controller used to select a duration for workout targets"),
             message: nil,
             preferredStyle: .actionSheet
         )
@@ -30,7 +30,7 @@ extension UIAlertController {
         formatter.unitsStyle = .full
 
         for interval in [1, 2].map({ TimeInterval(hours: $0) }) {
-            let duration = NSLocalizedString("为了 %1$@", comment: "The format string used to describe a finite workout targets duration")
+            let duration = NSLocalizedString("For %1$@", comment: "The format string used to describe a finite workout targets duration")
 
             addAction(UIAlertAction(title: String(format: duration, formatter.string(from: interval)!), style: .default) { _ in
                 handler(interval)
@@ -53,7 +53,7 @@ extension UIAlertController {
      */
     internal convenience init(premealDurationSelectionHandler handler: @escaping (_ duration: TimeInterval) -> Void) {
         self.init(
-            title: NSLocalizedString("使用粉刷前的预设", comment: "The title of the alert controller used to select a duration for pre-meal targets"),
+            title: NSLocalizedString("Use Pre-Meal Preset", comment: "The title of the alert controller used to select a duration for pre-meal targets"),
             message: nil,
             preferredStyle: .actionSheet
         )

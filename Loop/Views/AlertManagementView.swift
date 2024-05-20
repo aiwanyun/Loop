@@ -72,9 +72,78 @@ struct AlertManagementView: View {
         }
         .navigationTitle(NSLocalizedString("警报管理", comment: "Title of alert management screen"))
     }
+    
+    private var footerView: some View {
+        VStack(alignment: .leading, spacing: 24) {
+            HStack(alignment: .top, spacing: 8) {
+                Image("phone")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 64, maxHeight: 64)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(
+                        String(
+                            format: NSLocalizedString(
+                                "%1$@ APP SOUNDS",
+                                comment: "App sounds title text (1: app name)"
+                            ),
+                            appName.uppercased()
+                        )
+                    )
+                    
+                    Text(
+                        String(
+                            format: NSLocalizedString(
+                                "While mute alerts is on, all alerts from your %1$@ app including Critical and Time Sensitive alerts will temporarily display without sounds and will vibrate only.",
+                                comment: "App sounds descriptive text (1: app name)"
+                            ),
+                            appName
+                        )
+                    )
+                }
+            }
+            
+            HStack(alignment: .top, spacing: 8) {
+                Image("hardware")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 64, maxHeight: 64)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("硬件声音")
+                    
+                    Text("当静音警报打开时，您的胰岛素泵和CGM硬件仍然可能听起来。")
+                }
+            }
+            
+            HStack(alignment: .top, spacing: 8) {
+                Image(systemName: "moon.fill")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 64, maxHeight: 48)
+                    .foregroundColor(.accentColor)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("iOS焦点模式")
+                    
+                    Text(
+                        String(
+                            format: NSLocalizedString(
+                                "If iOS Focus Mode is ON and Mute Alerts is OFF, Critical Alerts will still be delivered and non-Critical Alerts will be silenced until %1$@ is added to each Focus mode as an Allowed App.",
+                                comment: "Focus modes descriptive text (1: app name)"
+                            ),
+                            appName
+                        )
+                    )
+                }
+            }
+        }
+        .padding(.top)
+    }
 
     private var alertPermissionsSection: some View {
-        Section(footer: DescriptiveText(label: String(format: NSLocalizedString("通知会向您提供重要的 %1$@ 应用程序信息，而无需您打开应用程序。", comment: "Alert Permissions descriptive text (1: app name)"), appName))) {
+        Section(footer: DescriptiveText(label: String(format: NSLocalizedString("Notifications give you important %1$@ app information without requiring you to open the app.", comment: "Alert Permissions descriptive text (1: app name)"), appName))) {
             NavigationLink(destination:
                             NotificationsCriticalAlertPermissionsView(mode: .flow, checker: checker))
             {
@@ -93,7 +162,7 @@ struct AlertManagementView: View {
 
     @ViewBuilder
     private var muteAlertsSection: some View {
-        Section(footer: DescriptiveText(label: String(format: NSLocalizedString("静音时，%1$@ 警报将暂时显示，不发出声音，仅振动。 静音期结束后，您的警报将恢复正常。", comment: "Description of temporary mute alerts (1: app name)"), appName))) {
+        Section(footer: footerView) {
             if !alertMuter.configuration.shouldMute {
                 howMuteAlertsWork
                 Button(action: { showMuteAlertOptions = true }) {
@@ -142,7 +211,7 @@ struct AlertManagementView: View {
     private var howMuteAlertsWork: some View {
         Button(action: { showHowMuteAlertWork = true }) {
             HStack {
-                Text(NSLocalizedString("仔细研究一下静音警报的工作方式", comment: "Label for link to learn how mute alerts work"))
+                Text(NSLocalizedString("关于警报的常见问题", comment: "Label for link to see frequently asked questions"))
                     .font(.footnote)
                     .foregroundColor(.secondary)
                 Spacer()
@@ -169,7 +238,7 @@ struct AlertManagementView: View {
     }
     
     private var missedMealAlertSection: some View {
-        Section(footer: DescriptiveText(label: NSLocalizedString("启用后，循环在发现未登录的餐点时会通知您。", comment: "Description of missed meal notifications."))) {
+        Section(footer: DescriptiveText(label: NSLocalizedString("启用后，闭环在发现未登录的餐点时会通知您。", comment: "Description of missed meal notifications."))) {
             Toggle(NSLocalizedString("错过的通知", comment: "Title for missed meal notifications toggle"), isOn: missedMealNotificationsEnabled)
         }
     }

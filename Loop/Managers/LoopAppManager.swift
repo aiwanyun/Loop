@@ -83,6 +83,7 @@ class LoopAppManager: NSObject {
     private var analyticsServicesManager = AnalyticsServicesManager()
     private(set) var testingScenariosManager: TestingScenariosManager?
     private var resetLoopManager: ResetLoopManager!
+    private var deeplinkManager: DeeplinkManager!
 
     private var overrideHistory = UserDefaults.appGroup?.overrideHistory ?? TemporaryScheduleOverrideHistory.init()
 
@@ -225,30 +226,34 @@ class LoopAppManager: NSObject {
         onboardingManager = OnboardingManager(pluginManager: pluginManager,
                                               bluetoothProvider: bluetoothStateManager,
                                               deviceDataManager: deviceDataManager,
+                                              statefulPluginManager: deviceDataManager.statefulPluginManager,
                                               servicesManager: deviceDataManager.servicesManager,
                                               loopDataManager: deviceDataManager.loopManager,
                                               supportManager: supportManager,
                                               windowProvider: windowProvider,
                                               userDefaults: UserDefaults.appGroup!)
 
+        deeplinkManager = DeeplinkManager(rootViewController: rootViewController)
 
         for support in supportManager.availableSupports {
             if let analyticsService = support as? AnalyticsService {
                 analyticsServicesManager.addService(analyticsService)
             }
+            support.initializationComplete(for: deviceDataManager.allActivePlugins)
         }
-        for support in supportManager.availableSupports {
-            support.initializationComplete(for: deviceDataManager.servicesManager.activeServices)
-        }
-
 
         deviceDataManager.onboardingManager = onboardingManager
 
+        // Analytics: user properties
         analyticsServicesManager.identifyAppName(Bundle.main.bundleDisplayName)
 
         if let workspaceGitRevision = BuildDetails.default.workspaceGitRevision {
             analyticsServicesManager.identifyWorkspaceGitRevision(workspaceGitRevision)
         }
+
+        analyticsServicesManager.identify("Dosing Strategy", value: settingsManager.loopSettings.automaticDosingStrategy.analyticsValue)
+        let serviceNames = deviceDataManager.servicesManager.activeServices.map { $0.pluginIdentifier }
+        analyticsServicesManager.identify("Services", array: serviceNames)
 
         if FeatureFlags.scenariosEnabled {
             testingScenariosManager = LocalTestingScenariosManager(deviceManager: deviceDataManager, supportManager: supportManager)
@@ -316,7 +321,7 @@ class LoopAppManager: NSObject {
 
     func didBecomeActive() {
         if let rootViewController = rootViewController {
-            ProfileExpirationAlerter.alertIfNeeded(viewControllerToPresentFrom: rootViewController)
+            AppExpirationAlerter.alertIfNeeded(viewControllerToPresentFrom: rootViewController)
         }
         settingsManager?.didBecomeActive()
         deviceDataManager?.didBecomeActive()
@@ -344,8 +349,14 @@ class LoopAppManager: NSObject {
         guard let notification = notification else {
             return false
         }
-        deviceDataManager?.handleRemoteNotification(notification)
+        deviceDataManager?.servicesManager.handleRemoteNotification(notification)
         return true
+    }
+    
+    // MARK: - Deeplinking
+    
+    func handle(_ url: URL) -> Bool {
+        deeplinkManager.handle(url)
     }
 
     // MARK: - Continuity
@@ -590,7 +601,7 @@ extension LoopAppManager: TemporaryScheduleOverrideHistoryDelegate {
     func temporaryScheduleOverrideHistoryDidUpdate(_ history: TemporaryScheduleOverrideHistory) {
         UserDefaults.appGroup?.overrideHistory = history
 
-        deviceDataManager.remoteDataServicesManager.temporaryScheduleOverrideHistoryDidUpdate()
+        deviceDataManager.remoteDataServicesManager.triggerUpload(for: .overrides)
     }
 }
 
@@ -617,6 +628,14 @@ extension LoopAppManager: ResetLoopManagerDelegate {
     func loopDidReset() {
         supportManager.availableSupports.forEach { supportUI in
             supportUI.loopDidReset()
+        }
+    }
+    
+    func resetTestingData(completion: @escaping () -> Void) {
+        deviceDataManager.deleteTestingCGMData { [weak deviceDataManager] _ in
+            deviceDataManager?.deleteTestingPumpData { _ in
+                completion()
+            }
         }
     }
     

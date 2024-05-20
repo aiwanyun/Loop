@@ -55,7 +55,7 @@ struct OnOffSelectionView: View {
             self.viewModel.onSelection(true)
             self.viewModel.dismiss?()
         }) {
-            Text("在", comment: "Label for on button")
+            Text("打开", comment: "Label for on button")
         }
         .cornerRadius(20)
     }
@@ -65,7 +65,7 @@ struct OnOffSelectionView: View {
             self.viewModel.onSelection(false)
             self.viewModel.dismiss?()
         }) {
-            Text("离开", comment: "Label for off button")
+            Text("关闭", comment: "Label for off button")
         }
         .cornerRadius(20)
     }

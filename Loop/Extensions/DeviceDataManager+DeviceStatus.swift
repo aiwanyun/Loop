@@ -132,15 +132,15 @@ fileprivate extension BluetoothState {
     }
 
     static var offHighlight: Highlight {
-        return Highlight(localizedMessage: NSLocalizedString("蓝牙\n关闭", comment: "Message to the user to that the bluetooth is off"))
+        return Highlight(localizedMessage: NSLocalizedString("Bluetooth\nOff", comment: "Message to the user to that the bluetooth is off"))
     }
 
     static var enableHighlight: Highlight {
-        return Highlight(localizedMessage: NSLocalizedString("启用\n蓝牙", comment: "Message to the user to enable bluetooth"))
+        return Highlight(localizedMessage: NSLocalizedString("Enable\nBluetooth", comment: "Message to the user to enable bluetooth"))
     }
 
     static var unavailableHighlight: Highlight {
-        return Highlight(localizedMessage: NSLocalizedString("蓝牙\n不可用", comment: "Message to the user that bluetooth is unavailable to the app"))
+        return Highlight(localizedMessage: NSLocalizedString("Bluetooth\nUnavailable", comment: "Message to the user that bluetooth is unavailable to the app"))
     }
 
     var action: HUDTapAction? {

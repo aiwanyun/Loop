@@ -59,7 +59,7 @@ struct ManualEntryDoseView: View {
     }
     
     private var title: Text {
-        return Text("原木剂量", comment: "Title for dose logging screen")
+        return Text("记录剂量", comment: "Title for dose logging screen")
     }
 
     private func shouldAutoScroll(basedOn geometry: GeometryProxy) -> Bool {
@@ -80,7 +80,7 @@ struct ManualEntryDoseView: View {
                 // Use a ZStack to allow horizontally clipping the predicted glucose chart,
                 // without clipping the point label on highlight, which draws outside the view's bounds.
                 ZStack(alignment: .topLeading) {
-                    Text("葡萄糖", comment: "Title for predicted glucose chart on bolus screen")
+                    Text("血糖", comment: "Title for predicted glucose chart on bolus screen")
                         .font(.subheadline)
                         .bold()
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -186,7 +186,7 @@ struct ManualEntryDoseView: View {
 
     private var bolusEntryRow: some View {
         HStack {
-            Text("大剂量", comment: "Label for bolus entry row on bolus screen")
+            Text("推注", comment: "Label for bolus entry row on bolus screen")
             Spacer()
             HStack(alignment: .firstTextBaseline) {
                 DismissibleKeyboardTextField(
@@ -242,7 +242,7 @@ struct ManualEntryDoseView: View {
                 self.viewModel.saveManualDose(onSuccess: self.dismiss)
             },
             label: {
-                return Text("原木剂量", comment: "Button text to log a dose")
+                return Text("记录剂量", comment: "Button text to log a dose")
             }
         )
         .buttonStyle(ActionButtonStyle(.primary))

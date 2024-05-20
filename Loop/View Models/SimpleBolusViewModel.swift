@@ -206,7 +206,7 @@ class SimpleBolusViewModel: ObservableObject {
                 recommendedBolus = Self.doseAmountFormatter.string(from: recommendation)!
                 enteredBolusString = Self.doseAmountFormatter.string(from: min(recommendation, delegate.maximumBolus))!
             } else {
-                recommendedBolus = NSLocalizedString(" - ", comment: "String denoting lack of a recommended bolus amount in the simple bolus calculator")
+                recommendedBolus = NSLocalizedString("–", comment: "String denoting lack of a recommended bolus amount in the simple bolus calculator")
                 enteredBolusString = Self.doseAmountFormatter.string(from: 0.0)!
             }
         }
@@ -330,7 +330,7 @@ class SimpleBolusViewModel: ObservableObject {
         // Authenticate the bolus before saving anything
         func authenticateIfNeeded(_ completion: @escaping (Bool) -> Void) {
             if let bolus = bolus, bolus.doubleValue(for: .internationalUnit()) > 0 {
-                let message = String(format: NSLocalizedString("验证 Bolus %@ 单位", comment: "The message displayed during a device authentication prompt for bolus specification"), enteredBolusString)
+                let message = String(format: NSLocalizedString("Authenticate to Bolus %@ Units", comment: "The message displayed during a device authentication prompt for bolus specification"), enteredBolusString)
                 authenticate(message) {
                     switch $0 {
                     case .success:

@@ -10,6 +10,7 @@ import os.log
 import LoopKit
 import LoopKitUI
 import LoopCore
+import Combine
 
 class ServicesManager {
 
@@ -23,11 +24,18 @@ class ServicesManager {
 
     let remoteDataServicesManager: RemoteDataServicesManager
     
+    let settingsManager: SettingsManager
+    
+    weak var servicesManagerDelegate: ServicesManagerDelegate?
+    weak var servicesManagerDosingDelegate: ServicesManagerDosingDelegate?
+    
     private var services = [Service]()
 
     private let servicesLock = UnfairLock()
 
     private let log = OSLog(category: "ServicesManager")
+    
+    lazy private var cancellables = Set<AnyCancellable>()
 
     @PersistedProperty(key: "Services")
     var rawServices: [Service.RawValue]?
@@ -37,13 +45,19 @@ class ServicesManager {
         alertManager: AlertManager,
         analyticsServicesManager: AnalyticsServicesManager,
         loggingServicesManager: LoggingServicesManager,
-        remoteDataServicesManager: RemoteDataServicesManager
+        remoteDataServicesManager: RemoteDataServicesManager,
+        settingsManager: SettingsManager,
+        servicesManagerDelegate: ServicesManagerDelegate,
+        servicesManagerDosingDelegate: ServicesManagerDosingDelegate
     ) {
         self.pluginManager = pluginManager
         self.alertManager = alertManager
         self.analyticsServicesManager = analyticsServicesManager
         self.loggingServicesManager = loggingServicesManager
         self.remoteDataServicesManager = remoteDataServicesManager
+        self.settingsManager = settingsManager
+        self.servicesManagerDelegate = servicesManagerDelegate
+        self.servicesManagerDosingDelegate = servicesManagerDosingDelegate
         restoreState()
     }
 
@@ -110,6 +124,7 @@ class ServicesManager {
     public func addActiveService(_ service: Service) {
         servicesLock.withLock {
             service.serviceDelegate = self
+            service.stateDelegate = self
 
             services.append(service)
 
@@ -139,9 +154,10 @@ class ServicesManager {
                 analyticsServicesManager.removeService(analyticsService)
             }
 
-            services.removeAll { $0.serviceIdentifier == service.serviceIdentifier }
+            services.removeAll { $0.pluginIdentifier == service.pluginIdentifier }
 
             service.serviceDelegate = nil
+            service.stateDelegate = nil
 
             saveState()
         }
@@ -157,6 +173,7 @@ class ServicesManager {
         rawServices.forEach { rawValue in
             if let service = serviceFromRawValue(rawValue) {
                 service.serviceDelegate = self
+                service.stateDelegate = self
 
                 services.append(service)
 
@@ -171,6 +188,69 @@ class ServicesManager {
                 }
             }
         }
+    }
+    
+    func handleRemoteNotification(_ notification: [String: AnyObject]) {
+        Task {
+            log.default("Remote Notification: Handling notification %{public}@", notification)
+            
+            guard FeatureFlags.remoteCommandsEnabled else {
+                log.error("Remote Notification: Remote Commands not enabled.")
+                return
+            }
+            
+            let backgroundTask = await beginBackgroundTask(name: "Handle Remote Notification")
+            do {
+                try await remoteDataServicesManager.remoteNotificationWasReceived(notification)
+            } catch {
+                log.error("Remote Notification: Error: %{public}@", String(describing: error))
+            }
+            
+            await endBackgroundTask(backgroundTask)
+            log.default("Remote Notification: Finished handling")
+        }
+    }
+    
+    private func beginBackgroundTask(name: String) async -> UIBackgroundTaskIdentifier? {
+        var backgroundTask: UIBackgroundTaskIdentifier?
+        backgroundTask = await UIApplication.shared.beginBackgroundTask(withName: name) {
+            guard let backgroundTask = backgroundTask else {return}
+            Task {
+                await UIApplication.shared.endBackgroundTask(backgroundTask)
+            }
+            
+            self.log.error("Background Task Expired: %{public}@", name)
+        }
+        
+        return backgroundTask
+    }
+    
+    private func endBackgroundTask(_ backgroundTask: UIBackgroundTaskIdentifier?) async {
+        guard let backgroundTask else {return}
+        await UIApplication.shared.endBackgroundTask(backgroundTask)
+    }
+}
+
+public protocol ServicesManagerDosingDelegate: AnyObject {
+    func deliverBolus(amountInUnits: Double) async throws
+}
+
+public protocol ServicesManagerDelegate: AnyObject {
+    func enactOverride(name: String, duration: TemporaryScheduleOverride.Duration?, remoteAddress: String) async throws
+    func cancelCurrentOverride() async throws
+    func deliverCarbs(amountInGrams: Double, absorptionTime: TimeInterval?, foodType: String?, startDate: Date?) async throws
+}
+
+// MARK: - StatefulPluggableDelegate
+extension ServicesManager: StatefulPluggableDelegate {
+    func pluginDidUpdateState(_ plugin: StatefulPluggable) {
+        saveState()
+    }
+
+    func pluginWantsDeletion(_ plugin: StatefulPluggable) {
+        guard let service = plugin as? Service else { return }
+        log.default("Service with identifier '%{public}@' deleted", service.pluginIdentifier)
+        removeActiveService(service)
     }
 }
 
@@ -192,14 +272,104 @@ extension ServicesManager: ServiceDelegate {
 
         return semanticVersion
     }
-
-    func serviceDidUpdateState(_ service: Service) {
-        saveState()
+    
+    func enactRemoteOverride(name: String, durationTime: TimeInterval?, remoteAddress: String) async throws {
+        
+        var duration: TemporaryScheduleOverride.Duration? = nil
+        if let durationTime = durationTime {
+            
+            guard durationTime <= LoopConstants.maxOverrideDurationTime else {
+                throw OverrideActionError.durationExceedsMax(LoopConstants.maxOverrideDurationTime)
+            }
+            
+            guard durationTime >= 0 else {
+                throw OverrideActionError.negativeDuration
+            }
+            
+            if durationTime == 0 {
+                duration = .indefinite
+            } else {
+                duration = .finite(durationTime)
+            }
+        }
+        
+        try await servicesManagerDelegate?.enactOverride(name: name, duration: duration, remoteAddress: remoteAddress)
+        await remoteDataServicesManager.triggerUpload(for: .overrides)
     }
-
-    func serviceWantsDeletion(_ service: Service) {
-        log.default("Service with identifier '%{public}@' deleted", service.serviceIdentifier)
-        removeActiveService(service)
+    
+    enum OverrideActionError: LocalizedError {
+        
+        case durationExceedsMax(TimeInterval)
+        case negativeDuration
+        
+        var errorDescription: String? {
+            switch self {
+            case .durationExceedsMax(let maxDurationTime):
+                return String(format: NSLocalizedString("Duration exceeds: %1$.1f hours", comment: "Override error description: duration exceed max (1: max duration in hours)."), maxDurationTime.hours)
+            case .negativeDuration:
+                return String(format: NSLocalizedString("负持续时间不允许", comment: "Override error description: negative duration error."))
+            }
+        }
+    }
+    
+    func cancelRemoteOverride() async throws {
+        try await servicesManagerDelegate?.cancelCurrentOverride()
+        await remoteDataServicesManager.triggerUpload(for: .overrides)
+    }
+    
+    func deliverRemoteCarbs(amountInGrams: Double, absorptionTime: TimeInterval?, foodType: String?, startDate: Date?) async throws {
+        do {
+            try await servicesManagerDelegate?.deliverCarbs(amountInGrams: amountInGrams, absorptionTime: absorptionTime, foodType: foodType, startDate: startDate)
+            await NotificationManager.sendRemoteCarbEntryNotification(amountInGrams: amountInGrams)
+            await remoteDataServicesManager.triggerUpload(for: .carb)
+            analyticsServicesManager.didAddCarbs(source: "Remote", amount: amountInGrams)
+        } catch {
+            await NotificationManager.sendRemoteCarbEntryFailureNotification(for: error, amountInGrams: amountInGrams)
+            throw error
+        }
+    }
+    
+    func deliverRemoteBolus(amountInUnits: Double) async throws {
+        do {
+            
+            guard amountInUnits > 0 else {
+                throw BolusActionError.invalidBolus
+            }
+            
+            guard let maxBolusAmount = settingsManager.loopSettings.maximumBolus else {
+                throw BolusActionError.missingMaxBolus
+            }
+            
+            guard amountInUnits <= maxBolusAmount else {
+                throw BolusActionError.exceedsMaxBolus
+            }
+            
+            try await servicesManagerDosingDelegate?.deliverBolus(amountInUnits: amountInUnits)
+            await NotificationManager.sendRemoteBolusNotification(amount: amountInUnits)
+            await remoteDataServicesManager.triggerUpload(for: .dose)
+            analyticsServicesManager.didBolus(source: "Remote", units: amountInUnits)
+        } catch {
+            await NotificationManager.sendRemoteBolusFailureNotification(for: error, amountInUnits: amountInUnits)
+            throw error
+        }
+    }
+    
+    enum BolusActionError: LocalizedError {
+        
+        case invalidBolus
+        case missingMaxBolus
+        case exceedsMaxBolus
+        
+        var errorDescription: String? {
+            switch self {
+            case .invalidBolus:
+                return NSLocalizedString("无效的推注", comment: "Bolus error description: invalid bolus amount.")
+            case .missingMaxBolus:
+                return NSLocalizedString("在设置中缺少最大允许的推注", comment: "Bolus error description: missing maximum bolus in settings.")
+            case .exceedsMaxBolus:
+                return NSLocalizedString("超过设置中最大允许的推注", comment: "Bolus error description: bolus exceeds maximum bolus in settings.")
+            }
+        }
     }
 }
 
@@ -217,16 +387,28 @@ extension ServicesManager: AlertIssuer {
 
 extension ServicesManager: ServiceOnboardingDelegate {
     func serviceOnboarding(didCreateService service: Service) {
-        log.default("Service with identifier '%{public}@' created", service.serviceIdentifier)
+        log.default("Service with identifier '%{public}@' created", service.pluginIdentifier)
         addActiveService(service)
     }
 
     func serviceOnboarding(didOnboardService service: Service) {
         precondition(service.isOnboarded)
-        log.default("Service with identifier '%{public}@' onboarded", service.serviceIdentifier)
+        log.default("Service with identifier '%{public}@' onboarded", service.pluginIdentifier)
     }
 }
 
 extension ServicesManager {
     var availableSupports: [SupportUI] { activeServices.compactMap { $0 as? SupportUI } }
+}
+
+// Service extension for rawValue
+extension Service {
+    typealias RawValue = [String: Any]
+
+    var rawValue: RawValue {
+        return [
+            "serviceIdentifier": pluginIdentifier,
+            "state": rawState
+        ]
+    }
 }

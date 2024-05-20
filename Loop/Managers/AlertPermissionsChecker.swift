@@ -111,7 +111,7 @@ extension AlertPermissionsChecker {
     private static let unsafeNotificationPermissionsAlertContent = Alert.Content(
         title: NSLocalizedString("警告！安全通知已关闭",
                                  comment: "Alert Permissions Need Attention alert title"),
-        body: String(format: NSLocalizedString("您可能不会收到有关重要安全信息的声音、视觉或振动警报。\n\n要解决此问题，请点击“设置”并确保通知、重要警报和时间敏感通知已打开。",
+        body: String(format: NSLocalizedString("You may not get sound, visual or vibration alerts regarding critical safety information.\n\nTo fix the issue, tap ‘Settings’ and make sure Notifications, Critical Alerts and Time Sensitive Notifications are turned ON.",
                                                comment: "Format for Notifications permissions disabled alert body. (1: app name)"),
                      Bundle.main.bundleDisplayName),
         acknowledgeActionButtonLabel: NSLocalizedString("好的", comment: "Notifications permissions disabled alert button")

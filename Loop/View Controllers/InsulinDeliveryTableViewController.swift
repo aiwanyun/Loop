@@ -41,7 +41,7 @@ public final class InsulinDeliveryTableViewController: UITableViewController {
             let titleFont = UIFont.systemFont(ofSize: 15, weight: .semibold)
             dataSourceSegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: titleFont], for: .normal)
             dataSourceSegmentedControl.setTitle(NSLocalizedString("事件历史", comment: "Segmented button title for insulin delivery log event history"), forSegmentAt: 0)
-            dataSourceSegmentedControl.setTitle(NSLocalizedString("水库", comment: "Segmented button title for insulin delivery log reservoir history"), forSegmentAt: 1)
+            dataSourceSegmentedControl.setTitle(NSLocalizedString("储液器", comment: "Segmented button title for insulin delivery log reservoir history"), forSegmentAt: 1)
         }
     }
     
@@ -465,7 +465,7 @@ public final class InsulinDeliveryTableViewController: UITableViewController {
                 let time = timeFormatter.string(from: entry.startDate)
                 let font = UIFont.preferredFont(forTextStyle: .body)
 
-                let description = String(format: NSLocalizedString("手动剂量： <b>%1$@</b> %2$@", comment: "Description of a bolus dose entry (1: value (? if no value) in bold, 2: unit)"), numberFormatter.string(from: entry.programmedUnits) ?? "?", DoseEntry.units.shortLocalizedUnitString(avoidLineBreaking: false))
+                let description = String(format: NSLocalizedString("Manual Dose: <b>%1$@</b> %2$@", comment: "Description of a bolus dose entry (1: value (? if no value) in bold, 2: unit)"), numberFormatter.string(from: entry.programmedUnits) ?? "?", DoseEntry.units.shortLocalizedUnitString(avoidLineBreaking: false))
 
                 let attributedDescription = createAttributedDescription(from: description, with: font)
                 cell.textLabel?.attributedText = attributedDescription
@@ -609,7 +609,7 @@ fileprivate var numberFormatter: NumberFormatter {
 fileprivate func createAttributedDescription(from description: String, with font: UIFont) -> NSAttributedString? {
     let descriptionWithFont = String(format:"<style>body{font-family: '-apple-system', '\(font.fontName)'; font-size: \(font.pointSize);}</style>%@", description)
 
-    guard let attributedDescription = try? NSMutableAttributedString(data: Data(descriptionWithFont.utf8), options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) else {
+    guard let attributedDescription = try? NSMutableAttributedString(data: descriptionWithFont.data(using: .utf16)!, options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil) else {
         return nil
     }
 
@@ -641,7 +641,7 @@ extension PersistedPumpEvent {
                 if let deliveredUnits = dose.deliveredUnits,
                    deliveredUnits != dose.programmedUnits
                 {
-                    description = String(format: NSLocalizedString("被打断 %1$@: <b>%2$@</b> of %3$@ %4$@", comment: "Description of an interrupted bolus dose entry (1: title for dose type, 2: value (? if no value) in bold, 3: programmed value (? if no value), 4: unit)"), eventTitle, numberFormatter.string(from: deliveredUnits) ?? "?", numberFormatter.string(from: dose.programmedUnits) ?? "?", DoseEntry.units.shortLocalizedUnitString())
+                    description = String(format: NSLocalizedString("Interrupted %1$@: <b>%2$@</b> of %3$@ %4$@", comment: "Description of an interrupted bolus dose entry (1: title for dose type, 2: value (? if no value) in bold, 3: programmed value (? if no value), 4: unit)"), eventTitle, numberFormatter.string(from: deliveredUnits) ?? "?", numberFormatter.string(from: dose.programmedUnits) ?? "?", DoseEntry.units.shortLocalizedUnitString())
                 } else {
                     description = String(format: NSLocalizedString("%1$@: <b>%2$@</b> %3$@", comment: "Description of a bolus dose entry (1: title for dose type, 2: value (? if no value) in bold, 3: unit)"), eventTitle, numberFormatter.string(from: dose.programmedUnits) ?? "?", DoseEntry.units.shortLocalizedUnitString(avoidLineBreaking: false))
                 }

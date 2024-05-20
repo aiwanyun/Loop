@@ -32,8 +32,8 @@ public struct NotificationsCriticalAlertPermissionsView: View {
     
     public var body: some View {
         switch mode {
-        case .flow: return AnyView(content())
-        case .topLevel: return AnyView(navigationContent())
+        case .flow: content()
+        case .topLevel: navigationContent()
         }
     }
     
@@ -46,9 +46,9 @@ public struct NotificationsCriticalAlertPermissionsView: View {
     private func content() -> some View {
         List {
             Section(footer: DescriptiveText(label: String(format: NSLocalizedString("""
-                通知会向您提供重要的 %1$@ 应用程序信息，而无需您打开应用程序。
+                Notifications give you important %1$@ app information without requiring you to open the app.
                 
-                在手机设置中将这些功能保持打开状态，以确保您收到 %1$@ 通知、重要警报和时间敏感通知。
+                Keep these turned ON in your phone’s settings to ensure you receive %1$@ Notifications, Critical Alerts, and Time Sensitive Notifications.
                 """, comment: "Alert Permissions descriptive text (1: app name)"), appName)))
             {
                 manageNotifications
@@ -77,11 +77,11 @@ extension NotificationsCriticalAlertPermissionsView {
     @ViewBuilder
     private func onOff(_ val: Bool) -> some View {
         if val {
-            Text("在", comment: "Notification Setting Status is On")
+            Text("打开", comment: "Notification Setting Status is On")
         } else {
             HStack {
                 Image(systemName: "exclamationmark.triangle.fill").foregroundColor(.critical)
-                Text("离开", comment: "Notification Setting Status is Off")
+                Text("关闭", comment: "Notification Setting Status is Off")
             }
         }
     }

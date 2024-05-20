@@ -29,8 +29,8 @@ class DeliveryUncertaintyAlertManager {
     func showAlert(animated: Bool = true) {
         if self.uncertainDeliveryAlert == nil {
             let alert = UIAlertController(
-                title: NSLocalizedString("无法到达泵", comment: "Title for alert shown when delivery status is uncertain"),
-                message: String(format: NSLocalizedString("%1$@ 无法与您的胰岛素泵通信。 应用程序将继续尝试到达您的泵，但无法更新胰岛素输送信息，并且无法继续实现自动化。\n您可以等待几分钟，看看问题是否得到解决，或点击下面的按钮以了解有关其他选项的更多信息。", comment: "Message for alert shown when delivery status is uncertain. (1: app name)"), Bundle.main.bundleDisplayName),
+                title: NSLocalizedString("无法连接泵", comment: "Title for alert shown when delivery status is uncertain"),
+                message: String(format: NSLocalizedString("%1$@ is unable to communicate with your insulin pump. The app will continue trying to reach your pump, but insulin delivery information cannot be updated and no automation can continue.\nYou can wait several minutes to see if the issue resolves or tap the button below to learn more about other options.", comment: "Message for alert shown when delivery status is uncertain. (1: app name)"), Bundle.main.bundleDisplayName),
                 preferredStyle: .alert)
             
             let actionTitle = NSLocalizedString("了解更多", comment: "OK button title for alert shown when delivery status is uncertain")

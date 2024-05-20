@@ -45,7 +45,7 @@ final class ActionHUDController: HUDInterfaceController {
         if FeatureFlags.sensitivityOverridesEnabled {
             overrideButtonLabel?.setText(NSLocalizedString("预设", comment: "The text for the Watch button for enabling a custom preset"))
         } else {
-            overrideButtonLabel?.setText(NSLocalizedString("锻炼", comment: "The text for the Watch button for enabling workout mode"))
+            overrideButtonLabel?.setText(NSLocalizedString("Workout", comment: "The text for the Watch button for enabling workout mode"))
         }
 
         let userActivity = NSUserActivity.forViewLoopStatus()
@@ -139,7 +139,7 @@ final class ActionHUDController: HUDInterfaceController {
         
         let buttonToSelect = loopManager.settings.preMealOverride?.isActive() == true ? SelectedButton.on : SelectedButton.off
         let viewModel = OnOffSelectionViewModel(
-            title: NSLocalizedString("餐前模式", comment: "Title for sheet to enable/disable pre-meal on watch"),
+            title: NSLocalizedString("Pre-Meal", comment: "Title for sheet to enable/disable pre-meal on watch"),
             message: formattedGlucoseRangeString(from: range),
             onSelection: setPreMealEnabled,
             selectedButton: buttonToSelect,
@@ -212,7 +212,7 @@ final class ActionHUDController: HUDInterfaceController {
             let buttonToSelect = loopManager.settings.nonPreMealOverrideEnabled() == true ? SelectedButton.on : SelectedButton.off
             
             let viewModel = OnOffSelectionViewModel(
-                title: NSLocalizedString("锻炼", comment: "Title for sheet to enable/disable workout mode on watch"),
+                title: NSLocalizedString("Workout", comment: "Title for sheet to enable/disable workout mode on watch"),
                 message: formattedGlucoseRangeString(from: range),
                 onSelection: { isWorkoutEnabled in
                     let override = isWorkoutEnabled ? self.loopManager.settings.legacyWorkoutOverride(for: .infinity) : nil

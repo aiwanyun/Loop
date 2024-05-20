@@ -25,9 +25,9 @@ enum ConfigurationErrorDetail: String, Codable {
         case .basalRateSchedule:
             return NSLocalizedString("基础费率时间表", comment: "Details for configuration error when basal rate schedule is missing")
         case .carbRatioSchedule:
-            return NSLocalizedString("碳水系数时间表", comment: "Details for configuration error when carb ratio schedule is missing")
+            return NSLocalizedString("碳水化合物比率时间表", comment: "Details for configuration error when carb ratio schedule is missing")
         case .glucoseTargetRangeSchedule:
-            return NSLocalizedString("葡萄糖目标范围时间表", comment: "Details for configuration error when glucose target range schedule is missing")
+            return NSLocalizedString("血糖目标范围时间表", comment: "Details for configuration error when glucose target range schedule is missing")
         case .insulinSensitivitySchedule:
             return NSLocalizedString("胰岛素灵敏度时间表", comment: "Details for configuration error when insulin sensitivity schedule is missing")
         case .maximumBasalRatePerHour:
@@ -49,7 +49,7 @@ enum MissingDataErrorDetail: String, Codable {
     var localizedDetail: String {
         switch self {
         case .glucose:
-            return NSLocalizedString("葡萄糖数据不可用", comment: "Description of error when glucose data is missing")
+            return NSLocalizedString("血糖数据不可用", comment: "Description of error when glucose data is missing")
         case .momentumEffect:
             return NSLocalizedString("动量影响", comment: "Details for missing data error when momentum effects are missing")
         case .carbEffect:
@@ -183,29 +183,29 @@ extension LoopError: LocalizedError {
 
         switch self {
         case .configurationError(let details):
-            return String(format: NSLocalizedString("配置错误：%1$@", comment: "The error message displayed for configuration errors. (1: configuration error details)"), details.localized())
+            return String(format: NSLocalizedString("Configuration Error: %1$@", comment: "The error message displayed for configuration errors. (1: configuration error details)"), details.localized())
         case .connectionError:
             return NSLocalizedString("没有连接的设备或设备连接期间故障", comment: "The error message displayed for device connection errors.")
         case .missingDataError(let details):
-            return String(format: NSLocalizedString("缺失数据： %1$@", comment: "The error message for missing data. (1: missing data details)"), details.localizedDetail)
+            return String(format: NSLocalizedString("Missing data: %1$@", comment: "The error message for missing data. (1: missing data details)"), details.localizedDetail)
         case .glucoseTooOld(let date):
             let minutes = formatter.string(from: -date.timeIntervalSinceNow) ?? ""
-            return String(format: NSLocalizedString("血糖数据是 %1$@ 旧的", comment: "The error message when glucose data is too old to be used. (1: glucose data age in minutes)"), minutes)
+            return String(format: NSLocalizedString("Glucose data is %1$@ old", comment: "The error message when glucose data is too old to be used. (1: glucose data age in minutes)"), minutes)
         case .invalidFutureGlucose(let date):
             let minutes = formatter.string(from: -date.timeIntervalSinceNow) ?? ""
-            return String(format: NSLocalizedString("葡萄糖读数无效，时间戳为 %1$@（未来）", comment: "The error message when glucose data is in the future. (1: glucose data time in future in minutes)"), minutes)
+            return String(format: NSLocalizedString("Invalid glucose reading with a timestamp that is %1$@ in the future", comment: "The error message when glucose data is in the future. (1: glucose data time in future in minutes)"), minutes)
         case .pumpDataTooOld(let date):
             let minutes = formatter.string(from: -date.timeIntervalSinceNow) ?? ""
-            return String(format: NSLocalizedString("泵数据为 %1$@ 旧数据", comment: "The error message when pump data is too old to be used. (1: pump data age in minutes)"), minutes)
+            return String(format: NSLocalizedString("Pump data is %1$@ old", comment: "The error message when pump data is too old to be used. (1: pump data age in minutes)"), minutes)
         case .recommendationExpired(let date):
             let minutes = formatter.string(from: -date.timeIntervalSinceNow) ?? ""
-            return String(format: NSLocalizedString("建议已过期：%1$@ 旧", comment: "The error message when a recommendation has expired. (1: age of recommendation in minutes)"), minutes)
+            return String(format: NSLocalizedString("Recommendation expired: %1$@ old", comment: "The error message when a recommendation has expired. (1: age of recommendation in minutes)"), minutes)
         case .pumpSuspended:
             return NSLocalizedString("泵悬挂。自动剂量被禁用。", comment: "The error message displayed for pumpSuspended errors.")
         case .pumpManagerError(let pumpManagerError):
-            return String(format: NSLocalizedString("泵管理器错误：%1$@", comment: "The error message displayed for pump manager errors. (1: pump manager error)"), pumpManagerError.errorDescription!)
+            return String(format: NSLocalizedString("Pump Manager Error: %1$@", comment: "The error message displayed for pump manager errors. (1: pump manager error)"), pumpManagerError.errorDescription!)
         case .unknownError(let error):
-            return String(format: NSLocalizedString("未知错误：%1$@", comment: "The error message displayed for unknown errors. (1: unknown error)"), error.localizedDescription)
+            return String(format: NSLocalizedString("Unknown Error: %1$@", comment: "The error message displayed for unknown errors. (1: unknown error)"), error.localizedDescription)
         }
     }
 }

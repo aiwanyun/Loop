@@ -17,51 +17,109 @@ struct HowMuteAlertWorkView: View {
     var body: some View {
         NavigationView {
             List {
-                VStack(alignment: .leading) {
-                    Text(NSLocalizedString("""
-静音警报允许您暂时静音警报和警报。
-使用静音警报时，还要考虑使用 iOS 焦点模式的影响。
-""", comment: "Description of how mute alerts work"))
-                    .fixedSize(horizontal: false, vertical: true)
-                    
-                    VStack(alignment: .leading, spacing: 10) {
-                        HStack(spacing: 10) {
-                            Image(systemName: "speaker.slash.fill")
-                                .foregroundColor(.white)
-                                .padding(5)
-                                .background(guidanceColors.warning)
-                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-                            
-                            Text(String(format: NSLocalizedString("%1$@ 静音警报", comment: "Format string for Section title for description that mute alerts is temporary (1: app name)"), appName))
-                                .bold()
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
+                VStack(alignment: .leading, spacing: 24) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("关键和时间敏感警报的示例是什么？")
+                            .bold()
                         
-                        Text(NSLocalizedString("""
-所有 Tidepool Loop 警报（包括严重警报）将被静音长达 4 小时。
-
-静音期结束后，警报声将恢复。
-""", comment: "Description that mute alerts is temporary"))
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.bottom)
-                        
-                        HStack(spacing: 10) {
-                            Image(systemName: "moon.fill")
-                                .foregroundColor(.accentColor)
-                            
-                            Text(NSLocalizedString("iOS焦点模式", comment: "Section title for description of how mute alerts work with focus mode"))
-                                .bold()
-                        }
-                        Text(String(format: NSLocalizedString("如果 iOS 焦点模式处于开启状态并且静音警报处于关闭状态，则仍会发送严重警报，但非严重警报将被静音，直到 %1$@ 作为允许的应用程序添加到每个焦点模式中。", comment: "Format string for description of how mute alerts works with focus mode (1: app name)"), appName))
-                            .fixedSize(horizontal: false, vertical: true)
+                        Text("iOS关键警报和时间敏感警报是Apple通知的类型。它们用于高优先事件。一些示例包括：")
                     }
+                    
+                    HStack {
+                        VStack(alignment: .leading, spacing: 16) {
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("关键警报")
+                                    .bold()
+                                
+                                Text("紧急低")
+                                    .bulleted()
+                                Text("传感器失败")
+                                    .bulleted()
+                                Text("储液器空")
+                                    .bulleted()
+                                Text("泵已过期")
+                                    .bulleted()
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text("时间敏感警报")
+                                    .bold()
+                                
+                                Text("高血糖")
+                                    .bulleted()
+                                Text("发射器低电池")
+                                    .bulleted()
+                            }
+                        }
+                        
+                        Spacer()
+                    }
+                    .font(.footnote)
+                    .foregroundColor(.black.opacity(0.6))
                     .padding()
-                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).stroke(Color(.systemFill), lineWidth: 1))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .stroke(Color(.systemFill), lineWidth: 1)
+                    )
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text(
+                            String(
+                                format: NSLocalizedString(
+                                    "How can I temporarily silence all %1$@ app sounds?",
+                                    comment: "Title text for temporarily silencing all sounds (1: app name)"
+                                ),
+                                appName
+                            )
+                        )
+                        .bold()
+                        
+                        Text(
+                            String(
+                                format: NSLocalizedString(
+                                    "Use the Mute Alerts feature. It allows you to temporarily silence all of your alerts and alarms via the %1$@ app, including Critical Alerts and Time Sensitive Alerts.",
+                                    comment: "Description text for temporarily silencing all sounds (1: app name)"
+                                ),
+                                appName
+                            )
+                        )
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("如何使非关键警报保持静音？")
+                            .bold()
+                        
+                        Text(
+                            String(
+                                format: NSLocalizedString(
+                                    "Turn off the volume on your iOS device or add %1$@ as an allowed app to each Focus Mode. Time Sensitive and Critical Alerts will still sound, but non-Critical Alerts will be silenced.",
+                                    comment: "Description text for temporarily silencing non-critical alerts (1: app name)"
+                                ),
+                                appName
+                            )
+                        )
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("我如何仅使时间敏感和非关键警报保持静音？")
+                            .bold()
+                        
+                        Text(
+                            String(
+                                format: NSLocalizedString(
+                                    "For safety purposes, you should allow Critical Alerts, Time Sensitive and Notification Permissions (non-critical alerts) on your device to continue using %1$@ and cannot turn off individual alarms.",
+                                    comment: "Description text for silencing time sensitive and non-critical alerts (1: app name)"
+                                ),
+                                appName
+                            )
+                        )
+                    }
                 }
+                .padding(.vertical, 8)
             }
             .insetGroupedListStyle()
-            .navigationTitle(NSLocalizedString("使用静音警报", comment: "View title for how mute alerts work"))
+            .navigationTitle(NSLocalizedString("管理警报", comment: "View title for how mute alerts work"))
             .navigationBarItems(trailing: closeButton)
         }
     }
@@ -69,6 +127,19 @@ struct HowMuteAlertWorkView: View {
     private var closeButton: some View {
         Button(action: dismiss) {
             Text(NSLocalizedString("关闭", comment: "Button title to close view"))
+        }
+    }
+}
+
+private extension Text {
+    func bulleted(color: Color = .accentColor.opacity(0.5)) -> some View {
+        HStack(spacing: 16) {
+            Image(systemName: "circle.fill")
+                .resizable()
+                .frame(width: 8, height: 8)
+                .foregroundColor(color)
+            
+            self
         }
     }
 }

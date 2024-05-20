@@ -43,7 +43,8 @@ class StatusViewController: UIViewController, NCWidgetProviding {
                 axisLabel: .axisLabelColor,
                 grid: .gridColor,
                 glucoseTint: .glucoseTintColor,
-                insulinTint: .insulinTintColor
+                insulinTint: .insulinTintColor,
+                carbTint: .carbTintColor
             ),
             settings: {
                 var settings = ChartSettings()
@@ -260,7 +261,7 @@ class StatusViewController: UIViewController, NCWidgetProviding {
             {
                 self.activeInsulinAmountLabel.text = String(format: NSLocalizedString("%1$@ U", comment: "The subtitle format describing units of active insulin. (1: localized insulin value description)"), valueStr)
             } else {
-                self.activeInsulinAmountLabel.text = NSLocalizedString("？你", comment: "Displayed in the widget when the amount of active insulin cannot be determined.")
+                self.activeInsulinAmountLabel.text = NSLocalizedString("? U", comment: "Displayed in the widget when the amount of active insulin cannot be determined.")
             }
 
             self.hudView.pumpStatusHUD.presentStatusHighlight(context.pumpStatusHighlightContext)

@@ -71,7 +71,7 @@ class HUDInterfaceController: WKInterfaceController {
         }())
 
         if date != nil {
-            glucoseLabel.setText(NSLocalizedString(" -   -   - ", comment: "No glucose value representation (3 dashes for mg/dL)"))
+            glucoseLabel.setText(NSLocalizedString("– – –", comment: "No glucose value representation (3 dashes for mg/dL)"))
             glucoseLabel.setHidden(false)
             
             let showEventualGlucose = FeatureFlags.showEventualBloodGlucoseOnWatchEnabled

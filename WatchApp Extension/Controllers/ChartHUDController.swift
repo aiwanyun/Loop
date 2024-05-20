@@ -30,7 +30,7 @@ final class ChartHUDController: HUDInterfaceController, WKCrownDelegate {
             case .netBasal:
                 return NSLocalizedString("净基础率", comment: "HUD row title for Net Basal Rate")
             case .reservoirVolume:
-                return NSLocalizedString("水库量", comment: "HUD row title for remaining reservoir volume")
+                return NSLocalizedString("储液器量", comment: "HUD row title for remaining reservoir volume")
             }
         }
 

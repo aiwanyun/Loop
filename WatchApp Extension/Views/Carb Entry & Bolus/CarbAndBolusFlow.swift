@@ -230,10 +230,10 @@ extension CarbAndBolusFlow {
         switch configuration {
         case .carbEntry:
             return bolusAmount > 0
-                ? Text("节省", comment: "Button text to confirm carb entry and bolus on Apple Watch")
-                : Text("节省", comment: "Button text to confirm carb entry without bolusing on Apple Watch")
+                ? Text("保存并推注", comment: "Button text to confirm carb entry and bolus on Apple Watch")
+                : Text("保存", comment: "Button text to confirm carb entry without bolusing on Apple Watch")
         case .manualBolus:
-            return Text("大剂量", comment: "Button text to confirm manual bolus on Apple Watch")
+            return Text("推注", comment: "Button text to confirm manual bolus on Apple Watch")
         }
     }
 

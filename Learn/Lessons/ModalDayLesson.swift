@@ -14,7 +14,7 @@ import os.log
 final class ModalDayLesson: Lesson {
     let title = NSLocalizedString("模式日", comment: "Lesson title")
 
-    let subtitle = NSLocalizedString("通过一天中的时间可视化最常见的葡萄糖值", comment: "Lesson subtitle")
+    let subtitle = NSLocalizedString("通过一天中的时间可视化最常见的血糖值", comment: "Lesson subtitle")
 
     let configurationSections: [LessonSectionProviding]
 

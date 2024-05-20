@@ -17,7 +17,7 @@ import os.log
 final class TimeInRangeLesson: Lesson {
     let title = NSLocalizedString("时间范围", comment: "Lesson title")
 
-    let subtitle = NSLocalizedString("计算指定范围内葡萄糖测量的百分比", comment: "Lesson subtitle")
+    let subtitle = NSLocalizedString("计算指定范围内血糖测量的百分比", comment: "Lesson subtitle")
 
     let configurationSections: [LessonSectionProviding]
 
